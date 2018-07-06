@@ -185,9 +185,36 @@ CONF_SWAPSIZE=100
 $ sudo /etc/init.d/dphys-swapfile restart swapon -s
 ```
 
+(Example1)
+```
+$ realsense-viewer
+```
 
+(Example2)
+```
+$ sudo raspi-config
+"7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
 
+$ cd ~/librealsense/wrappers/opencv/build/grabcuts
+$ rs-grabcuts
+```
 
+(Example3)
+```
+$ sudo raspi-config
+"7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
 
+$ cd ~/librealsense/wrappers/opencv/build/imshow
+$ rs-imshow
+```
+
+(Example4)
+```
+$ sudo raspi-config
+"7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
+
+$ cd ~/librealsense/wrappers/opencv/build/dnn
+$ rs-dnn
+```
 
 
