@@ -12,8 +12,6 @@ RaspberryPi3 + Neural Compute Stick(NCS) + RealSense D435 + MobileNet-SSD
 ![01](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/01.png)
 ![02](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/02.png)
 
-## Ubuntu's udev rule update
-
 ```
 $ sudo apt update;sudo apt upgrade
 $ sudo reboot
@@ -174,8 +172,6 @@ Type "help", "copyright", "credits" or "license" for more information.
 $ sudo apt-get install python-opengl
 $ sudo -H pip3 install pyopengl
 $ sudo -H pip3 install pyopengl_accelerate
-$ sudo raspi-config
-"7.Advanced Options" - "A7 GL Driver" - "G2 GL (Fake KMS)"
 ```
 
 ```
@@ -185,8 +181,22 @@ CONF_SWAPSIZE=100
 $ sudo /etc/init.d/dphys-swapfile restart swapon -s
 ```
 
+```
+$ git clone https://github.com/PINTO0309/MobileNet-SSD-RealSense.git
+```
+
+(Example0)
+```
+$ sudo raspi-config
+"7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
+$ cd ~/MobileNet-SSD-RealSense
+$ python3 SingleStickSSDwithRealSense.py
+```
+
 (Example1)
 ```
+$ sudo raspi-config
+"7.Advanced Options" - "A7 GL Driver" - "G2 GL (Fake KMS)"
 $ realsense-viewer
 ```
 
@@ -216,5 +226,6 @@ $ sudo raspi-config
 $ cd ~/librealsense/wrappers/opencv/build/dnn
 $ rs-dnn
 ```
+
 
 
