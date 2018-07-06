@@ -202,7 +202,7 @@ $ git clone https://github.com/PINTO0309/MobileNet-SSD-RealSense.git
 
 ## Execute the program
 
-(Example0)
+(Example0) MobileNet-SSD + Neural Compute Stick + RealSense D435
 ```
 $ sudo raspi-config
 "7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
@@ -235,7 +235,7 @@ $ cd ~/librealsense/wrappers/opencv/build/imshow
 $ rs-imshow
 ```
 
-(Example4)
+(Example4) MobileNet-SSD(OpenCV-DNN) + RealSense D435
 ```
 $ sudo raspi-config
 "7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
