@@ -216,6 +216,7 @@ $ sudo raspi-config
 "7.Advanced Options" - "A7 GL Driver" - "G2 GL (Fake KMS)"
 $ realsense-viewer
 ```
+![05](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/05.gif)
 
 (Example2)
 ```
@@ -225,6 +226,7 @@ $ sudo raspi-config
 $ cd ~/librealsense/wrappers/opencv/build/grabcuts
 $ rs-grabcuts
 ```
+![06](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/06.gif)
 
 (Example3)
 ```
@@ -234,6 +236,7 @@ $ sudo raspi-config
 $ cd ~/librealsense/wrappers/opencv/build/imshow
 $ rs-imshow
 ```
+![07](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/07.gif)
 
 (Example4) MobileNet-SSD(OpenCV-DNN) + RealSense D435
 ```
@@ -243,6 +246,6 @@ $ sudo raspi-config
 $ cd ~/librealsense/wrappers/opencv/build/dnn
 $ rs-dnn
 ```
-
+![08](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/08.gif)
 
 
