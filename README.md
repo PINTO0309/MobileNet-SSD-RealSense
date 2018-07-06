@@ -17,25 +17,26 @@ https://qiita.com/PINTO/items/1828f97d95fdda45f57d<br><br>
 
 
 ## Work with RaspberryPi3
+1.Execute the following
 ```
 $ sudo apt update;sudo apt upgrade
 $ sudo reboot
 ```
-
+2.Extend the SWAP area
 ```
 $ sudo nano /etc/dphys-swapfile
 CONF_SWAPSIZE=2048
 
 $ sudo /etc/init.d/dphys-swapfile restart swapon -s
 ```
-
+3.Update udev rule
 ```
 $ sudo apt install -y git libssl-dev libusb-1.0-0-dev pkg-config libgtk-3-dev libglfw3-dev at-spi2-core libdrm*
 $ cd /etc/udev/rules.d/
 $ sudo wget https://raw.githubusercontent.com/IntelRealSense/librealsense/master/config/99-realsense-libusb.rules
 $ sudo udevadm control --reload-rules && udevadm trigger
 ```
-
+4.Upgrade to "cmake 3.11.4"
 ```
 $ cd ~
 $ wget https://cmake.org/files/v3.11/cmake-3.11.4.tar.gz
@@ -49,14 +50,14 @@ $ source ~/.bashrc
 $ cmake --version
 cmake version 3.11.4
 ```
-
+5.Register LD_LIBRARY_PATH
 ```
 $ nano ~/.bashrc
 export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 
 $ source ~/.bashrc
 ```
-
+6.Upgrade protobuf version
 ```
 $ cd ~
 $ git clone --depth=1 -b v3.5.2 https://github.com/google/protobuf.git
@@ -67,14 +68,14 @@ $ make -j1
 $ sudo make install
 $ sudo ldconfig
 ```
-
+7.Install TBB (Intel Threading Building Blocks)
 ```
 $ cd ~
 $ wget https://github.com/PINTO0309/TBBonARMv7/raw/master/libtbb-dev_2018U2_armhf.deb
 $ sudo dpkg -i ~/libtbb-dev_2018U2_armhf.deb
 $ sudo ldconfig
 ```
-
+8.Uninstall old OpenCV
 ```
 $ cd ~/opencv-3.x.x/build
 $ sudo make uninstall
@@ -82,7 +83,7 @@ $ cd ~
 $ rm -r -f opencv-3.x.x
 $ rm -r -f opencv_contrib-3.x.x
 ```
-
+9.Build install "OpenCV 3.4.1"
 ```
 $ cd ~
 $ wget -O opencv.zip https://github.com/Itseez/opencv/archive/3.4.1.zip
@@ -112,26 +113,22 @@ $ make -j1
 $ sudo make install
 $ sudo ldconfig
 ```
-
+10.Install Intel® RealSense™ SDK 2.0
 ```
 $ cd ~
 $ git clone https://github.com/IntelRealSense/librealsense.git
 $ cd ~/librealsense;mkdir build;cd build
-```
 
-```
 $ cmake .. -DBUILD_EXAMPLES=true -DCMAKE_BUILD_TYPE=Release
 
 OR
 
 $ cmake .. -DBUILD_EXAMPLES=true
-```
 
-```
 $ make -j1
 $ sudo make install
 ```
-
+11.Install OpenCV Wrapper
 ```
 $ cd ~/librealsense/wrappers/opencv;mkdir build;cd build
 $ cmake ..
@@ -141,7 +138,7 @@ target_link_libraries(rs-latency-tool ${DEPENDENCIES} pthread)
 $ make -j $(($(nproc) + 1))
 $ sudo make install
 ```
-
+12.Install Python binding
 ```
 $ cd ~/librealsense/build
 
@@ -156,14 +153,14 @@ $ cmake .. -DBUILD_PYTHON_BINDINGS=bool:true -DPYTHON_EXECUTABLE=$(which python)
 $ make -j1
 $ sudo make install
 ```
-
+13.Update PYTHON_PATH
 ```
 $ nano ~/.bashrc
 export PYTHONPATH=$PYTHONPATH:/usr/local/lib
 
 $ source ~/.bashrc
 ```
-
+14.OpenCV import test
 ```
 $ python3
 Python 3.5.3 (default, Jan 19 2017, 14:11:04) 
@@ -172,20 +169,20 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> import pyrealsense2
 >>> exit()
 ```
-
+15.Installing the OpenGL package for Python
 ```
 $ sudo apt-get install python-opengl
 $ sudo -H pip3 install pyopengl
 $ sudo -H pip3 install pyopengl_accelerate
 ```
-
+16.Reduce the SWAP area to the default size
 ```
 $ sudo nano /etc/dphys-swapfile
 CONF_SWAPSIZE=100
 
 $ sudo /etc/init.d/dphys-swapfile restart swapon -s
 ```
-
+17.Clone a set of resources
 ```
 $ git clone https://github.com/PINTO0309/MobileNet-SSD-RealSense.git
 ```
