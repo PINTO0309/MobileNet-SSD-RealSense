@@ -1,5 +1,6 @@
 # MobileNet-SSD-RealSense
 RaspberryPi3 + Neural Compute Stick(NCS) + RealSense D435 + MobileNet-SSD<br>
+https://qiita.com/PINTO/items/1828f97d95fdda45f57d<br><br>
 ![03](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/03.gif)
 ![04](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/04.png)
 
