@@ -202,7 +202,7 @@ $ git clone https://github.com/PINTO0309/MobileNet-SSD-RealSense.git
 
 ## Execute the program
 
-(Example0) [MobileNet-SSD + Neural Compute Stick + RealSense D435](# MobileNet-SSD-RealSense)
+(Example0) MobileNet-SSD + Neural Compute Stick + RealSense D435
 ```
 $ sudo raspi-config
 "7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
