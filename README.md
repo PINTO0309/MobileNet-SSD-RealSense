@@ -145,7 +145,7 @@ $ cd ~/librealsense/build
 #When using with Python 3.x series
 $ cmake .. -DBUILD_PYTHON_BINDINGS=bool:true -DPYTHON_EXECUTABLE=$(which python3)
 
-又は
+OR
 
 #When using with Python 2.x series
 $ cmake .. -DBUILD_PYTHON_BINDINGS=bool:true -DPYTHON_EXECUTABLE=$(which python)
