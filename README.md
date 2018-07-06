@@ -1,6 +1,6 @@
 # MobileNet-SSD-RealSense
-RaspberryPi3 + Neural Compute Stick(NCS) + RealSense D435 + MobileNet-SSD
-![03](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/03.png)
+RaspberryPi3 + Neural Compute Stick(NCS) + RealSense D435 + MobileNet-SSD<br>
+![03](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/03.gif)
 ![04](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/04.png)
 
 ## Firmware update with Windows 10 PC
