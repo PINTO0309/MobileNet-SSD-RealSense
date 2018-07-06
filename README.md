@@ -6,7 +6,7 @@ https://qiita.com/PINTO/items/1828f97d95fdda45f57d<br><br>
 
 ## Environment
 1．RaspberryPi3 + Raspbian Stretch (USB2.0 Port)<br>
-2．Intel RealSense D435<br>
+2．Intel RealSense D435 (Firmware Ver 5.9.13)<br>
 3．Intel Movidius Neural Compute Stick x１piece<br>
 4．OpenCV3.4.1<br>
 5．TBB (Intel Threading Building Blocks)<br>
