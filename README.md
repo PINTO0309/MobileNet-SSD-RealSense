@@ -9,4 +9,5 @@ RaspberryPi3 + Neural Compute Stick(NCS) + RealSense D435 + MobileNet-SSD
 ５．intel-realsense-dfu.exe を実行<br>
 ６．「1」を入力してEnter入力し、画面の指示に従ってアップデート<br>
 ７．ファームウェアのバージョン確認「2」<br>
-
+![01](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/01.png)
+![02](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/02.png)
