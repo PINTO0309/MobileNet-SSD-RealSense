@@ -12,6 +12,8 @@ RaspberryPi3 + Neural Compute Stick(NCS) + RealSense D435 + MobileNet-SSD
 ![01](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/01.png)
 ![02](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/02.png)
 
+
+## Work with RaspberryPi3
 ```
 $ sudo apt update;sudo apt upgrade
 $ sudo reboot
