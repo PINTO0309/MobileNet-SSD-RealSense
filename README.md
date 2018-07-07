@@ -240,7 +240,7 @@ $ rs-imshow
 ```
 ![07](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/07.gif)
 
-(Example4) MobileNet-SSD(OpenCV-DNN) + RealSense D435
+(Example4) MobileNet-SSD(OpenCV-DNN) + RealSense D435 + Without Neural Compute Stick
 ```
 $ sudo raspi-config
 "7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
