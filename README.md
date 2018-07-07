@@ -26,8 +26,8 @@ Measure the distance to the object with RealSense D435 while performing object d
 4．Wait for completion of installation of device driver<br>
 5．Execute intel-realsense-dfu.exe<br>
 6．「1」 Type and press Enter and follow the instructions on the screen to update<br>
+![01](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/01.png)<br>
 7．Firmware version check 「2」<br>
-![01](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/01.png)
 ![02](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/02.png)
 
 
