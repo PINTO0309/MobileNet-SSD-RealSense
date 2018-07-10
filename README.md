@@ -18,6 +18,7 @@ Measure the distance to the object with RealSense D435 while performing object d
 7．Python3.5<br>
 8．NCSDK v1.12.00<br>
 9．HDMI Display<br>
+10．NCSDK v1.12.00 (It does not work with NCSDK v2.04+)
 
 ## Firmware update with Windows 10 PC
 1．ZIP 2 types [(1) Firmware update tool for Windows 10](https://downloadmirror.intel.com/27514/eng/Intel%20RealSense%20D400%20Series%20DFU%20Tool%20for%20Windows.zip)　[(2) The latest firmware bin file](https://downloadmirror.intel.com/27924/eng/Intel%C2%AE%20RealSense%E2%84%A2D400%20Series%20Signed%20Production%20Firmware%20v5_9_13.zip) Download and decompress<br>
