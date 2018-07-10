@@ -182,7 +182,7 @@ export PYTHONPATH=$PYTHONPATH:/usr/local/lib
 
 $ source ~/.bashrc
 ```
-14.OpenCV import test
+14.RealSense SDK import test
 ```
 $ python3
 Python 3.5.3 (default, Jan 19 2017, 14:11:04) 
