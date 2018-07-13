@@ -140,6 +140,8 @@ $ sudo ldconfig
 10.Install Intel® RealSense™ SDK 2.0
 ```
 $ cd ~
+$ sudo apt update;sudo apt upgrade
+$ sudo apt install git libssl-dev libusb-1.0-0-dev pkg-config libgtk-3-dev libglfw3-dev mesa-utils* libglu1-mesa-dev
 $ git clone https://github.com/IntelRealSense/librealsense.git
 $ cd ~/librealsense;mkdir build;cd build
 
