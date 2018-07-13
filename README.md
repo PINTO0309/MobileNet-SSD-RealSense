@@ -75,6 +75,7 @@ $ source ~/.bashrc
 ```
 6.Upgrade protobuf version
 ```
+$ cd ~
 $ wget https://github.com/google/protobuf/releases/download/v3.5.1/protobuf-all-3.5.1.tar.gz
 $ tar -zxvf protobuf-all-3.5.1.tar.gz
 $ cd protobuf-3.5.1
