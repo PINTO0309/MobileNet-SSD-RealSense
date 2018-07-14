@@ -4,6 +4,9 @@ Measure the distance to the object with RealSense D435 while performing object d
 **【Japanese Article】 https://qiita.com/PINTO/items/1828f97d95fdda45f57d**<br>
 **【YouTube Movie】 https://youtu.be/77cV9fyqJ1w**<br><br>
 
+## Change history
+July 14, 2018 Corresponds to v2.00.05.02
+
 ## Motion image
 **about 6.5 FPS （Detection + Screen drawing）**<br>
 ![03](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/03.gif)
