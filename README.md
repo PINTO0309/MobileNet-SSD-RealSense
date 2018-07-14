@@ -20,7 +20,7 @@ Measure the distance to the object with RealSense D435 while performing object d
 5．TBB (Intel Threading Building Blocks)<br>
 6．Numpy<br>
 7．Python3.5<br>
-8．NCSDK v2.00.05.02 (It does not work with NCSDK v1)<br>
+8．NCSDK v2.00.05.02 (It does not work with NCSDK v1. [v1 version is here](https://github.com/PINTO0309/MobileNet-SSD-RealSense/tree/v1.0))<br>
 9．HDMI Display<br>
 
 ## Firmware update with Windows 10 PC
