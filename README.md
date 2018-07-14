@@ -260,4 +260,10 @@ $ rs-dnn
 ```
 ![08](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/08.gif)
 
+# Conversion method from Caffe model to NCS model
+```
+$ cd ~/MobileNet-SSD-RealSense
+$ mvNCCompile ./deploy.prototxt -w ./MobileNetSSD_deploy.caffemodel -s 12
+```
+
 
