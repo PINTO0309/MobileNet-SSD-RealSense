@@ -23,8 +23,8 @@ LABELS = ('background',
           'motorbike', 'person', 'pottedplant',
           'sheep', 'sofa', 'train', 'tvmonitor')
 
-mvnc.SetGlobalOption(mvnc.GlobalOption.LOG_LEVEL, 2)
-devices = mvnc.EnumerateDevices()
+mvnc.global_set_option(mvnc.GlobalOption.RW_LOG_LEVEL, 2)
+devices = mvnc.enumerate_devices()
 if len(devices) == 0:
     print("No devices found")
     quit()
@@ -34,14 +34,13 @@ devHandle   = []
 graphHandle = []
 
 with open(join(graph_folder, "graph"), mode="rb") as f:
-    graph = f.read()
+    graph_buffer = f.read()
+graph = mvnc.Graph('MobileNet-SSD')
 
 for devnum in range(len(devices)):
     devHandle.append(mvnc.Device(devices[devnum]))
-    devHandle[devnum].OpenDevice()
-    graphHandle.append(devHandle[devnum].AllocateGraph(graph))
-    graphHandle[devnum].SetGraphOption(mvnc.GraphOption.ITERATIONS, 1)
-    iterations = graphHandle[devnum].GetGraphOption(mvnc.GraphOption.ITERATIONS)
+    devHandle[devnum].open()
+    graphHandle.append(graph.allocate_with_fifos(devHandle[devnum], graph_buffer))
 
 print("\nLoaded Graphs!!!")
 
@@ -56,7 +55,10 @@ config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
 pipeline.start(config)
 
 try:
+    freq = cv2.getTickFrequency()
+
     while True:
+        t1 = cv2.getTickCount()
 
         # Wait for a coherent pair of frames: depth and color
         frames = pipeline.wait_for_frames()
@@ -73,8 +75,10 @@ try:
         im = cv2.resize(color_image, (300, 300))
         im = im - 127.5
         im = im * 0.007843
-        graphHandle[0].LoadTensor(im.astype(np.float16), None)
-        out, userobj = graphHandle[0].GetResult()
+
+        #graphHandle[0][0]=input_fifo, graphHandle[0][1]=output_fifo
+        graph.queue_inference_with_fifo_elem(graphHandle[0][0], graphHandle[0][1], im.astype(np.float32), color_image)
+        out, input_image = graphHandle[0][1].read_elem()
 
         # Show images
         height = color_image.shape[0]
@@ -116,7 +120,6 @@ try:
                 box_right = int(object_info_overlay[base_index + 5] * source_image_width)
                 box_bottom = int(object_info_overlay[base_index + 6] * source_image_height)
                 meters = depth_frame.as_depth_frame().get_distance(box_left+int((box_right-box_left)/2), box_top+int((box_bottom-box_top)/2))
-                #print(meters)
                 label_text = LABELS[int(class_id)] + " (" + str(percentage) + "%)"+ " {:.2f}".format(meters) + " meters away"
 
                 box_color = (255, 128, 0)
@@ -138,6 +141,12 @@ try:
 
         cv2.namedWindow('RealSense', cv2.WINDOW_AUTOSIZE)
         cv2.imshow('RealSense', cv2.resize(color_image,(width, height)))
+
+        ## Print FPS
+        #t2 = cv2.getTickCount()
+        #time1 = (t2-t1)/freq
+        #print(" {:.2f} FPS".format(1/time1))
+
         if cv2.waitKey(1)&0xFF == ord('q'):
             break
 
@@ -150,8 +159,12 @@ finally:
     # Stop streaming
     pipeline.stop()
     for devnum in range(len(devices)):
-        graphHandle[devnum].DeallocateGraph()
-        devHandle[devnum].CloseDevice()
+        graphHandle[devnum][0].destroy()
+        graphHandle[devnum][1].destroy()
+        graph.destroy()
+        devHandle[devnum].close()
+        devHandle[devnum].destroy()
+
     print("\n\nFinished\n\n")
     sys.exit()
 
