@@ -120,6 +120,7 @@ $ sudo apt install build-essential cmake pkg-config libjpeg-dev libtiff5-dev \
 libjasper-dev libavcodec-dev libavformat-dev libswscale-dev \
 libv4l-dev libxvidcore-dev libx264-dev libgtk2.0-dev libgtk-3-dev \
 libcanberra-gtk* libatlas-base-dev gfortran python2.7-dev python3-dev
+
 $ cd ~
 $ wget -O opencv.zip https://github.com/Itseez/opencv/archive/3.4.2.zip
 $ unzip opencv.zip;rm opencv.zip
