@@ -6,6 +6,7 @@ Measure the distance to the object with RealSense D435 while performing object d
 
 ## Change history
 [July 14, 2018]　Corresponds to NCSDK v2.00.05.02
+[July 17, 2018]　Corresponds to OpenCV 3.4.2
 
 ## Motion image
 **about 6.5 FPS （Detection + Screen drawing）**<br>
@@ -110,14 +111,14 @@ $ cd ~
 $ rm -r -f opencv-3.x.x
 $ rm -r -f opencv_contrib-3.x.x
 ```
-9.Build install "OpenCV 3.4.1"
+9.Build install "OpenCV 3.4.2"
 ```
 $ cd ~
-$ wget -O opencv.zip https://github.com/Itseez/opencv/archive/3.4.1.zip
+$ wget -O opencv.zip https://github.com/Itseez/opencv/archive/3.4.2.zip
 $ unzip opencv.zip;rm opencv.zip
-$ wget -O opencv_contrib.zip https://github.com/Itseez/opencv_contrib/archive/3.4.1.zip
+$ wget -O opencv_contrib.zip https://github.com/Itseez/opencv_contrib/archive/3.4.2.zip
 $ unzip opencv_contrib.zip;rm opencv_contrib.zip
-$ cd ~/opencv-3.4.1/;mkdir build;cd build
+$ cd ~/opencv-3.4.2/;mkdir build;cd build
 $ cmake -D CMAKE_CXX_FLAGS="-DTBB_USE_GCC_BUILTINS=1 -D__TBB_64BIT_ATOMICS=0" \
         -D CMAKE_BUILD_TYPE=RELEASE \
         -D CMAKE_INSTALL_PREFIX=/usr/local \
@@ -134,6 +135,7 @@ $ cmake -D CMAKE_CXX_FLAGS="-DTBB_USE_GCC_BUILTINS=1 -D__TBB_64BIT_ATOMICS=0" \
         -D BUILD_TBB=OFF \
         -D WITH_CUDA=OFF \
         -D ENABLE_NEON:BOOL=ON \
+        -D ENABLE_VFPV3=ON \
         -D WITH_QT=OFF \
         -D BUILD_TESTS=OFF ..
 $ make -j1
