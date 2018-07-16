@@ -1,15 +1,16 @@
 # MobileNet-SSD-RealSense
 RaspberryPi3(Raspbian Stretch) + Neural Compute Stick(NCS) + RealSense D435 + MobileNet-SSD<br><br>
 Measure the distance to the object with RealSense D435 while performing object detection by MobileNet-SSD with RaspberryPi 3 boosted with Intel Movidius Neural Compute Stick.<br><br>
-**【Japanese Article】 https://qiita.com/PINTO/items/1828f97d95fdda45f57d**<br>
-**【YouTube Movie】 https://youtu.be/77cV9fyqJ1w**<br><br>
+**【Japanese Article】 https://qiita.com/PINTO/items/1828f97d95fdda45f57d**<br><br>
+
 
 ## Change history
-[July 14, 2018]　Corresponds to NCSDK v2.00.05.02
+[July 14, 2018]　Corresponds to NCSDK v2.00.05.02<br>
 [July 17, 2018]　Corresponds to OpenCV 3.4.2
 
 ## Motion image
 **about 6.5 FPS （Detection + Screen drawing）**<br>
+**【YouTube Movie】 https://youtu.be/77cV9fyqJ1w**<br><br>
 ![03](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/03.gif)
 ![04](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/04.png)
 
