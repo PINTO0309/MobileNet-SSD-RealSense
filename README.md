@@ -112,7 +112,8 @@ $ cd ~
 $ rm -r -f opencv-3.x.x
 $ rm -r -f opencv_contrib-3.x.x
 ```
-9.Build install "OpenCV 3.4.2"
+9.Build install "OpenCV 3.4.2" or Install by deb package.<br>
+**9.1 Build Install**
 ```
 $ cd ~
 $ wget -O opencv.zip https://github.com/Itseez/opencv/archive/3.4.2.zip
@@ -143,6 +144,15 @@ $ make -j1
 $ sudo make install
 $ sudo ldconfig
 ```
+**9.2 Install by deb package**
+```
+$ cd ~
+$ sudo apt autoremove libopencv3
+$ wget https://github.com/PINTO0309/OpenCVonARMv7/raw/master/libopencv3_3.4.2-20180709.1_armhf.deb
+$ sudo apt install -y ./libopencv3_3.4.2-20180709.1_armhf.deb
+$ sudo ldconfig
+```
+
 10.Install Intel® RealSense™ SDK 2.0
 ```
 $ cd ~
