@@ -10,12 +10,13 @@ Measure the distance to the object with RealSense D435 while performing object d
 [July 21, 2018]　Support for multiprocessing <MultiStickSSDwithRealSense.py>
 
 ## Motion image
-**about 6.5 FPS （Detection + Screen drawing）**<br>
+**about 6.5 FPS （Detection + Screen drawing / SingleStickSSDwithRealSense.py）**<br>
 **【YouTube Movie】 https://youtu.be/77cV9fyqJ1w**<br><br>
 ![03](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/03.gif)
 ![04](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/04.png)<br><br>
-**about 25.0 FPS （Asynchronous screen drawing）**<br>
-**【YouTube Movie】 **<br><br>
+**about 25.0 FPS （Asynchronous screen drawing / MultiStickSSDwithRealSense.py）**<br>
+**However, the prediction rate is fairly low.**<br>
+**【YouTube Movie】 https://youtu.be/tAf1u9DKkh4**<br><br>
 ![09](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/09.gif)<br>
 
 ## Environment
