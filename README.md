@@ -6,14 +6,17 @@ Measure the distance to the object with RealSense D435 while performing object d
 
 ## Change history
 [July 14, 2018]　Corresponds to NCSDK v2.00.05.02<br>
-[July 17, 2018]　Corresponds to OpenCV 3.4.2
+[July 17, 2018]　Corresponds to OpenCV 3.4.2<br>
 [July 21, 2018]　Support for multiprocessing <MultiStickSSDwithRealSense.py>
 
 ## Motion image
 **about 6.5 FPS （Detection + Screen drawing）**<br>
 **【YouTube Movie】 https://youtu.be/77cV9fyqJ1w**<br><br>
 ![03](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/03.gif)
-![04](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/04.png)
+![04](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/04.png)<br><br>
+**about 25.0 FPS （Asynchronous screen drawing）**<br>
+**【YouTube Movie】 **<br><br>
+![09](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/09.gif)<br>
 
 ## Environment
 1．RaspberryPi3 + Raspbian Stretch (USB2.0 Port)<br>
