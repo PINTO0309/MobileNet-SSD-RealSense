@@ -55,10 +55,10 @@ config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
 pipeline.start(config)
 
 try:
-    freq = cv2.getTickFrequency()
+    #freq = cv2.getTickFrequency()
 
     while True:
-        t1 = cv2.getTickCount()
+        t1 = time.perf_counter()
 
         # Wait for a coherent pair of frames: depth and color
         frames = pipeline.wait_for_frames()
@@ -143,9 +143,9 @@ try:
         cv2.imshow('RealSense', cv2.resize(color_image,(width, height)))
 
         ## Print FPS
-        #t2 = cv2.getTickCount()
-        #time1 = (t2-t1)/freq
-        #print(" {:.2f} FPS".format(1/time1))
+        t2 = time.perf_counter()
+        time1 = (t2-t1)#/freq
+        print(" {:.2f} FPS".format(1/time1))
 
         if cv2.waitKey(1)&0xFF == ord('q'):
             break
