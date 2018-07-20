@@ -7,6 +7,7 @@ Measure the distance to the object with RealSense D435 while performing object d
 ## Change history
 [July 14, 2018]　Corresponds to NCSDK v2.00.05.02<br>
 [July 17, 2018]　Corresponds to OpenCV 3.4.2
+[July 21, 2018]　Support for multiprocessing <MultiStickSSDwithRealSense.py>
 
 ## Motion image
 **about 6.5 FPS （Detection + Screen drawing）**<br>
