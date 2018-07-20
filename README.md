@@ -15,7 +15,7 @@ Measure the distance to the object with RealSense D435 while performing object d
 ![03](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/03.gif)
 ![04](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/04.png)<br><br>
 **about 25.0 FPS （Asynchronous screen drawing / MultiStickSSDwithRealSense.py）**<br>
-**However, the prediction rate is fairly low.**<br>
+**However, the prediction rate is fairly low.(about 8.0 FPS)**<br>
 **【YouTube Movie】 https://youtu.be/tAf1u9DKkh4**<br><br>
 ![09](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/09.gif)<br>
 
