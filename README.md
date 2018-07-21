@@ -295,4 +295,5 @@ $ mvNCCompile ./deploy.prototxt -w ./MobileNetSSD_deploy.caffemodel -s 12
 https://github.com/movidius/ncappzoo/tree/master/caffe/SSD_MobileNet
 https://github.com/FreeApe/VGG-or-MobileNet-SSD
 https://github.com/chuanqi305/MobileNet-SSD
+https://github.com/avBuffer/MobilenetSSD_caffe
 
