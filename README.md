@@ -20,7 +20,7 @@ Measure the distance to the object with RealSense D435 while performing object d
 **However, the prediction rate is fairly low.(about 8.0 FPS - 12.0 FPS)**<br>
 **【YouTube Movie】 https://youtu.be/tAf1u9DKkh4**<br><br>
 ![09](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/09.gif)<br><br>
-**USB Camera Mode MultiStick x4 Boosted**<br>
+**USB Camera Mode MultiStick x4 Boosted（Asynchronous screen drawing / MultiStickSSDwithRealSense.py）**<br>
 **【YouTube Movie】　https://youtu.be/GedDpAc0JyQ**<br><br>
 ![10](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/10.gif)<br>
 
@@ -249,6 +249,23 @@ $ sudo raspi-config
 "7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
 $ cd ~/MobileNet-SSD-RealSense
 $ python3 SingleStickSSDwithRealSense.py
+```
+
+
+(Example1) **[MobileNet-SSD + Neural Compute Stick + RealSense D435 Mode](#motion-image)**
+```
+$ sudo raspi-config
+"7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
+$ cd ~/MobileNet-SSD-RealSense
+$ python3 MultiStickSSDwithRealSense.py
+```
+
+(Example2) **[MobileNet-SSD + Neural Compute Stick + USB Camera Mode](#motion-image)**
+```
+$ sudo raspi-config
+"7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
+$ cd ~/MobileNet-SSD-RealSense
+$ python3 MultiStickSSDwithRealSense.py -mod 1 -wd 640 -ht 480
 ```
 
 (Example1)
