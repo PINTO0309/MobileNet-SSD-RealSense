@@ -27,7 +27,7 @@ Measure the distance to the object with RealSense D435 while performing object d
 ## Environment
 1．RaspberryPi3 + Raspbian Stretch (USB2.0 Port)<br>
 2．Intel RealSense D435 (Firmware Ver 5.9.13) or USB Camera<br>
-3．Intel Movidius Neural Compute Stick x１piece<br>
+3．Intel Movidius Neural Compute Stick x１piece or more<br>
 4．OpenCV3.4.2<br>
 5．VFPV3 or TBB (Intel Threading Building Blocks)<br>
 6．Numpy<br>
