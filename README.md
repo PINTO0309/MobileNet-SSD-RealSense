@@ -243,7 +243,7 @@ $ git clone https://github.com/PINTO0309/MobileNet-SSD-RealSense.git
 
 ## Execute the program
 
-(Example0) **[MobileNet-SSD + Neural Compute Stick + RealSense D435](#motion-image)**
+(Example0) **[MobileNet-SSD + Neural Compute Stick + RealSense D435 Mode + Syncronous](#motion-image)**
 ```
 $ sudo raspi-config
 "7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
@@ -252,7 +252,7 @@ $ python3 SingleStickSSDwithRealSense.py
 ```
 
 
-(Example1) **[MobileNet-SSD + Neural Compute Stick + RealSense D435 Mode](#motion-image)**
+(Example1) **[MobileNet-SSD + Neural Compute Stick + RealSense D435 Mode + Asynchronous](#motion-image)**
 ```
 $ sudo raspi-config
 "7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
@@ -260,7 +260,7 @@ $ cd ~/MobileNet-SSD-RealSense
 $ python3 MultiStickSSDwithRealSense.py
 ```
 
-(Example2) **[MobileNet-SSD + Neural Compute Stick + USB Camera Mode](#motion-image)**
+(Example2) **[MobileNet-SSD + Neural Compute Stick + USB Camera Mode + Asynchronous](#motion-image)**
 ```
 $ sudo raspi-config
 "7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
@@ -268,7 +268,7 @@ $ cd ~/MobileNet-SSD-RealSense
 $ python3 MultiStickSSDwithRealSense.py -mod 1 -wd 640 -ht 480
 ```
 
-(Example1)
+(Example3)
 ```
 $ sudo raspi-config
 "7.Advanced Options" - "A7 GL Driver" - "G2 GL (Fake KMS)"
@@ -276,7 +276,7 @@ $ realsense-viewer
 ```
 ![05](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/05.gif)
 
-(Example2)
+(Example4)
 ```
 $ sudo raspi-config
 "7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
@@ -286,7 +286,7 @@ $ rs-grabcuts
 ```
 ![06](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/06.gif)
 
-(Example3)
+(Example5)
 ```
 $ sudo raspi-config
 "7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
@@ -296,7 +296,7 @@ $ rs-imshow
 ```
 ![07](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/07.gif)
 
-(Example4) MobileNet-SSD(OpenCV-DNN) + RealSense D435 + Without Neural Compute Stick
+(Example6) MobileNet-SSD(OpenCV-DNN) + RealSense D435 + Without Neural Compute Stick
 ```
 $ sudo raspi-config
 "7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
