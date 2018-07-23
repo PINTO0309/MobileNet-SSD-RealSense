@@ -27,7 +27,7 @@ Measure the distance to the object with RealSense D435 while performing object d
 4．OpenCV3.4.2<br>
 5．VFPV3 or TBB (Intel Threading Building Blocks)<br>
 6．Numpy<br>
-7．Python3.5<br>
+7．Python3.5 (Only MultiStickSSDwithRealSense.py is multiprocessing enabled)<br>
 8．NCSDK v2.00.05.02 (It does not work with NCSDK v1.　[v1 version is here](https://github.com/PINTO0309/MobileNet-SSD-RealSense/tree/v1.0))<br>
 9．HDMI Display<br>
 
