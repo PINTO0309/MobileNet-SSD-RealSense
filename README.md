@@ -8,7 +8,8 @@ Measure the distance to the object with RealSense D435 while performing object d
 ## Change history
 [July 14, 2018]　Corresponds to NCSDK v2.00.05.02<br>
 [July 17, 2018]　Corresponds to OpenCV 3.4.2<br>
-[July 21, 2018]　Support for multiprocessing <MultiStickSSDwithRealSense.py>
+[July 21, 2018]　Support for multiprocessing <MultiStickSSDwithRealSense.py><br>
+[July 23, 2018]　Support for USB Camera Mode <MultiStickSSDwithRealSense.py><br>
 
 ## Motion image
 **about 6.5 FPS （Detection + Screen drawing / SingleStickSSDwithRealSense.py）**<br>
@@ -18,11 +19,14 @@ Measure the distance to the object with RealSense D435 while performing object d
 **about 25.0 FPS （Asynchronous screen drawing / MultiStickSSDwithRealSense.py）**<br>
 **However, the prediction rate is fairly low.(about 8.0 FPS - 12.0 FPS)**<br>
 **【YouTube Movie】 https://youtu.be/tAf1u9DKkh4**<br><br>
-![09](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/09.gif)<br>
+![09](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/09.gif)<br><br>
+**USB Camera Mode MultiStick x4 Boosted**<br>
+**【YouTube Movie】　https://youtu.be/GedDpAc0JyQ**<br><br>
+![10](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/10.gif)<br>
 
 ## Environment
 1．RaspberryPi3 + Raspbian Stretch (USB2.0 Port)<br>
-2．Intel RealSense D435 (Firmware Ver 5.9.13)<br>
+2．Intel RealSense D435 (Firmware Ver 5.9.13) or USB Camera<br>
 3．Intel Movidius Neural Compute Stick x１piece<br>
 4．OpenCV3.4.2<br>
 5．VFPV3 or TBB (Intel Threading Building Blocks)<br>
