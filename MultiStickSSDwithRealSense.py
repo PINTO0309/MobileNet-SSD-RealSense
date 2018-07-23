@@ -1,20 +1,13 @@
 import sys
-graph_folder="./"
 if sys.version_info.major < 3 or sys.version_info.minor < 4:
     print("Please using python3.4 or greater!")
-    exit(1)
-
-if len(sys.argv) > 1:
-    graph_folder = sys.argv[1]
-
+    sys.exit(1)
 import pyrealsense2 as rs
 import numpy as np
-import cv2
+import cv2, io, time, argparse, re
 from mvnc import mvncapi as mvnc
 from os import system
-import io, time
 from os.path import isfile, join
-import re
 from time import sleep
 import multiprocessing as mp
 
@@ -27,14 +20,20 @@ results = None
 fps = ""
 framecount = 0
 time1 = 0
+graph_folder = ""
+cam = None
+camera_mode = 0
+camera_width = 320
+camera_height = 240
+window_name = ""
 
-
-
-def camThread(results, frameBuffer):
+def camThread(results, frameBuffer, camera_mode, camera_width, camera_height):
     global fps
     global lastresults
     global framecount
     global time1
+    global cam
+    global window_name
 
     LABELS = ('background',
               'aeroplane', 'bicycle', 'bird', 'boat',
@@ -44,28 +43,53 @@ def camThread(results, frameBuffer):
               'sheep', 'sofa', 'train', 'tvmonitor')
 
     # Configure depth and color streams
-    pipeline = rs.pipeline()
-    config = rs.config()
-    config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 30)
-    config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
-    pipeline.start(config)
+    #  Or
+    # Open USB Camera streams
+    if camera_mode == 0:
+        pipeline = rs.pipeline()
+        config = rs.config()
+        config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 30)
+        config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
+        pipeline.start(config)
+        window_name = "RealSense"
+    elif camera_mode == 1:
+        cam = cv2.VideoCapture(0)
+        if cam.isOpened() != True:
+            print("USB Camera Open Error!!!")
+            sys.exit(0)
+        cam.set(cv2.CAP_PROP_FPS, 30)
+        cam.set(cv2.CAP_PROP_FRAME_WIDTH, camera_width)
+        cam.set(cv2.CAP_PROP_FRAME_HEIGHT, camera_height)
+        window_name = "USB Camera"
 
-    cv2.namedWindow('RealSense', cv2.WINDOW_AUTOSIZE)
+    cv2.namedWindow(window_name, cv2.WINDOW_AUTOSIZE)
 
     while True:
         t1 = time.perf_counter()
 
-        # Wait for a coherent pair of frames: depth and color
-        frames = pipeline.wait_for_frames()
-        depth_frame = frames.get_depth_frame()
-        color_frame = frames.get_color_frame()
-        if not depth_frame or not color_frame:
-            continue
+        # 0:= RealSense Mode
+        # 1:= USB Camera Mode
 
-        if frameBuffer.full():
-            frameBuffer.get()
+        if camera_mode == 0:
+            # Wait for a coherent pair of frames: depth and color
+            frames = pipeline.wait_for_frames()
+            depth_frame = frames.get_depth_frame()
+            color_frame = frames.get_color_frame()
+            if not depth_frame or not color_frame:
+                continue
+            if frameBuffer.full():
+                frameBuffer.get()
+            color_image = np.asanyarray(color_frame.get_data())
 
-        color_image = np.asanyarray(color_frame.get_data())
+        elif camera_mode == 1:
+            # USB Camera Stream Read
+            s, color_image = cam.read()
+            if not s:
+                continue
+            if frameBuffer.full():
+                frameBuffer.get()
+            frames = color_image
+
         height = color_image.shape[0]
         width = color_image.shape[1]
         frameBuffer.put(color_image.copy())
@@ -73,12 +97,12 @@ def camThread(results, frameBuffer):
 
         if not results.empty():
             res = results.get(False)
-            imdraw = overlay_on_image(frames, res, LABELS)
+            imdraw = overlay_on_image(frames, res, LABELS, camera_mode)
             lastresults = res
         else:
-            imdraw = overlay_on_image(frames, lastresults, LABELS)
+            imdraw = overlay_on_image(frames, lastresults, LABELS, camera_mode)
 
-        cv2.imshow('RealSense', cv2.resize(imdraw, (width, height)))
+        cv2.imshow(window_name, cv2.resize(imdraw, (width, height)))
 
         if cv2.waitKey(1)&0xFF == ord('q'):
             # Stop streaming
@@ -106,7 +130,7 @@ def inferencer(results, frameBuffer):
     mvnc.global_set_option(mvnc.GlobalOption.RW_LOG_LEVEL, 4)
     devices = mvnc.enumerate_devices()
     if len(devices) == 0:
-        print("No devices found")
+        print("No NCS devices found")
         sys.exit(1)
     print(len(devices))
 
@@ -126,7 +150,7 @@ def inferencer(results, frameBuffer):
             continue
 
     if devopen == False:
-        print("Devices open Error!!!")
+        print("NCS Devices open Error!!!")
         sys.exit(1)
 
     print("Loaded Graphs!!! "+str(devnum))
@@ -160,12 +184,15 @@ def preprocess_image(src):
 
 
 
-def overlay_on_image(frames, object_info, LABELS):
+def overlay_on_image(frames, object_info, LABELS, camera_mode):
 
     try:
-        depth_frame = frames.get_depth_frame()
-        color_frame = frames.get_color_frame()
-        color_image = np.asanyarray(color_frame.get_data())
+        if camera_mode == 0:
+            depth_frame = frames.get_depth_frame()
+            color_frame = frames.get_color_frame()
+            color_image = np.asanyarray(color_frame.get_data())
+        elif camera_mode == 1:
+            color_image = frames
 
         if isinstance(object_info, type(None)):
             return color_image
@@ -210,8 +237,12 @@ def overlay_on_image(frames, object_info, LABELS):
                 box_top = int(object_info_overlay[base_index + 4] * source_image_height)
                 box_right = int(object_info_overlay[base_index + 5] * source_image_width)
                 box_bottom = int(object_info_overlay[base_index + 6] * source_image_height)
-                meters = depth_frame.as_depth_frame().get_distance(box_left+int((box_right-box_left)/2), box_top+int((box_bottom-box_top)/2))
-                label_text = LABELS[int(class_id)] + " (" + str(percentage) + "%)"+ " {:.2f}".format(meters) + " meters away"
+
+                if camera_mode == 0:
+                    meters = depth_frame.as_depth_frame().get_distance(box_left+int((box_right-box_left)/2), box_top+int((box_bottom-box_top)/2))
+                    label_text = LABELS[int(class_id)] + " (" + str(percentage) + "%)"+ " {:.2f}".format(meters) + " meters away"
+                elif camera_mode == 1:
+                    label_text = LABELS[int(class_id)] + " (" + str(percentage) + "%)"
 
                 box_color = (255, 128, 0)
                 box_thickness = 1
@@ -230,7 +261,7 @@ def overlay_on_image(frames, object_info, LABELS):
                 cv2.rectangle(img_cp, (label_left - 1, label_top - 1), (label_right + 1, label_bottom + 1), label_background_color, -1)
                 cv2.putText(img_cp, label_text, (label_left, label_bottom), cv2.FONT_HERSHEY_SIMPLEX, 0.5, label_text_color, 1)
 
-        cv2.putText(img_cp, fps, (550,15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (38,0,255), 1, cv2.LINE_AA)
+        cv2.putText(img_cp, fps, (width-90,15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (38,0,255), 1, cv2.LINE_AA)
         return img_cp
 
     except:
@@ -241,6 +272,23 @@ def overlay_on_image(frames, object_info, LABELS):
 
 if __name__ == '__main__':
 
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-grp','--graph',dest='graph_folder',type=str,default='./',help='MVNC graphs Path. (Default=./)')
+    parser.add_argument('-mod','--mode',dest='camera_mode',type=int,default=0,help='Camera Mode. (0:=RealSense Mode, 1:=USB Camera Mode. Defalut=0)')
+    parser.add_argument('-wd','--width',dest='camera_width',type=int,default=320,help='Width of the frames in the video stream. (USB Camera Mode Only. Default=320)')
+    parser.add_argument('-ht','--height',dest='camera_height',type=int,default=240,help='Height of the frames in the video stream. (USB Camera Mode Only. Default=240)')
+    args = parser.parse_args()
+
+    graph_folder  = args.graph_folder
+    camera_mode   = args.camera_mode
+    camera_width  = args.camera_width
+    camera_height = args.camera_height
+
+    # 0:=RealSense Mode, 1:=USB Camera Mode
+    if camera_mode != 0 and camera_mode != 1:
+        print("Camera Mode Error!! " + str(camera_mode))
+        sys.exit(0)
+
     devices = None
     try:
 
@@ -249,7 +297,7 @@ if __name__ == '__main__':
         results = mp.Queue()
 
         # Start streaming
-        p = mp.Process(target=camThread, args=(results, frameBuffer), daemon=True)
+        p = mp.Process(target=camThread, args=(results, frameBuffer, camera_mode, camera_width, camera_height), daemon=True)
         p.start()
         processes.append(p)
 
