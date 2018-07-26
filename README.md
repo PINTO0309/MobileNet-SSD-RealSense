@@ -6,7 +6,7 @@ Measure the distance to the object with RealSense D435 while performing object d
 
 
 ## Change history
-[July 14, 2018]　Corresponds to NCSDK v2.00.05.02<br>
+[July 14, 2018]　Corresponds to NCSDK v2.05.00.02<br>
 [July 17, 2018]　Corresponds to OpenCV 3.4.2<br>
 [July 21, 2018]　Support for multiprocessing <MultiStickSSDwithRealSense.py><br>
 [July 23, 2018]　Support for USB Camera Mode <MultiStickSSDwithRealSense.py><br>
@@ -32,7 +32,7 @@ Measure the distance to the object with RealSense D435 while performing object d
 5．VFPV3 or TBB (Intel Threading Building Blocks)<br>
 6．Numpy<br>
 7．Python3.5 (Only MultiStickSSDwithRealSense.py is multiprocessing enabled)<br>
-8．NCSDK v2.00.05.02 (It does not work with NCSDK v1.　[v1 version is here](https://github.com/PINTO0309/MobileNet-SSD-RealSense/tree/v1.0))<br>
+8．NCSDK v2.05.00.02 (It does not work with NCSDK v1.　[v1 version is here](https://github.com/PINTO0309/MobileNet-SSD-RealSense/tree/v1.0))<br>
 9．HDMI Display<br>
 
 ## Firmware update with Windows 10 PC
