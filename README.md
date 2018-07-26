@@ -1,5 +1,5 @@
 # MobileNet-SSD-RealSense
-RaspberryPi3(Raspbian Stretch) + Neural Compute Stick(NCS) + RealSense D435 + MobileNet-SSD(MobileNetSSD)<br><br>
+RaspberryPi3(Raspbian Stretch) + Neural Compute Stick(NCS) + RealSense D435(or USB Camera) + MobileNet-SSD(MobileNetSSD)<br><br>
 Measure the distance to the object with RealSense D435 while performing object detection by MobileNet-SSD(MobileNetSSD) with RaspberryPi 3 boosted with Intel Movidius Neural Compute Stick.<br><br>
 **【Japanese Article1】 https://qiita.com/PINTO/items/1828f97d95fdda45f57d**<br>
 **【Japanese Article2】 https://qiita.com/PINTO/items/40abcf33af3ae7ef579d**<br><br>
