@@ -318,3 +318,4 @@ https://github.com/FreeApe/VGG-or-MobileNet-SSD<br>
 https://github.com/chuanqi305/MobileNet-SSD<br>
 https://github.com/avBuffer/MobilenetSSD_caffe<br>
 https://github.com/Coldmooon/SSD-on-Custom-Dataset<br>
+https://stackoverflow.com/questions/33962226/common-causes-of-nans-during-training<br>
