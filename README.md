@@ -10,6 +10,7 @@ Measure the distance to the object with RealSense D435 while performing object d
 [July 17, 2018]　Corresponds to OpenCV 3.4.2<br>
 [July 21, 2018]　Support for multiprocessing <MultiStickSSDwithRealSense.py><br>
 [July 23, 2018]　Support for USB Camera Mode <MultiStickSSDwithRealSense.py><br>
+[July 29, 2018]　Added steps to build learning environment<br>
 
 ## Motion image
 **about 6.5 FPS （Detection + Screen drawing / SingleStickSSDwithRealSense.py）**<br>
@@ -312,7 +313,216 @@ $ cd ~/MobileNet-SSD-RealSense
 $ mvNCCompile ./deploy.prototxt -w ./MobileNetSSD_deploy.caffemodel -s 12
 ```
 
-# Procedure for generating original learning data
+# Construction of learning environment and simple test (Ubuntu16.04 x86_64 PC + GPU)
+1.**【Example】** Introduction of NVIDIA-Driver, CUDA and cuDNN to the environment with GPU
+```
+$ sudo apt-get remove nvidia-*
+$ sudo apt-get remove cuda-*
+
+$ apt search "^nvidia-[0-9]{3}$"
+$ sudo apt install cuda-8.0
+$ sudo reboot
+$ nvidia-smi
+
+$ wget https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v5.1/prod_20161129/8.0/cudnn-8.0-linux-x64-v5.1-tgz
+$ sudo tar -xzf cudnn-8.0-linux-x64-v5.1.tgz -C /usr/local
+$ echo 'export PATH=/usr/local/cuda/bin:${PATH}' >> ~/.bashrc
+$ echo 'export LD_LIBRARY_PATH=/usr/local/cuda/lib64:${LD_LIBRARY_PATH}' >> ~/.bashrc
+$ source ~/.bashrc
+$ sudo ldconfig
+$ nvcc -V
+$ cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2
+```
+2.**【Example】** Introduction of Caffe to environment with GPU
+```
+$ cd ~
+$ sudo apt install libopenblas-base libopenblas-dev
+$ git clone https://github.com/weiliu89/caffe.git
+$ cd caffe
+$ git checkout ssd
+$ cp Makefile.config.example Makefile.config
+$ nano Makefile.config
+```
+
+```
+# cuDNN acceleration switch (uncomment to build with cuDNN).
+#USE_CUDNN := 1
+↓
+# cuDNN acceleration switch (uncomment to build with cuDNN).
+USE_CUDNN := 1
+
+# Uncomment if you're using OpenCV 3
+# OPENCV_VERSION := 3
+↓
+# Uncomment if you're using OpenCV 3
+OPENCV_VERSION := 3
+
+# CUDA directory contains bin/ and lib/ directories that we need.
+CUDA_DIR := /usr/local/cuda
+↓
+# CUDA directory contains bin/ and lib/ directories that we need.
+CUDA_DIR := /usr/local/cuda-8.0
+
+# CUDA architecture setting: going with all of them.
+# For CUDA < 6.0, comment the lines after *_35 for compatibility.
+CUDA_ARCH := -gencode arch=compute_20,code=sm_20 \
+             -gencode arch=compute_20,code=sm_21 \
+             -gencode arch=compute_30,code=sm_30 \
+             -gencode arch=compute_35,code=sm_35 \
+             -gencode arch=compute_50,code=sm_50 \
+             -gencode arch=compute_52,code=sm_52 \
+             -gencode arch=compute_61,code=sm_61
+↓
+# CUDA architecture setting: going with all of them.
+# For CUDA < 6.0, comment the lines after *_35 for compatibility.
+CUDA_ARCH := -gencode arch=compute_30,code=sm_30 \
+             -gencode arch=compute_35,code=sm_35 \
+             -gencode arch=compute_50,code=sm_50 \
+             -gencode arch=compute_52,code=sm_52 \
+             -gencode arch=compute_61,code=sm_61
+
+# NOTE: this is required only if you will compile the python interface.
+# We need to be able to find Python.h and numpy/arrayobject.h.
+PYTHON_INCLUDE := /usr/include/python2.7 \
+		/usr/lib/python2.7/dist-packages/numpy/core/include
+↓
+# NOTE: this is required only if you will compile the python interface.
+# We need to be able to find Python.h and numpy/arrayobject.h.
+PYTHON_INCLUDE := /usr/include/python2.7 \
+		/usr/lib/python2.7/dist-packages/numpy/core/include \
+                /usr/local/lib/python2.7/dist-packages/numpy/core/include
+
+
+# Uncomment to support layers written in Python (will link against Python libs)
+# WITH_PYTHON_LAYER := 1
+↓
+# Uncomment to support layers written in Python (will link against Python libs)
+WITH_PYTHON_LAYER := 1
+
+# Whatever else you find you need goes here.
+INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include
+LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib
+↓
+# Whatever else you find you need goes here.
+INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include　\
+                /usr/include/hdf5/serial
+LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib　\
+                /usr/lib/x86_64-linux-gnu/hdf5/serial
+
+# Uncomment to use `pkg-config` to specify OpenCV library paths.
+# (Usually not necessary -- OpenCV libraries are normally installed in one of the above $LIBRARY_DIRS.)
+# USE_PKG_CONFIG := 1
+↓
+# Uncomment to use `pkg-config` to specify OpenCV library paths.
+# (Usually not necessary -- OpenCV libraries are normally installed in one of the above $LIBRARY_DIRS.)
+USE_PKG_CONFIG := 1
+```
+
+```
+$ make all -j4
+$ make test -j4
+$ make distribute -j4
+$ export PYTHONPATH=/home/<username>/caffe/python:$PYTHONPATH
+$ make py
+```
+
+3.Download of VGG model [My Example CAFFE_ROOT PATH = "/home/＜username＞/caffe"]
+```
+$ export CAFFE_ROOT=/home/<username>/caffe
+$ cd $CAFFE_ROOT/models/VGGNet
+$ wget http://cs.unc.edu/~wliu/projects/ParseNet/VGG_ILSVRC_16_layers_fc_reduced.caffemodel
+```
+
+4.Download VOC 2007 and VOC 2012 datasets
+
+```
+# Download the data.
+$ cd ~;mkdir data;cd data
+$ wget http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar #<--- 1.86GB
+$ wget http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtrainval_06-Nov-2007.tar #<--- 438MB
+$ wget http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtest_06-Nov-2007.tar #<--- 430MB
+
+# Extract the data.
+$ tar -xvf VOCtrainval_11-May-2012.tar
+$ tar -xvf VOCtrainval_06-Nov-2007.tar
+$ tar -xvf VOCtest_06-Nov-2007.tar
+$ rm VOCtrainval_11-May-2012.tar;rm VOCtrainval_06-Nov-2007.tar;rm VOCtest_06-Nov-2007.tar
+```
+
+5.Generate lmdb file
+```
+$ export CAFFE_ROOT=/home/<username>/caffe
+$ cd $CAFFE_ROOT
+# Create the trainval.txt, test.txt, and test_name_size.txt in $CAFFE_ROOT/data/VOC0712/
+$ ./data/VOC0712/create_list.sh
+
+# You can modify the parameters in create_data.sh if needed.
+# It will create lmdb files for trainval and test with encoded original image:
+#   - $HOME/data/VOCdevkit/VOC0712/lmdb/VOC0712_trainval_lmdb
+#   - $HOME/data/VOCdevkit/VOC0712/lmdb/VOC0712_test_lmdb
+# and make soft links at examples/VOC0712/
+
+$ ./data/VOC0712/create_data.sh
+```
+
+6.Execution of learning [My Example environment GPU x1, GeForce GT 650M = RAM:2GB]<br><br>
+Adjust according to the number of GPU
+```
+# It will create model definition files and save snapshot models in:
+#   - $CAFFE_ROOT/models/VGGNet/VOC0712/SSD_300x300/
+# and job file, log file, and the python script in:
+#   - $CAFFE_ROOT/jobs/VGGNet/VOC0712/SSD_300x300/
+# and save temporary evaluation results in:
+#   - $HOME/data/VOCdevkit/results/VOC2007/SSD_300x300/
+# It should reach 77.* mAP at 120k iterations.
+
+$ export CAFFE_ROOT=/home/<username>/caffe
+$ export PYTHONPATH=/home/<username>/caffe/python:$PYTHONPATH
+$ cd $CAFFE_ROOT
+$ cp examples/ssd/ssd_pascal.py examples/ssd/BK_ssd_pascal.py
+$ nano examples/ssd/ssd_pascal.py
+```
+
+```
+# Solver parameters.
+# Defining which GPUs to use.
+gpus = "0,1,2,3"
+↓
+# Solver parameters.
+# Defining which GPUs to use.
+gpus = "0"
+```
+
+Adjust according to GPU performance (Memory Size) [My Example GeForce GT 650M x1 = RAM:2GB]
+```
+# Divide the mini-batch to different GPUs.
+batch_size = 32
+accum_batch_size = 32
+↓
+# Divide the mini-batch to different GPUs.
+batch_size = 1
+accum_batch_size = 1
+```
+
+Execution
+```
+$ python examples/ssd/ssd_pascal.py
+```
+
+7.Evaluation of learning data (still image)
+```
+$ cd $CAFFE_ROOT
+# If you would like to test a model you trained, you can do:
+$ python examples/ssd/score_ssd_pascal.py
+```
+
+8.Evaluation of learning data (USB camera)
+```
+# If you would like to attach a webcam to a model you trained, you can do:
+$ python examples/ssd/ssd_pascal_webcam.py
+```
+
+# Reference article, thanks
 https://github.com/movidius/ncappzoo/tree/master/caffe/SSD_MobileNet<br>
 https://github.com/FreeApe/VGG-or-MobileNet-SSD<br>
 https://github.com/chuanqi305/MobileNet-SSD<br>
