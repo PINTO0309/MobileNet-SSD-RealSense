@@ -244,7 +244,7 @@ $ git clone https://github.com/PINTO0309/MobileNet-SSD-RealSense.git
 
 ## Execute the program
 
-(Example0) **[MobileNet-SSD + Neural Compute Stick + RealSense D435 Mode + Syncronous](#motion-image)**
+(Example0) **[MobileNet-SSD + Neural Compute Stick + RealSense D435 Mode + Syncronous](#about-65-fps-detection--synchronous-screen-drawing--singlestickssdwithrealsensepy)**
 ```
 $ sudo raspi-config
 "7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
@@ -253,7 +253,7 @@ $ python3 SingleStickSSDwithRealSense.py
 ```
 
 
-(Example1) **[MobileNet-SSD + Neural Compute Stick + RealSense D435 Mode + Asynchronous](#motion-image)**
+(Example1) **[MobileNet-SSD + Neural Compute Stick + RealSense D435 Mode + Asynchronous](#about-250-fps-asynchronous-screen-drawing--multistickssdwithrealsensepy)**
 ```
 $ sudo raspi-config
 "7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
@@ -261,7 +261,7 @@ $ cd ~/MobileNet-SSD-RealSense
 $ python3 MultiStickSSDwithRealSense.py
 ```
 
-(Example2) **[MobileNet-SSD + Neural Compute Stick + USB Camera Mode + Asynchronous](#motion-image)**
+(Example2) **[MobileNet-SSD + Neural Compute Stick + USB Camera Mode + Asynchronous](#usb-camera-mode-multistick-x4-boostedasynchronous-screen-drawing--multistickssdwithrealsensepy)**
 ```
 $ sudo raspi-config
 "7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
