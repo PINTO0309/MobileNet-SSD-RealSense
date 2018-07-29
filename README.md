@@ -313,7 +313,7 @@ $ cd ~/MobileNet-SSD-RealSense
 $ mvNCCompile ./deploy.prototxt -w ./MobileNetSSD_deploy.caffemodel -s 12
 ```
 
-# Construction of learning environment and simple test (Ubuntu16.04 x86_64 PC + GPU[NVIDIA Geforce])
+# Construction of learning environment and simple test for model (Ubuntu16.04 x86_64 PC + GPU[NVIDIA Geforce])
 1.**【Example】** Introduction of NVIDIA-Driver, CUDA and cuDNN to the environment with GPU
 ```
 $ sudo apt-get remove nvidia-*
