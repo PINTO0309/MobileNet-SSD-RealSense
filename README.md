@@ -13,11 +13,11 @@ Measure the distance to the object with RealSense D435 while performing object d
 [July 29, 2018]　Added steps to build learning environment<br>
 
 ## Motion image
-### **about 6.5 FPS （Detection + Synchronous screen drawing / SingleStickSSDwithRealSense.py）**<br>
+### **RealSense Mode about 6.5 FPS （Detection + Synchronous screen drawing / SingleStickSSDwithRealSense.py）**<br>
 **【YouTube Movie】 https://youtu.be/77cV9fyqJ1w**<br><br>
 ![03](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/03.gif)
 ![04](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/04.png)<br><br>
-### **about 25.0 FPS （Asynchronous screen drawing / MultiStickSSDwithRealSense.py）**<br>
+### **RealSense Mode about 25.0 FPS （Asynchronous screen drawing / MultiStickSSDwithRealSense.py）**<br>
 **However, the prediction rate is fairly low.(about 8.0 FPS - 12.0 FPS)**<br>
 **【YouTube Movie】 https://youtu.be/tAf1u9DKkh4**<br><br>
 ![09](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/09.gif)<br><br>
@@ -244,7 +244,7 @@ $ git clone https://github.com/PINTO0309/MobileNet-SSD-RealSense.git
 
 ## Execute the program
 
-(Example0) **[MobileNet-SSD + Neural Compute Stick + RealSense D435 Mode + Syncronous](#about-65-fps-detection--synchronous-screen-drawing--singlestickssdwithrealsensepy)**
+(Example0) **[MobileNet-SSD + Neural Compute Stick + RealSense D435 Mode + Syncronous](#realsense-mode-about-65-fps-detection--synchronous-screen-drawing--singlestickssdwithrealsensepy)**
 ```
 $ sudo raspi-config
 "7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
@@ -253,7 +253,7 @@ $ python3 SingleStickSSDwithRealSense.py
 ```
 
 
-(Example1) **[MobileNet-SSD + Neural Compute Stick + RealSense D435 Mode + Asynchronous](#about-250-fps-asynchronous-screen-drawing--multistickssdwithrealsensepy)**
+(Example1) **[MobileNet-SSD + Neural Compute Stick + RealSense D435 Mode + Asynchronous](#realsense-mode-about-250-fps-asynchronous-screen-drawing--multistickssdwithrealsensepy)**
 ```
 $ sudo raspi-config
 "7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
