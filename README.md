@@ -528,4 +528,5 @@ https://github.com/FreeApe/VGG-or-MobileNet-SSD<br>
 https://github.com/chuanqi305/MobileNet-SSD<br>
 https://github.com/avBuffer/MobilenetSSD_caffe<br>
 https://github.com/Coldmooon/SSD-on-Custom-Dataset<br>
+https://github.com/BVLC/caffe/wiki/Ubuntu-16.04-or-15.10-Installation-Guide#the-gpu-support-prerequisites<br>
 https://stackoverflow.com/questions/33962226/common-causes-of-nans-during-training<br>
