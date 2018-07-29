@@ -13,7 +13,7 @@ Measure the distance to the object with RealSense D435 while performing object d
 [July 29, 2018]　Added steps to build learning environment<br>
 
 ## Motion image
-**about 6.5 FPS （Detection + Screen drawing / SingleStickSSDwithRealSense.py）**<br>
+**about 6.5 FPS （Detection + Synchronous screen drawing / SingleStickSSDwithRealSense.py）**<br>
 **【YouTube Movie】 https://youtu.be/77cV9fyqJ1w**<br><br>
 ![03](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/03.gif)
 ![04](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/04.png)<br><br>
