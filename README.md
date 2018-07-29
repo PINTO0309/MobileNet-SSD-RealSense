@@ -509,11 +509,16 @@ Execution
 - VGG_VOC0712_SSD_300x300_iter_n.caffemodel
 - VGG_VOC0712_SSD_300x300_iter_n.solverstate
 ```
+$ export CAFFE_ROOT=/home/<username>/caffe
+$ export PYTHONPATH=/home/<username>/caffe/python:$PYTHONPATH
+$ cd $CAFFE_ROOT
 $ python examples/ssd/ssd_pascal.py
 ```
 
 7.Evaluation of learning data (still image)
 ```
+$ export CAFFE_ROOT=/home/<username>/caffe
+$ export PYTHONPATH=/home/<username>/caffe/python:$PYTHONPATH
 $ cd $CAFFE_ROOT
 # If you would like to test a model you trained, you can do:
 $ python examples/ssd/score_ssd_pascal.py
@@ -521,6 +526,9 @@ $ python examples/ssd/score_ssd_pascal.py
 
 8.Evaluation of learning data (USB camera)
 ```
+$ export CAFFE_ROOT=/home/<username>/caffe
+$ export PYTHONPATH=/home/<username>/caffe/python:$PYTHONPATH
+$ cd $CAFFE_ROOT
 # If you would like to attach a webcam to a model you trained, you can do:
 $ python examples/ssd/ssd_pascal_webcam.py
 ```
