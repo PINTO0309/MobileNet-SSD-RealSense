@@ -426,7 +426,7 @@ $ export PYTHONPATH=/home/<username>/caffe/python:$PYTHONPATH
 $ make py
 ```
 
-3.Download of VGG model [My Example CAFFE_ROOT PATH = "/home/＜username＞/caffe"]
+3.Download of VGG model [My Example CAFFE_ROOT PATH = "/home/\<username\>/caffe"]
 ```
 $ export CAFFE_ROOT=/home/<username>/caffe
 $ cd $CAFFE_ROOT/models/VGGNet
