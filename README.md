@@ -505,7 +505,7 @@ accum_batch_size = 1
 ```
 
 Execution
-- The learned data is generated in "$ CAFFE_ROOT/models/VGGNet/VOC0712/SSD_300x300"
+- The learned data is generated in "$CAFFE_ROOT/models/VGGNet/VOC0712/SSD_300x300"
 - VGG_VOC0712_SSD_300x300_iter_n.caffemodel
 - VGG_VOC0712_SSD_300x300_iter_n.solverstate
 ```
