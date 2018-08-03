@@ -232,7 +232,7 @@ def overlay_on_image(frames, object_info, LABELS, camera_mode, background_transp
         height = color_image.shape[0]
         width = color_image.shape[1]
         entire_pixel = height * width
-        occupancy_threshold = 0.7
+        occupancy_threshold = 0.9
         num_valid_boxes = int(object_info[0])
 
         if background_transparent_mode == 0:
@@ -267,7 +267,6 @@ def overlay_on_image(frames, object_info, LABELS, camera_mode, background_transp
                     min_score_percent = 60
                 elif background_transparent_mode == 1:
                     min_score_percent = 20
-                #min_score_percent = 60
 
                 source_image_width = width
                 source_image_height = height
