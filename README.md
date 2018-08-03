@@ -11,7 +11,7 @@ Measure the distance to the object with RealSense D435 while performing object d
 [July 21, 2018]　Support for multiprocessing <MultiStickSSDwithRealSense.py><br>
 [July 23, 2018]　Support for USB Camera Mode <MultiStickSSDwithRealSense.py><br>
 [July 29, 2018]　Added steps to build learning environment<br>
-[August 3, 2018]　Background Multi-transparent mode beta implementation
+[Aug   3, 2018]　Background Multi-transparent mode beta implementation <MultiStickSSDwithRealSense.py><br>
 
 ## Motion image
 ### **RealSense Mode about 6.5 FPS （Detection + Synchronous screen drawing / SingleStickSSDwithRealSense.py）**<br>
