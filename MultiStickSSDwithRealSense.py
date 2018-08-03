@@ -26,8 +26,16 @@ camera_mode = 0
 camera_width = 320
 camera_height = 240
 window_name = ""
+background_transparent_mode = 0
+background_img = None
+depth_sensor = None
+depth_scale = 1.0
+align_to = None
+align = None
 
-def camThread(results, frameBuffer, camera_mode, camera_width, camera_height):
+
+
+def camThread(results, frameBuffer, camera_mode, camera_width, camera_height, background_transparent_mode, background_img):
     global fps
     global lastresults
     global framecount
@@ -50,7 +58,11 @@ def camThread(results, frameBuffer, camera_mode, camera_width, camera_height):
         config = rs.config()
         config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 30)
         config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
-        pipeline.start(config)
+        profile = pipeline.start(config)
+        depth_sensor = profile.get_device().first_depth_sensor()
+        depth_scale = depth_sensor.get_depth_scale()
+        align_to = rs.stream.color
+        align = rs.align(align_to)
         window_name = "RealSense"
     elif camera_mode == 1:
         cam = cv2.VideoCapture(0)
@@ -97,10 +109,12 @@ def camThread(results, frameBuffer, camera_mode, camera_width, camera_height):
 
         if not results.empty():
             res = results.get(False)
-            imdraw = overlay_on_image(frames, res, LABELS, camera_mode)
+            imdraw = overlay_on_image(frames, res, LABELS, camera_mode, background_transparent_mode, 
+                                      background_img, depth_scale=depth_scale, align=align)
             lastresults = res
         else:
-            imdraw = overlay_on_image(frames, lastresults, LABELS, camera_mode)
+            imdraw = overlay_on_image(frames, lastresults, LABELS, camera_mode, background_transparent_mode, 
+                                      background_img, depth_scale=depth_scale, align=align)
 
         cv2.imshow(window_name, cv2.resize(imdraw, (width, height)))
 
@@ -184,26 +198,51 @@ def preprocess_image(src):
 
 
 
-def overlay_on_image(frames, object_info, LABELS, camera_mode):
+def overlay_on_image(frames, object_info, LABELS, camera_mode, background_transparent_mode, background_img, depth_scale=1.0, align=None):
 
     try:
+
+        # 0:=RealSense Mode, 1:=USB Camera Mode
         if camera_mode == 0:
-            depth_frame = frames.get_depth_frame()
-            color_frame = frames.get_color_frame()
+            # 0:= No background transparent, 1:= Background transparent
+            if background_transparent_mode == 0:
+                depth_frame = frames.get_depth_frame()
+                color_frame = frames.get_color_frame()
+
+            elif background_transparent_mode == 1:
+                aligned_frames = align.process(frames)
+                depth_frame = aligned_frames.get_depth_frame()               
+                color_frame = aligned_frames.get_color_frame()
+
+            depth_dist  = depth_frame.as_depth_frame()
+            depth_image = np.asanyarray(depth_frame.get_data())
             color_image = np.asanyarray(color_frame.get_data())
+
         elif camera_mode == 1:
             color_image = frames
 
         if isinstance(object_info, type(None)):
-            return color_image
+            # 0:= No background transparent, 1:= Background transparent
+            if background_transparent_mode == 0:
+                return color_image
+            elif background_transparent_mode == 1:
+                return background_img
 
         # Show images
         height = color_image.shape[0]
         width = color_image.shape[1]
+        entire_pixel = height * width
+        occupancy_threshold = 0.7
         num_valid_boxes = int(object_info[0])
-        img_cp = color_image.copy()
+
+        if background_transparent_mode == 0:
+            img_cp = color_image.copy()
+        elif background_transparent_mode == 1:
+            img_cp = background_img.copy()
 
         if num_valid_boxes > 0:
+
+            drawing_initial_flag = True
 
             for box_index in range(num_valid_boxes):
                 base_index = 7+ box_index * 7
@@ -223,7 +262,13 @@ def overlay_on_image(frames, object_info, LABELS, camera_mode):
 
                 object_info_overlay = object_info[base_index:base_index + 7]
 
-                min_score_percent = 60
+                # 0:= No background transparent, 1:= Background transparent
+                if background_transparent_mode == 0:
+                    min_score_percent = 60
+                elif background_transparent_mode == 1:
+                    min_score_percent = 20
+                #min_score_percent = 60
+
                 source_image_width = width
                 source_image_height = height
 
@@ -238,28 +283,49 @@ def overlay_on_image(frames, object_info, LABELS, camera_mode):
                 box_right = int(object_info_overlay[base_index + 5] * source_image_width)
                 box_bottom = int(object_info_overlay[base_index + 6] * source_image_height)
 
+                meters = depth_dist.get_distance(box_left+int((box_right-box_left)/2), box_top+int((box_bottom-box_top)/2))
+
+                # 0:=RealSense Mode, 1:=USB Camera Mode
                 if camera_mode == 0:
-                    meters = depth_frame.as_depth_frame().get_distance(box_left+int((box_right-box_left)/2), box_top+int((box_bottom-box_top)/2))
                     label_text = LABELS[int(class_id)] + " (" + str(percentage) + "%)"+ " {:.2f}".format(meters) + " meters away"
                 elif camera_mode == 1:
                     label_text = LABELS[int(class_id)] + " (" + str(percentage) + "%)"
 
-                box_color = (255, 128, 0)
-                box_thickness = 1
-                cv2.rectangle(img_cp, (box_left, box_top), (box_right, box_bottom), box_color, box_thickness)
+                # 0:= No background transparent, 1:= Background transparent
+                if background_transparent_mode == 0:
+                    box_color = (255, 128, 0)
+                    box_thickness = 1
+                    cv2.rectangle(img_cp, (box_left, box_top), (box_right, box_bottom), box_color, box_thickness)
+                    label_background_color = (125, 175, 75)
+                    label_text_color = (255, 255, 255)
+                    label_size = cv2.getTextSize(label_text, cv2.FONT_HERSHEY_SIMPLEX, 0.5, 1)[0]
+                    label_left = box_left
+                    label_top = box_top - label_size[1]
+                    if (label_top < 1):
+                        label_top = 1
+                    label_right = label_left + label_size[0]
+                    label_bottom = label_top + label_size[1]
+                    cv2.rectangle(img_cp, (label_left - 1, label_top - 1), (label_right + 1, label_bottom + 1), label_background_color, -1)
+                    cv2.putText(img_cp, label_text, (label_left, label_bottom), cv2.FONT_HERSHEY_SIMPLEX, 0.5, label_text_color, 1)
 
-                label_background_color = (125, 175, 75)
-                label_text_color = (255, 255, 255)
+                elif background_transparent_mode == 1:
+                    clipping_distance = (meters+0.05) / depth_scale
+                    depth_image_3d = np.dstack((depth_image, depth_image, depth_image))
+                    fore = np.where((depth_image_3d > clipping_distance) | (depth_image_3d <= 0), 0, color_image)
 
-                label_size = cv2.getTextSize(label_text, cv2.FONT_HERSHEY_SIMPLEX, 0.5, 1)[0]
-                label_left = box_left
-                label_top = box_top - label_size[1]
-                if (label_top < 1):
-                    label_top = 1
-                label_right = label_left + label_size[0]
-                label_bottom = label_top + label_size[1]
-                cv2.rectangle(img_cp, (label_left - 1, label_top - 1), (label_right + 1, label_bottom + 1), label_background_color, -1)
-                cv2.putText(img_cp, label_text, (label_left, label_bottom), cv2.FONT_HERSHEY_SIMPLEX, 0.5, label_text_color, 1)
+                    area = abs(box_bottom - box_top) * abs(box_right - box_left)
+                    occupancy = area / entire_pixel
+
+                    if occupancy <= occupancy_threshold:
+                        if drawing_initial_flag == True:
+                            img_cp = fore
+                            drawing_initial_flag = False
+                        else:
+                            img_cp[box_top:box_bottom, box_left:box_right] = cv2.addWeighted(img_cp[box_top:box_bottom, box_left:box_right], 
+                                                                                             0.85, 
+                                                                                             fore[box_top:box_bottom, box_left:box_right], 
+                                                                                             0.85, 
+                                                                                             0)
 
         cv2.putText(img_cp, fps, (width-90,15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (38,0,255), 1, cv2.LINE_AA)
         return img_cp
@@ -270,6 +336,9 @@ def overlay_on_image(frames, object_info, LABELS, camera_mode):
 
 
 
+
+
+
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
@@ -277,17 +346,25 @@ if __name__ == '__main__':
     parser.add_argument('-mod','--mode',dest='camera_mode',type=int,default=0,help='Camera Mode. (0:=RealSense Mode, 1:=USB Camera Mode. Defalut=0)')
     parser.add_argument('-wd','--width',dest='camera_width',type=int,default=320,help='Width of the frames in the video stream. (USB Camera Mode Only. Default=320)')
     parser.add_argument('-ht','--height',dest='camera_height',type=int,default=240,help='Height of the frames in the video stream. (USB Camera Mode Only. Default=240)')
+    parser.add_argument('-tp','--transparent',dest='background_transparent_mode',type=int,default=0,help='TransparentMode. (RealSense Mode Only. 0:=No background transparent, 1:=Background transparent)')
     args = parser.parse_args()
 
     graph_folder  = args.graph_folder
     camera_mode   = args.camera_mode
     camera_width  = args.camera_width
     camera_height = args.camera_height
+    background_transparent_mode = args.background_transparent_mode
 
     # 0:=RealSense Mode, 1:=USB Camera Mode
     if camera_mode != 0 and camera_mode != 1:
         print("Camera Mode Error!! " + str(camera_mode))
         sys.exit(0)
+
+    if camera_mode != 0 and background_transparent_mode == 1:
+        background_transparent_mode = 0
+
+    if background_transparent_mode == 1:
+        background_img = np.zeros((camera_height, camera_width, 3), dtype=np.uint8)
 
     devices = None
     try:
@@ -297,7 +374,9 @@ if __name__ == '__main__':
         results = mp.Queue()
 
         # Start streaming
-        p = mp.Process(target=camThread, args=(results, frameBuffer, camera_mode, camera_width, camera_height), daemon=True)
+        p = mp.Process(target=camThread, 
+                       args=(results, frameBuffer, camera_mode, camera_width, camera_height, background_transparent_mode, background_img),
+                       daemon=True)
         p.start()
         processes.append(p)
 
@@ -309,7 +388,9 @@ if __name__ == '__main__':
             quit()
 
         for devnum in range(len(devices)):
-            p = mp.Process(target=inferencer, args=(results, frameBuffer), daemon=True)
+            p = mp.Process(target=inferencer, 
+                           args=(results, frameBuffer), 
+                           daemon=True)
             p.start()
             processes.append(p)
 
