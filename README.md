@@ -376,6 +376,8 @@ int main(int argc, char** argv) {
 $ nvcc cudnn_version.cpp -o cudnn_version
 $ ./cudnn_version
 
+$ sudo pip uninstall tensorflow-gpu
+$ sudo pip install tensorflow-gpu==1.10.0
 $ sudo pip3 uninstall tensorflow-gpu
 $ sudo pip3 install tensorflow-gpu==1.10.0
 ```
