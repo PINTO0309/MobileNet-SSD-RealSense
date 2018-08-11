@@ -350,7 +350,6 @@ $ sudo dpkg -i libcudnn7-dev_7.2.1.38-1+cuda9.0_amd64.deb
 $ sudo dpkg -i cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64.deb
 $ sudo apt-key add /var/cuda-repo-9-0-local/7fa2af80.pub
 $ sudo apt update
-$ sudo apt install cuda
 $ sudo dpkg -i cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64.deb
 $ sudo dpkg -i cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64.deb
 $ sudo dpkg -i cuda-repo-ubuntu1604-9-0-local-cublas-performance-update-2_1.0-1_amd64.deb
