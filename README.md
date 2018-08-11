@@ -375,6 +375,9 @@ int main(int argc, char** argv) {
 
 $ nvcc cudnn_version.cpp -o cudnn_version
 $ ./cudnn_version
+
+$ sudo pip3 uninstall tensorflow-gpu
+$ sudo pip3 install tensorflow-gpu==1.10.0
 ```
 2.**【Example】** Introduction of Caffe to environment with GPU
 ```
