@@ -363,7 +363,7 @@ $ echo 'export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64:${LD_LIBRARY_PATH}' >> 
 $ source ~/.bashrc
 $ sudo ldconfig
 $ nvcc -V
-$ nano cudnn_version.cpp
+$ cd ~;nano cudnn_version.cpp
 
 #include <cudnn.h>
 #include <iostream>
