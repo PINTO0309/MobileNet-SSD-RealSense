@@ -339,8 +339,11 @@ $ nvidia-smi
 ###$ wget https://developer.nvidia.com/compute/machine-learning/cudnn/secure/v5.1/prod_20161129/8.0/cudnn-8.0-linux-x64-v5.1-tgz
 
 ### Download cuDNN v7.2.1 NVIDIA Home Page
+### libcudnn7_7.2.1.38-1+cuda9.2_amd64.deb
 ### libcudnn7-dev_7.2.1.38-1+cuda9.2_amd64.deb
-### sudo dpkg-i libcudnn7-dev_7.2.1.38-1+cuda9.2_amd64.deb
+
+### sudo dpkg -i libcudnn7_7.2.1.38-1+cuda9.2_amd64.deb
+### sudo dpkg -i libcudnn7-dev_7.2.1.38-1+cuda9.2_amd64.deb
 
 $ sudo tar -xzf cudnn-8.0-linux-x64-v5.1.tgz -C /usr/local
 $ echo 'export PATH=/usr/local/cuda/bin:${PATH}' >> ~/.bashrc
