@@ -467,6 +467,7 @@ USE_PKG_CONFIG := 1
 ```
 $ rm -r -f build
 $ rm -r -f .build_release
+$ make superclean
 $ make all -j4
 $ make test -j4
 $ make distribute -j4
