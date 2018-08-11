@@ -363,7 +363,18 @@ $ echo 'export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64:${LD_LIBRARY_PATH}' >> 
 $ source ~/.bashrc
 $ sudo ldconfig
 $ nvcc -V
-$ cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2
+$ nano cudnn_version.cpp
+
+#include <cudnn.h>
+#include <iostream>
+
+int main(int argc, char** argv) {
+    std::cout << "CUDNN_VERSION: " << CUDNN_VERSION << std::endl;
+    return 0;
+}
+
+$ nvcc cudnn_version.cpp -o cudnn_version
+$ ./cudnn_version
 ```
 2.**【Example】** Introduction of Caffe to environment with GPU
 ```
