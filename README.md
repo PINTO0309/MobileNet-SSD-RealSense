@@ -332,26 +332,32 @@ $ sudo apt-get remove nvidia-*
 $ sudo apt-get remove cuda-*
 
 $ apt search "^nvidia-[0-9]{3}$"
-$ sudo apt install cuda-9.2
+$ sudo apt install cuda-9.0
 $ sudo reboot
 $ nvidia-smi
 
 ### Download cuDNN v7.2.1 NVIDIA Home Page
-### libcudnn7_7.2.1.38-1+cuda9.2_amd64.deb
-### libcudnn7-dev_7.2.1.38-1+cuda9.2_amd64.deb
-### cuda-repo-ubuntu1604-9-2-local_9.2.148-1_amd64.deb
-### cuda-repo-ubuntu1604-9-2-148-local-patch-1_1.0-1_amd64.deb
+### libcudnn7_7.2.1.38-1+cuda9.0_amd64.deb
+### libcudnn7-dev_7.2.1.38-1+cuda9.0_amd64.deb
+### cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64.deb
+### cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64.deb
+### cuda-repo-ubuntu1604-9-0-local-cublas-performance-update-2_1.0-1_amd64.deb
+### cuda-repo-ubuntu1604-9-0-local-cublas-performance-update-3_1.0-1_amd64.deb
+### cuda-repo-ubuntu1604-9-0-176-local-patch-4_1.0-1_amd64.deb
 
 $ sudo dpkg -i libcudnn7_7.2.1.38-1+cuda9.2_amd64.deb
 $ sudo dpkg -i libcudnn7-dev_7.2.1.38-1+cuda9.2_amd64.deb
-$ sudo dpkg -i cuda-repo-ubuntu1604-9-2-local_9.2.148-1_amd64.deb
-$ sudo apt-key add /var/cuda-repo-9-2-local/7fa2af80.pub
+$ sudo dpkg -i cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64.deb
+$ sudo apt-key add /var/cuda-repo-9-0-local/7fa2af80.pub
 $ sudo apt update
 $ sudo apt install cuda
-$ sudo dpkg -i cuda-repo-ubuntu1604-9-2-148-local-patch-1_1.0-1_amd64.deb
+$ sudo dpkg -i cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64.deb
+$ sudo dpkg -i cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64.deb
+$ sudo dpkg -i cuda-repo-ubuntu1604-9-0-local-cublas-performance-update-2_1.0-1_amd64.deb
+$ sudo dpkg -i cuda-repo-ubuntu1604-9-0-local-cublas-performance-update-3_1.0-1_amd64.deb
+$ sudo dpkg -i cuda-repo-ubuntu1604-9-0-176-local-patch-4_1.0-1_amd64.deb
 $ sudo apt update
-$ sudo apt install cuda
-$ rm libcudnn7_7.2.1.38-1+cuda9.2_amd64.deb;rm libcudnn7-dev_7.2.1.38-1+cuda9.2_amd64.deb;rm cuda-repo-ubuntu1604-9-2-local_9.2.148-1_amd64.deb;rm cuda-repo-ubuntu1604-9-2-148-local-patch-1_1.0-1_amd64.deb
+$ rm libcudnn7_7.2.1.38-1+cuda9.0_amd64.deb;rm libcudnn7-dev_7.2.1.38-1+cuda9.0_amd64.deb;rm cuda-repo-ubuntu1604-9-0-local_9.0.176-1_amd64.deb;rm cuda-repo-ubuntu1604-9-0-local-cublas-performance-update_1.0-1_amd64.deb;rm cuda-repo-ubuntu1604-9-0-local-cublas-performance-update-2_1.0-1_amd64.deb;rm cuda-repo-ubuntu1604-9-0-local-cublas-performance-update-3_1.0-1_amd64.deb;rm cuda-repo-ubuntu1604-9-0-176-local-patch-4_1.0-1_amd64.deb
 
 $ sudo ln -s /usr/local/cuda-9.2/targets/x86_64-linux/lib/stubs/libcublas.so /usr/local/cuda-9.2/targets/x86_64-linux/lib/stubs/libcublas.so.9.0
 $ echo 'export PATH=/usr/local/cuda-9.2/bin:/usr/local/cuda-9.2/targets:${PATH}' >> ~/.bashrc
