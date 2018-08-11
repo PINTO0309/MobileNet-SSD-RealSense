@@ -354,8 +354,8 @@ $ sudo apt install cuda
 $ rm libcudnn7_7.2.1.38-1+cuda9.2_amd64.deb;rm libcudnn7-dev_7.2.1.38-1+cuda9.2_amd64.deb;rm cuda-repo-ubuntu1604-9-2-local_9.2.148-1_amd64.deb;rm cuda-repo-ubuntu1604-9-2-148-local-patch-1_1.0-1_amd64.deb
 
 $ sudo ln -s /usr/local/cuda-9.2/targets/x86_64-linux/lib/stubs/libcublas.so /usr/local/cuda-9.2/targets/x86_64-linux/lib/stubs/libcublas.so.9.0
-$ echo 'export PATH=/usr/local/cuda-9.2/bin:${PATH}' >> ~/.bashrc
-$ echo 'export LD_LIBRARY_PATH=/usr/local/cuda-9.2/lib64:${LD_LIBRARY_PATH}' >> ~/.bashrc
+$ echo 'export PATH=/usr/local/cuda-9.2/bin:/usr/local/cuda-9.2/targets:${PATH}' >> ~/.bashrc
+$ echo 'export LD_LIBRARY_PATH=/usr/local/cuda-9.2/lib64:/usr/local/cuda-9.2/targets/x86_64-linux/lib:${LD_LIBRARY_PATH}' >> ~/.bashrc
 $ source ~/.bashrc
 $ sudo ldconfig
 $ nvcc -V
