@@ -404,7 +404,7 @@ OPENCV_VERSION := 3
 CUDA_DIR := /usr/local/cuda
 ↓
 # CUDA directory contains bin/ and lib/ directories that we need.
-CUDA_DIR := /usr/local/cuda-9.2
+CUDA_DIR := /usr/local/cuda-9.0
 
 # CUDA architecture setting: going with all of them.
 # For CUDA < 6.0, comment the lines after *_35 for compatibility.
