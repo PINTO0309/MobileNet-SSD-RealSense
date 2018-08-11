@@ -344,6 +344,7 @@ $ nvidia-smi
 
 ### sudo dpkg -i libcudnn7_7.2.1.38-1+cuda9.2_amd64.deb
 ### sudo dpkg -i libcudnn7-dev_7.2.1.38-1+cuda9.2_amd64.deb
+### rm libcudnn7_7.2.1.38-1+cuda9.2_amd64.deb;rm libcudnn7-dev_7.2.1.38-1+cuda9.2_amd64.deb
 
 $ sudo tar -xzf cudnn-8.0-linux-x64-v5.1.tgz -C /usr/local
 $ echo 'export PATH=/usr/local/cuda/bin:${PATH}' >> ~/.bashrc
