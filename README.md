@@ -321,7 +321,7 @@ $ rs-dnn
 ```
 ![08](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/08.gif)
 
-# 【Reference】 MobileNetSSDv2 Model (Caffe) Great Thanks!!
+# 【Reference】 MobileNetv2 Model (Caffe) Great Thanks!!
 **https://github.com/xufeifeiWHU/Mobilenet-v2-on-Movidius-stick.git**
 
 # Conversion method from Caffe model to NCS model
