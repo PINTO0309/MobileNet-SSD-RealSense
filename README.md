@@ -13,7 +13,7 @@ Measure the distance to the object with RealSense D435 while performing object d
 [July 29, 2018]　Added steps to build learning environment<br>
 [Aug　3, 2018]　Background Multi-transparent mode implementation <MultiStickSSDwithRealSense.py><br>
 [Aug  11, 2018]　CUDA9.0 + cuDNN7.2 compatible with environment construction procedure<br>
-[Aug　14, 2018]　Reference of MobileNetv2 Model added to README and added Facedetection Model<br>
+[Aug 14, 2018]　Reference of MobileNetv2 Model added to README and added Facedetection Model<br>
 
 ## Motion image
 ### **RealSense Mode about 6.5 FPS （Detection + Synchronous screen drawing / SingleStickSSDwithRealSense.py）**<br>
