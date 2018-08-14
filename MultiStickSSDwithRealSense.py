@@ -42,6 +42,9 @@ def camThread(results, frameBuffer, camera_mode, camera_width, camera_height, ba
     global time1
     global cam
     global window_name
+    global depth_scale
+    global align_to
+    global align
 
     LABELS = ('background',
               'aeroplane', 'bicycle', 'bird', 'boat',
@@ -109,11 +112,11 @@ def camThread(results, frameBuffer, camera_mode, camera_width, camera_height, ba
 
         if not results.empty():
             res = results.get(False)
-            imdraw = overlay_on_image(frames, res, LABELS, camera_mode, background_transparent_mode, 
+            imdraw = overlay_on_image(frames, res, LABELS, camera_mode, background_transparent_mode,
                                       background_img, depth_scale=depth_scale, align=align)
             lastresults = res
         else:
-            imdraw = overlay_on_image(frames, lastresults, LABELS, camera_mode, background_transparent_mode, 
+            imdraw = overlay_on_image(frames, lastresults, LABELS, camera_mode, background_transparent_mode,
                                       background_img, depth_scale=depth_scale, align=align)
 
         cv2.imshow(window_name, cv2.resize(imdraw, (width, height)))
@@ -194,7 +197,7 @@ def preprocess_image(src):
         return img
     except:
         import traceback
-        traceback.print_exc()      
+        traceback.print_exc()
 
 
 
@@ -211,7 +214,7 @@ def overlay_on_image(frames, object_info, LABELS, camera_mode, background_transp
 
             elif background_transparent_mode == 1:
                 aligned_frames = align.process(frames)
-                depth_frame = aligned_frames.get_depth_frame()               
+                depth_frame = aligned_frames.get_depth_frame()
                 color_frame = aligned_frames.get_color_frame()
 
             depth_dist  = depth_frame.as_depth_frame()
@@ -282,10 +285,9 @@ def overlay_on_image(frames, object_info, LABELS, camera_mode, background_transp
                 box_right = int(object_info_overlay[base_index + 5] * source_image_width)
                 box_bottom = int(object_info_overlay[base_index + 6] * source_image_height)
 
-                meters = depth_dist.get_distance(box_left+int((box_right-box_left)/2), box_top+int((box_bottom-box_top)/2))
-
                 # 0:=RealSense Mode, 1:=USB Camera Mode
                 if camera_mode == 0:
+                    meters = depth_dist.get_distance(box_left+int((box_right-box_left)/2), box_top+int((box_bottom-box_top)/2))
                     label_text = LABELS[int(class_id)] + " (" + str(percentage) + "%)"+ " {:.2f}".format(meters) + " meters away"
                 elif camera_mode == 1:
                     label_text = LABELS[int(class_id)] + " (" + str(percentage) + "%)"
@@ -320,10 +322,10 @@ def overlay_on_image(frames, object_info, LABELS, camera_mode, background_transp
                             img_cp = fore
                             drawing_initial_flag = False
                         else:
-                            img_cp[box_top:box_bottom, box_left:box_right] = cv2.addWeighted(img_cp[box_top:box_bottom, box_left:box_right], 
-                                                                                             0.85, 
-                                                                                             fore[box_top:box_bottom, box_left:box_right], 
-                                                                                             0.85, 
+                            img_cp[box_top:box_bottom, box_left:box_right] = cv2.addWeighted(img_cp[box_top:box_bottom, box_left:box_right],
+                                                                                             0.85,
+                                                                                             fore[box_top:box_bottom, box_left:box_right],
+                                                                                             0.85,
                                                                                              0)
 
         cv2.putText(img_cp, fps, (width-90,15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (38,0,255), 1, cv2.LINE_AA)
@@ -373,7 +375,7 @@ if __name__ == '__main__':
         results = mp.Queue()
 
         # Start streaming
-        p = mp.Process(target=camThread, 
+        p = mp.Process(target=camThread,
                        args=(results, frameBuffer, camera_mode, camera_width, camera_height, background_transparent_mode, background_img),
                        daemon=True)
         p.start()
@@ -387,8 +389,8 @@ if __name__ == '__main__':
             quit()
 
         for devnum in range(len(devices)):
-            p = mp.Process(target=inferencer, 
-                           args=(results, frameBuffer), 
+            p = mp.Process(target=inferencer,
+                           args=(results, frameBuffer),
                            daemon=True)
             p.start()
             processes.append(p)
@@ -404,13 +406,3 @@ if __name__ == '__main__':
             processes[p].terminate()
 
         print("\n\nFinished\n\n")
-
-
-
-
-
-
-
-
-
-
