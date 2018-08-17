@@ -210,9 +210,4 @@ layer {
     }
   }
 }
-layer {
-  name: "prob1"
-  type: "Softmax"
-  bottom: "conv5-1"
-  top: "prob1"
-}
+

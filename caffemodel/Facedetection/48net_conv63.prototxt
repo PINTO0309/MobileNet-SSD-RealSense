@@ -239,31 +239,6 @@ layer {
   }
 }
 layer {
-  name: "conv6-2"
-  type: "InnerProduct"
-  bottom: "conv5"
-  top: "conv6-2"
-  param {
-    lr_mult: 1
-    decay_mult: 1
-  }
-  param {
-    lr_mult: 2
-    decay_mult: 1
-  }
-  inner_product_param {
-  	#kernel_size: 1
-	num_output: 4
-    weight_filler {
-      type: "xavier"
-	}
-    bias_filler {
-      type: "constant"
-      value: 0
-    }
-  }
-}
-layer {
   name: "conv6-3"
   type: "InnerProduct"
   bottom: "conv5"
@@ -287,10 +262,4 @@ layer {
       value: 0
     }
   }
-}
-layer {
-  name: "prob1"
-  type: "Softmax"
-  bottom: "conv6-1"
-  top: "prob1"
 }
