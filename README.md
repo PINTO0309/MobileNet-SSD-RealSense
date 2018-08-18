@@ -606,4 +606,5 @@ https://github.com/CongWeilin/mtcnn-caffe<br>
 https://github.com/DuinoDu/mtcnn.git<br>
 https://www.hackster.io/mjrobot/real-time-face-recognition-an-end-to-end-project-a10826<br>
 https://github.com/Mjrovai/OpenCV-Face-Recognition.git<br>
-
+https://github.com/sgxu/face-detection-based-on-caffe.git<br>
+https://github.com/RiweiChen/DeepFace.git<br>
