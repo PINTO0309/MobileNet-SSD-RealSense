@@ -333,6 +333,7 @@ $ mvNCCompile ./caffemodel/MobileNetSSD/deploy.prototxt -w ./caffemodel/MobileNe
 $ mvNCCompile ./caffemodel/Facedetection/12net.prototxt -w ./caffemodel/Facedetection/12net.caffemodel -s 12
 $ mvNCCompile ./caffemodel/Facedetection/24net.prototxt -w ./caffemodel/Facedetection/24net.caffemodel -s 12
 $ mvNCCompile ./caffemodel/Facedetection/48net.prototxt -w ./caffemodel/Facedetection/48net.caffemodel -s 12
+$ mvNCCompile ./deploy_fc.prototxt -w ./snapshot_iter_100000_fc.caffemodel -s 12
 ```
 
 # Construction of learning environment and simple test for model (Ubuntu16.04 x86_64 PC + GPU[NVIDIA Geforce])
