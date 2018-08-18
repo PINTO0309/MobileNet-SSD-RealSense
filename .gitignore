@@ -3,4 +3,9 @@ MultiStickSSDwithRealSenseOpenGL.py
 _*.*
 __*.*
 cv2.so
+evaluate_48.py
+test.py
+filter.py
+nms.py
+render_result.py
 
