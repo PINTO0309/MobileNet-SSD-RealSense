@@ -604,3 +604,4 @@ https://github.com/BVLC/caffe/wiki/Ubuntu-16.04-or-15.10-Installation-Guide#the-
 https://stackoverflow.com/questions/33962226/common-causes-of-nans-during-training<br>
 https://github.com/CongWeilin/mtcnn-caffe<br>
 https://github.com/DuinoDu/mtcnn.git<br>
+https://www.hackster.io/mjrobot/real-time-face-recognition-an-end-to-end-project-a10826<br>
