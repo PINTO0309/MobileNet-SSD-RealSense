@@ -2,6 +2,7 @@ BK_graph
 MultiStickSSDwithRealSenseOpenGL.py
 _*.*
 __*.*
+__pycache__
 cv2.so
 evaluate_48.py
 test.py
