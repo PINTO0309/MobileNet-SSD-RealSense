@@ -15,7 +15,7 @@ Measure the distance to the object with RealSense D435 while performing object d
 [Aug  11, 2018]　CUDA9.0 + cuDNN7.2 compatible with environment construction procedure<br>
 [Aug 14, 2018]　Reference of MobileNetv2 Model added to README and added Facedetection Model<br>
 [Aug 15, 2018]　Bug Fixed. ``MultiStickSSDwithRealSense.py`` depth_scale be undefined. Pull Requests merged. Thank you Drunkar!!<br>
-[Aug 19, 2018]　**【Experimental】** Update Facedetection model [DeepFace] (facedetectXX.graph)<br>
+[Aug 19, 2018]　**【Experimental】** Update Facedetection model [DeepFace] (graph.facedetectXX)<br>
 
 ## Motion image
 ### **RealSense Mode about 6.5 FPS （Detection + Synchronous screen drawing / SingleStickSSDwithRealSense.py）**<br>
