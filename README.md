@@ -330,7 +330,7 @@ $ rs-dnn
 ```
 $ cd ~/MobileNet-SSD-RealSense
 $ mvNCCompile ./caffemodel/MobileNetSSD/deploy.prototxt -w ./caffemodel/MobileNetSSD/MobileNetSSD_deploy.caffemodel -s 12
-$ mvNCCompile ./caffemodel/Facedetection/deploy_fc.prototxt -w ./caffemodel/Facedetection/100000iter_fc.caffemodel -s 12
+$ mvNCCompile ./caffemodel/Facedetection/deploy_fc640.prototxt -w ./caffemodel/Facedetection/100000iter_fc.caffemodel -s 12
 ```
 
 # Construction of learning environment and simple test for model (Ubuntu16.04 x86_64 PC + GPU[NVIDIA Geforce])
