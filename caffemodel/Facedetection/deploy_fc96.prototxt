@@ -3,8 +3,8 @@ input: "data"
 input_shape{
   dim: 1
   dim: 3
-  dim: 80
-  dim: 80
+  dim: 96
+  dim: 96
 }
 #############################  CONV NET 1 #############################
 layer {
