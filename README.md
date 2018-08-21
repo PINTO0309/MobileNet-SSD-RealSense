@@ -63,7 +63,7 @@ Measure the distance to the object with RealSense D435 while performing object d
 $ sudo apt update;sudo apt upgrade
 $ sudo reboot
 ```
-2.Extend the SWAP area
+2.Extend the SWAP area (Raspbian Stretch Only)
 ```
 $ sudo nano /etc/dphys-swapfile
 CONF_SWAPSIZE=2048
@@ -246,7 +246,7 @@ $ sudo apt-get install python-opengl
 $ sudo -H pip3 install pyopengl
 $ sudo -H pip3 install pyopengl_accelerate
 ```
-16.Reduce the SWAP area to the default size
+16.Reduce the SWAP area to the default size (Raspbian Stretch Only)
 ```
 $ sudo nano /etc/dphys-swapfile
 CONF_SWAPSIZE=100
