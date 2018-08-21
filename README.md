@@ -71,7 +71,12 @@ $ sudo /etc/init.d/dphys-swapfile restart swapon -s
 ```
 3.Update udev rule
 ```
-$ sudo apt install -y git libssl-dev libusb-1.0-0-dev pkg-config libgtk-3-dev libglfw3-dev at-spi2-core libdrm*
+# Raspbian Stretch
+$ sudo apt install -y git libusb-1.0.0 libusb-1.0-0-dev pkg-config at-spi2-core
+
+# Ubuntu16.04
+$ sudo apt install -y git libssl-dev libusb-1.0.0 libusb-1.0-0-dev pkg-config libgtk-3-dev libglfw3-dev at-spi2-core libdrm*
+
 $ cd /etc/udev/rules.d/
 $ sudo wget https://raw.githubusercontent.com/IntelRealSense/librealsense/master/config/99-realsense-libusb.rules
 $ sudo udevadm control --reload-rules && udevadm trigger
@@ -182,6 +187,8 @@ $ sudo ldconfig
 ```
 $ cd ~
 $ sudo apt update;sudo apt upgrade
+
+# Ubuntu16.04
 $ sudo apt install mesa-utils* libglu1* libgles2-mesa-dev libopenal-dev
 
 $ git clone https://github.com/IntelRealSense/librealsense.git
