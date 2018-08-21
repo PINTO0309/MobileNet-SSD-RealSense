@@ -16,6 +16,7 @@ Measure the distance to the object with RealSense D435 while performing object d
 [Aug 14, 2018]　Reference of MobileNetv2 Model added to README and added Facedetection Model<br>
 [Aug 15, 2018]　Bug Fixed. ``MultiStickSSDwithRealSense.py`` depth_scale be undefined. Pull Requests merged. Thank you Drunkar!!<br>
 [Aug 19, 2018]　**【Experimental】** Update Facedetection model [DeepFace] (graph.facedetectXX)<br>
+[Aug 22, 2018]　<font color="red">Separate environment construction procedure of "Raspbian Stretch" and "Ubuntu16.04"</font><br>
 
 ## Motion image
 ### **RealSense Mode about 6.5 FPS （Detection + Synchronous screen drawing / SingleStickSSDwithRealSense.py）**<br>
