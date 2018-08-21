@@ -188,7 +188,7 @@ $ sudo ldconfig
 $ cd ~
 $ sudo apt update;sudo apt upgrade
 
-# Ubuntu16.04
+# Ubuntu16.04 Only
 $ sudo apt install mesa-utils* libglu1* libgles2-mesa-dev libopenal-dev
 
 $ git clone https://github.com/IntelRealSense/librealsense.git
