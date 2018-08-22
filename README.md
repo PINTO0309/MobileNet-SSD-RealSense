@@ -302,7 +302,7 @@ $ python3 MultiStickSSDwithRealSense.py -mod 1 -wd 640 -ht 480
 $ sudo raspi-config
 "7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
 $ cd ~/MobileNet-SSD-RealSense
-$ python3 MultiStickSSDwithRealSense.py -wd 640 -ht 480 -tp 1
+$ python3 MultiStickSSDwithRealSense.py -tp 1
 ```
 
 (Example4)
