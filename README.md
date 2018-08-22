@@ -262,7 +262,16 @@ $ git clone https://github.com/PINTO0309/MobileNet-SSD-RealSense.git
 ```
 
 ## Execute the program
+```
+MultiStickSSDwithRealSense.py <option1> <option2> ...
 
+<options>
+ -grp MVNC graphs Path. (Default=./)
+ -mod Camera Mode. (0:=RealSense Mode, 1:=USB Camera Mode. Defalut=0)
+ -wd　Width of the frames in the video stream. (USB Camera Mode Only. Default=320)
+ -ht　Height of the frames in the video stream. (USB Camera Mode Only. Default=240)
+ -tp　TransparentMode. (RealSense Mode Only. 0:=No background transparent, 1:=Background transparent. Default=0)
+```
 (Example0) **[MobileNet-SSD + Neural Compute Stick + RealSense D435 Mode + Syncronous](#realsense-mode-about-65-fps-detection--synchronous-screen-drawing--singlestickssdwithrealsensepy)**
 ```
 $ sudo raspi-config
