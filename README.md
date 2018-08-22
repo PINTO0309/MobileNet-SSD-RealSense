@@ -73,7 +73,7 @@ $ sudo /etc/init.d/dphys-swapfile restart swapon -s
 3.Update udev rule
 ```
 # Raspbian Stretch
-$ sudo apt install -y git libusb-1.0.0 libusb-1.0-0-dev pkg-config at-spi2-core libgtk-3-dev
+$ sudo apt install -y git libusb-1.0.0 libusb-1.0-0-dev pkg-config at-spi2-core libgtk-3-dev libgl1-mesa-dev
 
 # Ubuntu16.04
 $ sudo apt install -y git libssl-dev libusb-1.0.0 libusb-1.0-0-dev pkg-config libgtk-3-dev libglfw3-dev at-spi2-core libdrm*
