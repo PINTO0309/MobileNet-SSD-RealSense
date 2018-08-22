@@ -263,7 +263,7 @@ $ git clone https://github.com/PINTO0309/MobileNet-SSD-RealSense.git
 
 ## Execute the program
 ```
-MultiStickSSDwithRealSense.py <option1> <option2> ...
+python3 MultiStickSSDwithRealSense.py <option1> <option2> ...
 
 <options>
  -grp MVNC graphs Path. (Default=./)
