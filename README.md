@@ -616,3 +616,4 @@ https://www.hackster.io/mjrobot/real-time-face-recognition-an-end-to-end-project
 https://github.com/Mjrovai/OpenCV-Face-Recognition.git<br>
 https://github.com/sgxu/face-detection-based-on-caffe.git<br>
 https://github.com/RiweiChen/DeepFace.git<br>
+https://github.com/KatsunoriWa/eval_faceDetectors<br>
