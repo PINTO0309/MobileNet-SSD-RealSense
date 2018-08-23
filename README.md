@@ -72,6 +72,54 @@ CONF_SWAPSIZE=2048
 $ sudo /etc/init.d/dphys-swapfile restart swapon -s
 ```
 3.Install NSCDK<br>
+```
+$ sudo apt install python-pip python3-pip
+$ cd ~/ncsdk
+$ make uninstall
+$ cd ~;rm -r -f ncsdk
+
+$ wget https://ncs-forum-uploads.s3.amazonaws.com/ncsdk/ncsdk-02_05_00_02-full/ncsdk-2.05.00.02.tar.gz
+$ tar -zxvf ncsdk-2.05.00.02.tar.gz
+$ mv ncsdk-2.05.00.02 ncsdk
+
+or
+
+$ git clone -b ncsdk2 http://github.com/Movidius/ncsdk
+
+$ cd ncsdk
+$ nano ncsdk.conf
+
+#MAKE_NJOBS=1
+↓
+MAKE_NJOBS=1
+
+$ sudo apt install cython
+$ sudo -H pip3 install cython
+$ sudo -H pip3 install numpy
+$ sudo -H pip3 install pillow
+$ sudo pip3 uninstall tensorflow
+$ cd ~
+$ wget https://github.com/google/protobuf/releases/download/v3.5.1/protobuf-all-3.5.1.tar.gz
+$ tar -zxvf protobuf-all-3.5.1.tar.gz
+$ cd protobuf-3.5.1
+$ ./configure
+$ sudo make -j1
+$ sudo make install
+$ cd python
+$ export LD_LIBRARY_PATH=../src/.libs
+$ python3 setup.py build --cpp_implementation 
+$ python3 setup.py test --cpp_implementation
+$ sudo python3 setup.py install --cpp_implementation
+$ sudo ldconfig
+$ protoc --version
+
+$ cd ~/ncsdk
+$ make install
+$ make examples -j1
+
+$ sudo pip3 uninstall tensorflow
+$ sudo pip3 install tensorflow==1.10.0
+```
 **https://github.com/movidius/ncsdk**<br>
 
 4.Update udev rule
