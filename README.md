@@ -104,7 +104,7 @@ $ sudo -H pip3 install pillow
 $ make install
 $ make examples -j1
 
-$ sudo pip3 uninstall tensorflow #tensorflow==1.7.0
+$ sudo pip3 uninstall tensorflow #tensorflow==1.7.0 is unstable
 $ cd ~
 $ wget https://github.com/google/protobuf/releases/download/v3.5.1/protobuf-all-3.5.1.tar.gz
 $ tar -zxvf protobuf-all-3.5.1.tar.gz
