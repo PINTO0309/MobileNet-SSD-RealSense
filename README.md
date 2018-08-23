@@ -65,7 +65,7 @@ Measure the distance to the object with RealSense D435 while performing object d
 $ sudo apt update;sudo apt upgrade
 $ sudo reboot
 ```
-2.Extend the SWAP area (RaspberryPi+Raspbian Stretch/RaspberryPi+Ubuntu Mate Only)
+2.Extend the SWAP area (RaspberryPi+Raspbian Stretch / RaspberryPi+Ubuntu Mate Only)
 ```
 $ sudo nano /etc/dphys-swapfile
 CONF_SWAPSIZE=2048
