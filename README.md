@@ -74,10 +74,11 @@ $ sudo /etc/init.d/dphys-swapfile restart swapon -s
 3.Install NSCDK<br>
 ```
 $ sudo apt install python-pip python3-pip
+
 $ cd ~/ncsdk
 $ make uninstall
 $ cd ~;rm -r -f ncsdk
-
+#=====================================================================================================
 $ wget https://ncs-forum-uploads.s3.amazonaws.com/ncsdk/ncsdk-02_05_00_02-full/ncsdk-2.05.00.02.tar.gz
 $ tar -zxvf ncsdk-2.05.00.02.tar.gz
 $ mv ncsdk-2.05.00.02 ncsdk
@@ -85,7 +86,7 @@ $ mv ncsdk-2.05.00.02 ncsdk
 or
 
 $ git clone -b ncsdk2 http://github.com/Movidius/ncsdk
-
+#=====================================================================================================
 $ cd ncsdk
 $ nano ncsdk.conf
 
