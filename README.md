@@ -104,7 +104,7 @@ $ sudo -H pip3 install pillow
 $ make install
 $ make examples -j1
 
-$ sudo pip3 uninstall tensorflow
+$ sudo pip3 uninstall tensorflow #tensorflow==1.7.0
 $ cd ~
 $ wget https://github.com/google/protobuf/releases/download/v3.5.1/protobuf-all-3.5.1.tar.gz
 $ tar -zxvf protobuf-all-3.5.1.tar.gz
@@ -120,7 +120,7 @@ $ sudo python3 setup.py install --cpp_implementation
 $ sudo ldconfig
 $ protoc --version
 
-$ sudo -H pip3 install tensorflow
+$ sudo -H pip3 install tensorflow #tensorflow==1.9.0+
 ```
 **【Reference】https://github.com/movidius/ncsdk**<br>
 
