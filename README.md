@@ -98,6 +98,9 @@ $ sudo apt install cython
 $ sudo -H pip3 install cython
 $ sudo -H pip3 install numpy
 $ sudo -H pip3 install pillow
+$ make install
+$ make examples -j1
+
 $ sudo pip3 uninstall tensorflow
 $ cd ~
 $ wget https://github.com/google/protobuf/releases/download/v3.5.1/protobuf-all-3.5.1.tar.gz
@@ -114,12 +117,7 @@ $ sudo python3 setup.py install --cpp_implementation
 $ sudo ldconfig
 $ protoc --version
 
-$ cd ~/ncsdk
-$ make install
-$ make examples -j1
-
-$ sudo pip3 uninstall tensorflow
-$ sudo pip3 install tensorflow==1.10.0
+$ sudo -H pip3 install tensorflow
 ```
 **https://github.com/movidius/ncsdk**<br>
 
