@@ -60,7 +60,7 @@ Measure the distance to the object with RealSense D435 while performing object d
 
 
 ## Work with RaspberryPi3 (or PC + Ubuntu16.04 / RaspberryPi + Ubuntu Mate)
-**Use of Virtualbox is not strongly recommended**
+**Use of Virtualbox is not strongly recommended**<br>
 1.Execute the following
 ```
 $ sudo apt update;sudo apt upgrade
