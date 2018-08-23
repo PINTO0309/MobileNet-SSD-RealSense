@@ -74,6 +74,8 @@ $ sudo /etc/init.d/dphys-swapfile restart swapon -s
 3.Install NSCDK<br>
 ```
 $ sudo apt install python-pip python3-pip
+$ sudo pip3 install --upgrade pip
+$ sudo pip2 install --upgrade pip
 
 $ cd ~/ncsdk
 $ make uninstall
