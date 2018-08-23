@@ -155,33 +155,14 @@ export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 
 $ source ~/.bashrc
 ```
-7.Upgrade protobuf version
-```
-$ cd ~
-$ wget https://github.com/google/protobuf/releases/download/v3.5.1/protobuf-all-3.5.1.tar.gz
-$ tar -zxvf protobuf-all-3.5.1.tar.gz
-$ cd protobuf-3.5.1
-$ ./configure
-$ sudo make -j1
-$ sudo make install
-$ cd python
-$ export LD_LIBRARY_PATH=../src/.libs
-$ python3 setup.py build --cpp_implementation 
-$ python3 setup.py test --cpp_implementation
-$ sudo python3 setup.py install --cpp_implementation
-$ export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=cpp
-$ export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION_VERSION=3
-$ sudo ldconfig
-$ protoc --version
-```
-8.Install TBB (Intel Threading Building Blocks)
+7.Install TBB (Intel Threading Building Blocks)
 ```
 $ cd ~
 $ wget https://github.com/PINTO0309/TBBonARMv7/raw/master/libtbb-dev_2018U2_armhf.deb
 $ sudo dpkg -i ~/libtbb-dev_2018U2_armhf.deb
 $ sudo ldconfig
 ```
-9.Uninstall old OpenCV
+8.Uninstall old OpenCV
 ```
 $ cd ~/opencv-3.x.x/build
 $ sudo make uninstall
@@ -189,8 +170,8 @@ $ cd ~
 $ rm -r -f opencv-3.x.x
 $ rm -r -f opencv_contrib-3.x.x
 ```
-10.Build install "OpenCV 3.4.2" or Install by deb package.<br>
-**10.1 Build Install**
+9.Build install "OpenCV 3.4.2" or Install by deb package.<br>
+**9.1 Build Install**
 ```
 $ sudo apt update && sudo apt upgrade
 $ sudo apt install build-essential cmake pkg-config libjpeg-dev libtiff5-dev \
@@ -227,7 +208,7 @@ $ make -j1
 $ sudo make install
 $ sudo ldconfig
 ```
-**10.2 Install by deb package**
+**9.2 Install by deb package**
 ```
 $ cd ~
 $ sudo apt autoremove libopencv3
@@ -236,7 +217,7 @@ $ sudo apt install -y ./libopencv3_3.4.2-20180709.1_armhf.deb
 $ sudo ldconfig
 ```
 
-11.Install Intel® RealSense™ SDK 2.0
+10.Install Intel® RealSense™ SDK 2.0
 ```
 $ cd ~
 $ sudo apt update;sudo apt upgrade
@@ -251,7 +232,7 @@ $ cmake .. -DBUILD_EXAMPLES=true -DCMAKE_BUILD_TYPE=Release
 $ make -j1
 $ sudo make install
 ```
-12.Install OpenCV Wrapper
+11.Install OpenCV Wrapper
 ```
 $ cd ~/librealsense/wrappers/opencv;mkdir build;cd build
 $ cmake ..
@@ -261,7 +242,7 @@ target_link_libraries(rs-latency-tool ${DEPENDENCIES} pthread)
 $ make -j $(($(nproc) + 1))
 $ sudo make install
 ```
-13.Install Python binding
+12.Install Python binding
 ```
 $ cd ~/librealsense/build
 
@@ -276,14 +257,14 @@ $ cmake .. -DBUILD_PYTHON_BINDINGS=bool:true -DPYTHON_EXECUTABLE=$(which python)
 $ make -j1
 $ sudo make install
 ```
-14.Update PYTHON_PATH
+13.Update PYTHON_PATH
 ```
 $ nano ~/.bashrc
 export PYTHONPATH=$PYTHONPATH:/usr/local/lib
 
 $ source ~/.bashrc
 ```
-15.RealSense SDK import test
+14.RealSense SDK import test
 ```
 $ python3
 Python 3.5.3 (default, Jan 19 2017, 14:11:04) 
@@ -292,20 +273,20 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> import pyrealsense2
 >>> exit()
 ```
-16.Installing the OpenGL package for Python
+15.Installing the OpenGL package for Python
 ```
 $ sudo apt-get install python-opengl
 $ sudo -H pip3 install pyopengl
 $ sudo -H pip3 install pyopengl_accelerate
 ```
-17.Reduce the SWAP area to the default size (RaspberryPi+Raspbian Stretch / RaspberryPi+Ubuntu Mate Only)
+16.Reduce the SWAP area to the default size (RaspberryPi+Raspbian Stretch / RaspberryPi+Ubuntu Mate Only)
 ```
 $ sudo nano /etc/dphys-swapfile
 CONF_SWAPSIZE=100
 
 $ sudo /etc/init.d/dphys-swapfile restart swapon -s
 ```
-18.Clone a set of resources
+17.Clone a set of resources
 ```
 $ git clone https://github.com/PINTO0309/MobileNet-SSD-RealSense.git
 ```
