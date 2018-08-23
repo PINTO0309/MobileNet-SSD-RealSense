@@ -69,11 +69,11 @@ $ sudo reboot
 $ sudo nano /etc/dphys-swapfile
 CONF_SWAPSIZE=2048
 
-3.Install NSCDK
-https://github.com/movidius/ncsdk
-
 $ sudo /etc/init.d/dphys-swapfile restart swapon -s
 ```
+3.Install NSCDK<br>
+**https://github.com/movidius/ncsdk**<br>
+
 4.Update udev rule
 ```
 # Raspbian Stretch
