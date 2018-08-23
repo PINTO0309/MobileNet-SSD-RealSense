@@ -69,9 +69,12 @@ $ sudo reboot
 $ sudo nano /etc/dphys-swapfile
 CONF_SWAPSIZE=2048
 
+3.Install NSCDK
+https://github.com/movidius/ncsdk
+
 $ sudo /etc/init.d/dphys-swapfile restart swapon -s
 ```
-3.Update udev rule
+4.Update udev rule
 ```
 # Raspbian Stretch
 $ sudo apt install -y git libusb-1.0.0 libusb-1.0-0-dev pkg-config at-spi2-core libgtk-3-dev \
@@ -85,7 +88,7 @@ $ cd /etc/udev/rules.d/
 $ sudo wget https://raw.githubusercontent.com/IntelRealSense/librealsense/master/config/99-realsense-libusb.rules
 $ sudo udevadm control --reload-rules && udevadm trigger
 ```
-4.Upgrade to "cmake 3.11.4"
+5.Upgrade to "cmake 3.11.4"
 ```
 $ cd ~
 $ wget https://cmake.org/files/v3.11/cmake-3.11.4.tar.gz
@@ -99,14 +102,14 @@ $ source ~/.bashrc
 $ cmake --version
 cmake version 3.11.4
 ```
-5.Register LD_LIBRARY_PATH
+6.Register LD_LIBRARY_PATH
 ```
 $ nano ~/.bashrc
 export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 
 $ source ~/.bashrc
 ```
-6.Upgrade protobuf version
+7.Upgrade protobuf version
 ```
 $ cd ~
 $ wget https://github.com/google/protobuf/releases/download/v3.5.1/protobuf-all-3.5.1.tar.gz
@@ -125,14 +128,14 @@ $ export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION_VERSION=3
 $ sudo ldconfig
 $ protoc --version
 ```
-7.Install TBB (Intel Threading Building Blocks)
+8.Install TBB (Intel Threading Building Blocks)
 ```
 $ cd ~
 $ wget https://github.com/PINTO0309/TBBonARMv7/raw/master/libtbb-dev_2018U2_armhf.deb
 $ sudo dpkg -i ~/libtbb-dev_2018U2_armhf.deb
 $ sudo ldconfig
 ```
-8.Uninstall old OpenCV
+9.Uninstall old OpenCV
 ```
 $ cd ~/opencv-3.x.x/build
 $ sudo make uninstall
@@ -140,8 +143,8 @@ $ cd ~
 $ rm -r -f opencv-3.x.x
 $ rm -r -f opencv_contrib-3.x.x
 ```
-9.Build install "OpenCV 3.4.2" or Install by deb package.<br>
-**9.1 Build Install**
+10.Build install "OpenCV 3.4.2" or Install by deb package.<br>
+**10.1 Build Install**
 ```
 $ sudo apt update && sudo apt upgrade
 $ sudo apt install build-essential cmake pkg-config libjpeg-dev libtiff5-dev \
@@ -178,7 +181,7 @@ $ make -j1
 $ sudo make install
 $ sudo ldconfig
 ```
-**9.2 Install by deb package**
+**10.2 Install by deb package**
 ```
 $ cd ~
 $ sudo apt autoremove libopencv3
@@ -187,7 +190,7 @@ $ sudo apt install -y ./libopencv3_3.4.2-20180709.1_armhf.deb
 $ sudo ldconfig
 ```
 
-10.Install Intel® RealSense™ SDK 2.0
+11.Install Intel® RealSense™ SDK 2.0
 ```
 $ cd ~
 $ sudo apt update;sudo apt upgrade
@@ -202,7 +205,7 @@ $ cmake .. -DBUILD_EXAMPLES=true -DCMAKE_BUILD_TYPE=Release
 $ make -j1
 $ sudo make install
 ```
-11.Install OpenCV Wrapper
+12.Install OpenCV Wrapper
 ```
 $ cd ~/librealsense/wrappers/opencv;mkdir build;cd build
 $ cmake ..
@@ -212,7 +215,7 @@ target_link_libraries(rs-latency-tool ${DEPENDENCIES} pthread)
 $ make -j $(($(nproc) + 1))
 $ sudo make install
 ```
-12.Install Python binding
+13.Install Python binding
 ```
 $ cd ~/librealsense/build
 
@@ -227,14 +230,14 @@ $ cmake .. -DBUILD_PYTHON_BINDINGS=bool:true -DPYTHON_EXECUTABLE=$(which python)
 $ make -j1
 $ sudo make install
 ```
-13.Update PYTHON_PATH
+14.Update PYTHON_PATH
 ```
 $ nano ~/.bashrc
 export PYTHONPATH=$PYTHONPATH:/usr/local/lib
 
 $ source ~/.bashrc
 ```
-14.RealSense SDK import test
+15.RealSense SDK import test
 ```
 $ python3
 Python 3.5.3 (default, Jan 19 2017, 14:11:04) 
@@ -243,20 +246,20 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> import pyrealsense2
 >>> exit()
 ```
-15.Installing the OpenGL package for Python
+16.Installing the OpenGL package for Python
 ```
 $ sudo apt-get install python-opengl
 $ sudo -H pip3 install pyopengl
 $ sudo -H pip3 install pyopengl_accelerate
 ```
-16.Reduce the SWAP area to the default size (Raspbian Stretch Only)
+17.Reduce the SWAP area to the default size (Raspbian Stretch Only)
 ```
 $ sudo nano /etc/dphys-swapfile
 CONF_SWAPSIZE=100
 
 $ sudo /etc/init.d/dphys-swapfile restart swapon -s
 ```
-17.Clone a set of resources
+18.Clone a set of resources
 ```
 $ git clone https://github.com/PINTO0309/MobileNet-SSD-RealSense.git
 ```
