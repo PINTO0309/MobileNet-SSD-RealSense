@@ -298,7 +298,7 @@ $ sudo apt-get install python-opengl
 $ sudo -H pip3 install pyopengl
 $ sudo -H pip3 install pyopengl_accelerate
 ```
-17.Reduce the SWAP area to the default size (Raspbian Stretch Only)
+17.Reduce the SWAP area to the default size (RaspberryPi+Raspbian Stretch / RaspberryPi+Ubuntu Mate Only)
 ```
 $ sudo nano /etc/dphys-swapfile
 CONF_SWAPSIZE=100
