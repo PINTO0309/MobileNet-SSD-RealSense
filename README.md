@@ -119,7 +119,7 @@ $ protoc --version
 
 $ sudo -H pip3 install tensorflow
 ```
-**https://github.com/movidius/ncsdk**<br>
+**【Reference】https://github.com/movidius/ncsdk**<br>
 
 4.Update udev rule
 ```
