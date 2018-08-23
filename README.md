@@ -59,7 +59,8 @@ Measure the distance to the object with RealSense D435 while performing object d
 ![02](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/02.png)
 
 
-## Work with RaspberryPi3 (or PC + Ubuntu16.04. Use of Virtualbox is not strongly recommended)
+## Work with RaspberryPi3 (or PC + Ubuntu16.04 / RaspberryPi + Ubuntu Mate)
+**Use of Virtualbox is not strongly recommended**
 1.Execute the following
 ```
 $ sudo apt update;sudo apt upgrade
