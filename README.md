@@ -163,7 +163,8 @@ $ wget https://github.com/PINTO0309/TBBonARMv7/raw/master/libtbb-dev_2018U2_armh
 $ sudo dpkg -i ~/libtbb-dev_2018U2_armhf.deb
 $ sudo ldconfig
 ```
-8.Uninstall old OpenCV
+8.Uninstall old OpenCV<br>
+**[Very Important] The highest performance can not be obtained unless VFPV3 is enabled.**
 ```
 $ cd ~/opencv-3.x.x/build
 $ sudo make uninstall
@@ -172,6 +173,7 @@ $ rm -r -f opencv-3.x.x
 $ rm -r -f opencv_contrib-3.x.x
 ```
 9.Build install "OpenCV 3.4.2" or Install by deb package.<br>
+**[Very Important] The highest performance can not be obtained unless VFPV3 is enabled.**<br><br>
 **9.1 Build Install**
 ```
 $ sudo apt update && sudo apt upgrade
@@ -209,7 +211,7 @@ $ make -j1
 $ sudo make install
 $ sudo ldconfig
 ```
-**9.2 Install by deb package**
+**9.2 Install by deb package [I already activated VFPV3 and built it]**
 ```
 $ cd ~
 $ sudo apt autoremove libopencv3
