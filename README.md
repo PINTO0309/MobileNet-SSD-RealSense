@@ -27,7 +27,7 @@ Main Thread(1 process) + 1 Stick(1 process) + 1 Stick(1 process) + 1 Stick(1 pro
 [Aug 22, 2018]　**Separate environment construction procedure of "Raspbian Stretch" and "Ubuntu16.04"**<br>
 [Aug 22, 2018]　**【Experimental】** FaceDetection model replaced [resnet] (graph.facedetection)<br>
 [Aug 23, 2018]　Added steps to build NCSDKv2<br>
-[Aug 25, 2018]　Added Detection FPS View <MultiStickSSDwithRealSense.py><br>
+[Aug 25, 2018]　Added "Detection FPS View" <MultiStickSSDwithRealSense.py><br>
 
 ## Motion image
 ### **RealSense Mode about 6.5 FPS （Detection + Synchronous screen drawing / SingleStickSSDwithRealSense.py）**<br>
