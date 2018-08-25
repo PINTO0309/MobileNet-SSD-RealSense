@@ -4,6 +4,14 @@ Measure the distance to the object with RealSense D435 while performing object d
 **【Japanese Article1】 https://qiita.com/PINTO/items/1828f97d95fdda45f57d**<br>
 **【Japanese / English Article2】 https://qiita.com/PINTO/items/40abcf33af3ae7ef579d**<br><br>
 
+## Summary
+**Performance measurement result each number of sticks.**<br>
+Since the core number of RaspberryPi is 4 cores, 3 sticks are the limit.<br>
+Main Thread(1 process) + 1 Stick(1 process) + 1 Stick(1 process) + 1 Stick(1 process)<br><br>
+1 Stick = 6 FPS<br>
+2 Sticks = 12 FPS<br>
+3 Sticks = 16.5 FPS<br>
+4 Sticks = 16.5 FPS<br>
 
 ## Change history
 [July 14, 2018]　Corresponds to NCSDK v2.05.00.02<br>
