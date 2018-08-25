@@ -163,7 +163,7 @@ $ wget https://github.com/PINTO0309/TBBonARMv7/raw/master/libtbb-dev_2018U2_armh
 $ sudo dpkg -i ~/libtbb-dev_2018U2_armhf.deb
 $ sudo ldconfig
 ```
-8.Uninstall old OpenCV<br>
+8.Uninstall old OpenCV (RaspberryPi Only)<br>
 **[Very Important] The highest performance can not be obtained unless VFPV3 is enabled.**
 ```
 $ cd ~/opencv-3.x.x/build
@@ -174,7 +174,7 @@ $ rm -r -f opencv_contrib-3.x.x
 ```
 9.Build install "OpenCV 3.4.2" or Install by deb package.<br>
 **[Very Important] The highest performance can not be obtained unless VFPV3 is enabled.**<br><br>
-**9.1 Build Install**
+**9.1 Build Install (RaspberryPi Only)**
 ```
 $ sudo apt update && sudo apt upgrade
 $ sudo apt install build-essential cmake pkg-config libjpeg-dev libtiff5-dev \
@@ -211,7 +211,7 @@ $ make -j1
 $ sudo make install
 $ sudo ldconfig
 ```
-**9.2 Install by deb package [I already activated VFPV3 and built it]**
+**9.2 Install by deb package (RaspberryPi Only) [I already activated VFPV3 and built it]**
 ```
 $ cd ~
 $ sudo apt autoremove libopencv3
