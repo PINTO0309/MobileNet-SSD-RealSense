@@ -38,10 +38,10 @@ Main Thread(1 process) + 1 Stick(1 process) + 1 Stick(1 process) + 1 Stick(1 pro
 **However, the prediction rate is fairly low.(about 8.0 FPS - 12.0 FPS)**<br>
 **【YouTube Movie】 https://youtu.be/tAf1u9DKkh4**<br><br>
 ![09](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/09.gif)<br><br>
-### **USB Camera Mode MultiStick x4 Boosted（Asynchronous screen drawing / MultiStickSSDwithRealSense.py）**<br>
+### **USB Camera Mode MultiStick x4 Boosted 16.0 FPS+ （Asynchronous screen drawing / MultiStickSSDwithRealSense.py）**<br>
 **【YouTube Movie】　https://youtu.be/GedDpAc0JyQ**<br><br>
 ![10](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/10.gif) ![11](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/11.png)<br>
-### **RealSense Mode SingleStickabout 16.0 FPS+ （Transparent background in real time / Asynchronous screen drawing / MultiStickSSDwithRealSense.py）**<br>
+### **RealSense Mode SingleStickabout （Transparent background in real time / Asynchronous screen drawing / MultiStickSSDwithRealSense.py）**<br>
 **【YouTube Movie】　https://youtu.be/ApyX-mN_dYA**<br><br>
 ![12](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/12.gif)<br>
 
