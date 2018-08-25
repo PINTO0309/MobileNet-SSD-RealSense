@@ -9,8 +9,8 @@ Measure the distance to the object with RealSense D435 while performing object d
 Since the core number of RaspberryPi is 4 cores, 3 sticks are the limit.<br>
 Main Thread(1 process) + 1 Stick(1 process) + 1 Stick(1 process) + 1 Stick(1 process)<br><br>
 
-Input resolution ：　640x480
-Output resolution　：　640x480
+Input resolution ：　640x480<br>
+Output resolution　：　640x480<br><br>
 
 1 Stick = 6 FPS　**https://youtu.be/lNbhutT8hkA**<br>
 2 Sticks = 12 FPS　**https://youtu.be/zuJOhKWoLwc**<br>
