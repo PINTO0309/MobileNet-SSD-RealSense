@@ -10,7 +10,7 @@ Since the core number of RaspberryPi is 4 cores, 3 sticks are the limit.<br>
 Main Thread(1 process) + 1 Stick(1 process) + 1 Stick(1 process) + 1 Stick(1 process)<br><br>
 
 Video device　：　USB Camera (No RealSense D435)<br>
-Input resolution ：　640x480<br>
+Input resolution　：　640x480<br>
 Output resolution　：　640x480<br><br>
 
 1 Stick = 6 FPS　**https://youtu.be/lNbhutT8hkA**<br>
