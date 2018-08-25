@@ -37,7 +37,7 @@ Measure the distance to the object with RealSense D435 while performing object d
 ![12](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/12.gif)<br>
 
 ## Environment
-1．RaspberryPi3 + Raspbian Stretch (USB2.0 Port) or Ubuntu16.04<br>
+1．RaspberryPi3 + Raspbian Stretch (USB2.0 Port) or RaspberryPi3 + Ubuntu Mate or PC + Ubuntu16.04<br>
 2．Intel RealSense D435 (Firmware Ver 5.9.13) or USB Camera<br>
 3．Intel Movidius Neural Compute Stick x１piece or more<br>
 4．OpenCV3.4.2<br>
@@ -103,7 +103,6 @@ $ sudo -H pip3 install cython
 $ sudo -H pip3 install numpy
 $ sudo -H pip3 install pillow
 $ make install
-$ make examples -j1
 
 $ sudo pip3 uninstall tensorflow #tensorflow==1.7.0 is unstable
 $ cd ~
@@ -122,6 +121,8 @@ $ sudo ldconfig
 $ protoc --version
 
 $ sudo -H pip3 install tensorflow #tensorflow==1.9.0+
+# Before executing "make examples", insert Neural Compute Stick into the USB port of the device.
+$ make examples -j1
 ```
 **【Reference】https://github.com/movidius/ncsdk**<br>
 
@@ -162,7 +163,8 @@ $ wget https://github.com/PINTO0309/TBBonARMv7/raw/master/libtbb-dev_2018U2_armh
 $ sudo dpkg -i ~/libtbb-dev_2018U2_armhf.deb
 $ sudo ldconfig
 ```
-8.Uninstall old OpenCV
+8.Uninstall old OpenCV (RaspberryPi Only)<br>
+**[Very Important] The highest performance can not be obtained unless VFPV3 is enabled.**
 ```
 $ cd ~/opencv-3.x.x/build
 $ sudo make uninstall
@@ -171,7 +173,8 @@ $ rm -r -f opencv-3.x.x
 $ rm -r -f opencv_contrib-3.x.x
 ```
 9.Build install "OpenCV 3.4.2" or Install by deb package.<br>
-**9.1 Build Install**
+**[Very Important] The highest performance can not be obtained unless VFPV3 is enabled.**<br><br>
+**9.1 Build Install (RaspberryPi Only)**
 ```
 $ sudo apt update && sudo apt upgrade
 $ sudo apt install build-essential cmake pkg-config libjpeg-dev libtiff5-dev \
@@ -208,7 +211,7 @@ $ make -j1
 $ sudo make install
 $ sudo ldconfig
 ```
-**9.2 Install by deb package**
+**9.2 Install by deb package (RaspberryPi Only) [I already activated VFPV3 and built it]**
 ```
 $ cd ~
 $ sudo apt autoremove libopencv3
