@@ -6,7 +6,6 @@ input_shape {
   dim: 300
   dim: 300
 }
-
 layer {
   name: "data_bn"
   type: "BatchNorm"
@@ -1732,7 +1731,6 @@ layer {
     axis: 2
   }
 }
-
 layer {
   name: "mbox_conf_reshape"
   type: "Reshape"
@@ -1764,7 +1762,6 @@ layer {
     axis: 1
   }
 }
-
 layer {
   name: "detection_out"
   type: "DetectionOutput"

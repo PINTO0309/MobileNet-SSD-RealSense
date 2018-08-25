@@ -18,8 +18,11 @@ processes = []
 frameBuffer = None
 results = None
 fps = ""
+detectfps = ""
 framecount = 0
+detectframecount = 0
 time1 = 0
+time2 = 0
 graph_folder = ""
 cam = None
 camera_mode = 0
@@ -37,9 +40,12 @@ align = None
 
 def camThread(results, frameBuffer, camera_mode, camera_width, camera_height, background_transparent_mode, background_img):
     global fps
+    global detectfps
     global lastresults
     global framecount
+    global detectframecount
     global time1
+    global time2
     global cam
     global window_name
     global depth_scale
@@ -112,6 +118,7 @@ def camThread(results, frameBuffer, camera_mode, camera_width, camera_height, ba
 
         if not results.empty():
             res = results.get(False)
+            detectframecount += 1
             imdraw = overlay_on_image(frames, res, LABELS, camera_mode, background_transparent_mode,
                                       background_img, depth_scale=depth_scale, align=align)
             lastresults = res
@@ -130,11 +137,16 @@ def camThread(results, frameBuffer, camera_mode, camera_width, camera_height, ba
         ## Print FPS
         framecount += 1
         if framecount >= 15:
-            fps = " {:.1f} FPS".format(time1/15)
+            fps       = "(Playback) {:.1f} FPS".format(time1/15)
+            detectfps = "(Detection) {:.1f} FPS".format(detectframecount/time2)
             framecount = 0
+            detectframecount = 0
             time1 = 0
+            time2 = 0
         t2 = time.perf_counter()
-        time1 += 1/(t2-t1)
+        elapsedTime = t2-t1
+        time1 += 1/elapsedTime
+        time2 += elapsedTime
 
 
 
@@ -328,7 +340,8 @@ def overlay_on_image(frames, object_info, LABELS, camera_mode, background_transp
                                                                                              0.85,
                                                                                              0)
 
-        cv2.putText(img_cp, fps, (width-90,15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (38,0,255), 1, cv2.LINE_AA)
+        cv2.putText(img_cp, fps,       (width-170,15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (38,0,255), 1, cv2.LINE_AA)
+        cv2.putText(img_cp, detectfps, (width-170,30), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (38,0,255), 1, cv2.LINE_AA)
         return img_cp
 
     except:
