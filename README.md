@@ -14,7 +14,7 @@ Main Thread(1 process) + 1 Stick(1 process) + 1 Stick(1 process) + 1 Stick(1 pro
 |1|Video device|USB Camera (No RealSense D435)|
 |2|Input resolution|640x480|
 |3|Output resolution|640x480|<br>
-### Result
+### Result of detection rate
 |No.|Stick count|FPS|Youtube Movie|
 |:-:|:-|:-|:-|
 |1|1 Stick|6 FPS|**https://youtu.be/lNbhutT8hkA**|
