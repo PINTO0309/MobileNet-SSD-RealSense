@@ -8,16 +8,21 @@ Measure the distance to the object with RealSense D435 while performing object d
 **Performance measurement result each number of sticks. (Detection rate, no Playback rate)**<br>
 Since the core number of RaspberryPi is 4 cores, 3 sticks are the limit.<br>
 Main Thread(1 process) + 1 Stick(1 process) + 1 Stick(1 process) + 1 Stick(1 process)<br><br>
+### Verification environment
+|No.|Item|Contents|
+|:-:|:-|:-|
+|1|Video device|USB Camera (No RealSense D435)|
+|2|Input resolution|640x480|
+|3|Output resolution|640x480|<br>
+### Result
+|No.|Stick count|FPS|Youtube Movie|
+|:-:|:-|:-|:-|
+|1|1 Stick|6 FPS|**https://youtu.be/lNbhutT8hkA**|
+|2|2 Sticks|12 FPS|**https://youtu.be/zuJOhKWoLwc**|
+|3|3 Sticks|16.5 FPS|**https://youtu.be/8UDFIJ1Z4v8**|
+|4|4 Sticks|16.5 FPS|**https://youtu.be/_2xIZ-IZwZc**|
 
-Video device　：　USB Camera (No RealSense D435)<br>
-Input resolution　：　640x480<br>
-Output resolution　：　640x480<br><br>
-
-1 Stick = 6 FPS　**https://youtu.be/lNbhutT8hkA**<br>
-2 Sticks = 12 FPS　**https://youtu.be/zuJOhKWoLwc**<br>
-3 Sticks = 16.5 FPS　**https://youtu.be/8UDFIJ1Z4v8**<br>
-4 Sticks = 16.5 FPS　**https://youtu.be/_2xIZ-IZwZc**<br>
-
+<br><br>
 ## Change history
 <details><summary>Change history</summary><div>
 [July 14, 2018]　Corresponds to NCSDK v2.05.00.02<br>
@@ -34,7 +39,7 @@ Output resolution　：　640x480<br><br>
 [Aug 22, 2018]　【Experimental】 FaceDetection model replaced [resnet] (graph.facedetection)<br>
 [Aug 23, 2018]　Added steps to build NCSDKv2<br>
 [Aug 25, 2018]　Added "Detection FPS View" [MultiStickSSDwithRealSense.py]<br>
-</div></details>
+</div></details><br><br>
 
 ## Motion image
 ### **RealSense Mode about 6.5 FPS （Detection + Synchronous screen drawing / SingleStickSSDwithRealSense.py）**<br>
