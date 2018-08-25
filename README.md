@@ -19,20 +19,22 @@ Output resolution　：　640x480<br><br>
 4 Sticks = 16.5 FPS　**https://youtu.be/_2xIZ-IZwZc**<br>
 
 ## Change history
+<details><summary>Change history</summary><div>
 [July 14, 2018]　Corresponds to NCSDK v2.05.00.02<br>
 [July 17, 2018]　Corresponds to OpenCV 3.4.2<br>
-[July 21, 2018]　Support for multiprocessing <MultiStickSSDwithRealSense.py><br>
-[July 23, 2018]　Support for USB Camera Mode <MultiStickSSDwithRealSense.py><br>
+[July 21, 2018]　Support for multiprocessing [MultiStickSSDwithRealSense.py]<br>
+[July 23, 2018]　Support for USB Camera Mode [MultiStickSSDwithRealSense.py]<br>
 [July 29, 2018]　Added steps to build learning environment<br>
-[Aug　3, 2018]　Background Multi-transparent mode implementation <MultiStickSSDwithRealSense.py><br>
+[Aug　3, 2018]　Background Multi-transparent mode implementation [MultiStickSSDwithRealSense.py]<br>
 [Aug  11, 2018]　CUDA9.0 + cuDNN7.2 compatible with environment construction procedure<br>
 [Aug 14, 2018]　Reference of MobileNetv2 Model added to README and added Facedetection Model<br>
-[Aug 15, 2018]　Bug Fixed. ``MultiStickSSDwithRealSense.py`` depth_scale be undefined. Pull Requests merged. Thank you Drunkar!!<br>
-[Aug 19, 2018]　~~**【Experimental】** Update Facedetection model [DeepFace] (graph.facedetectXX)~~<br>
-[Aug 22, 2018]　**Separate environment construction procedure of "Raspbian Stretch" and "Ubuntu16.04"**<br>
-[Aug 22, 2018]　**【Experimental】** FaceDetection model replaced [resnet] (graph.facedetection)<br>
+[Aug 15, 2018]　Bug Fixed. `MultiStickSSDwithRealSense.py` depth_scale be undefined. Pull Requests merged. Thank you Drunkar!!<br>
+[Aug 19, 2018]　【Experimental】 Update Facedetection model [DeepFace] (graph.facedetectXX)<br>
+[Aug 22, 2018]　Separate environment construction procedure of "Raspbian Stretch" and "Ubuntu16.04"<br>
+[Aug 22, 2018]　【Experimental】 FaceDetection model replaced [resnet] (graph.facedetection)<br>
 [Aug 23, 2018]　Added steps to build NCSDKv2<br>
-[Aug 25, 2018]　Added "Detection FPS View" <MultiStickSSDwithRealSense.py><br>
+[Aug 25, 2018]　Added "Detection FPS View" [MultiStickSSDwithRealSense.py]<br>
+</div></details>
 
 ## Motion image
 ### **RealSense Mode about 6.5 FPS （Detection + Synchronous screen drawing / SingleStickSSDwithRealSense.py）**<br>
