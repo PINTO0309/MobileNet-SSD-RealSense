@@ -55,7 +55,7 @@ Camera Thread(1 process) + 1 Stick(1 process) + 1 Stick(1 process) + 1 Stick(1 p
 ### **USB Camera Mode MultiStick x4 Boosted 16.0 FPS+ （Asynchronous screen drawing / MultiStickSSDwithRealSense.py）**<br>
 **【YouTube Movie】　https://youtu.be/GedDpAc0JyQ**<br><br>
 ![10](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/10.gif) ![11](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/11.png)<br>
-### **RealSense Mode SingleStickabout （Transparent background in real time / Asynchronous screen drawing / MultiStickSSDwithRealSense.py）**<br>
+### **RealSense Mode SingleStick about 5.0 FPS（Transparent background in real time / Asynchronous screen drawing / MultiStickSSDwithRealSense.py）**<br>
 **【YouTube Movie】　https://youtu.be/ApyX-mN_dYA**<br><br>
 ![12](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/12.gif)<br>
 
