@@ -17,12 +17,12 @@ Camera Thread(1 process) + 1 Stick(1 process) + 1 Stick(1 process) + 1 Stick(1 p
 |3|Output resolution|640x480|
 |4|Execution parameters|$ python3 MultiStickSSDwithRealSense.py -mod 1 -wd 640 -ht 480
 ### Result of detection rate
-|No.|Stick count|FPS|Youtube Movie|
-|:-:|:-|:-|:-|
-|1|1 Stick|6 FPS|**https://youtu.be/lNbhutT8hkA**|
-|2|2 Sticks|12 FPS|**https://youtu.be/zuJOhKWoLwc**|
-|3|3 Sticks|16.5 FPS|**https://youtu.be/8UDFIJ1Z4v8**|
-|4|4 Sticks|16.5 FPS|**https://youtu.be/_2xIZ-IZwZc**|
+|No.|Stick count|FPS|Youtube Movie|Note|
+|:-:|:-|:-|:-|:-|
+|1|1 Stick|6 FPS|**https://youtu.be/lNbhutT8hkA**|base line|
+|2|2 Sticks|12 FPS|**https://youtu.be/zuJOhKWoLwc**|6 FPS increase|
+|3|3 Sticks|16.5 FPS|**https://youtu.be/8UDFIJ1Z4v8**|4.5 FPS increase|
+|4|4 Sticks|16.5 FPS|**https://youtu.be/_2xIZ-IZwZc**|No improvement|
 
 <br><br>
 ## Change history
