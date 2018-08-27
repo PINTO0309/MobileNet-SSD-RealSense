@@ -13,9 +13,10 @@ Camera Thread(1 process) + 1 Stick(1 process) + 1 Stick(1 process) + 1 Stick(1 p
 |No.|Item|Contents|
 |:-:|:-|:-|
 |1|Video device|USB Camera (No RealSense D435)|
-|2|Input resolution|640x480|
-|3|Output resolution|640x480|
-|4|Execution parameters|$ python3 MultiStickSSDwithRealSense.py -mod 1 -wd 640 -ht 480
+|2|Auxiliary equipment|(Required) self-powered USB2.0 HUB|
+|3|Input resolution|640x480|
+|4|Output resolution|640x480|
+|5|Execution parameters|$ python3 MultiStickSSDwithRealSense.py -mod 1 -wd 640 -ht 480
 ### Result of detection rate
 |No.|Stick count|FPS|Youtube Movie|Note|
 |:-:|:-|:-|:-|:-|
