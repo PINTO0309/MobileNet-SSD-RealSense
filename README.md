@@ -685,3 +685,4 @@ https://github.com/Mjrovai/OpenCV-Face-Recognition.git<br>
 https://github.com/sgxu/face-detection-based-on-caffe.git<br>
 https://github.com/RiweiChen/DeepFace.git<br>
 https://github.com/KatsunoriWa/eval_faceDetectors<br>
+https://github.com/BeloborodovDS/MobilenetSSDFace<br>
