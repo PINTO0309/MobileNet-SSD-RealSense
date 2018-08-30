@@ -191,7 +191,7 @@ def inferencer(results, frameBuffer):
 
             color_image = frameBuffer.get()
             prepimg = preprocess_image(color_image)
-            graph.queue_inference_with_fifo_elem(graphHandle0, graphHandle1, prepimg.astype(np.float32), color_image)
+            graph.queue_inference_with_fifo_elem(graphHandle0, graphHandle1, prepimg.astype(np.float32), None)
             out, _ = graphHandle1.read_elem()
             results.put(out)
         except:
