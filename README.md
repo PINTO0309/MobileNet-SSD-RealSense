@@ -12,7 +12,7 @@ Camera Thread(1 process) + 1 Stick(1 process) + 1 Stick(1 process) + 1 Stick(1 p
 ### Verification environment
 |No.|Item|Contents|
 |:-:|:-|:-|
-|1|Video device|USB Camera (No RealSense D435)|
+|1|Video device|USB Camera (No RealSense D435) ELP-USB8MP02G-L75|
 |2|Auxiliary equipment|(Required) self-powered USB2.0 HUB|
 |3|Input resolution|640x480|
 |4|Output resolution|640x480|
