@@ -38,9 +38,15 @@ depth_scale = 1.0
 align_to = None
 align = None
 
+LABELS = [['background',
+           'aeroplane', 'bicycle', 'bird', 'boat',
+           'bottle', 'bus', 'car', 'cat', 'chair',
+           'cow', 'diningtable', 'dog', 'horse',
+           'motorbike', 'person', 'pottedplant',
+           'sheep', 'sofa', 'train', 'tvmonitor'],
+          ['background', 'face']]
 
-
-def camThread(results, frameBuffer, camera_mode, camera_width, camera_height, background_transparent_mode, background_img):
+def camThread(LABELS, results, frameBuffer, camera_mode, camera_width, camera_height, background_transparent_mode, background_img):
     global fps
     global detectfps
     global lastresults
@@ -53,14 +59,6 @@ def camThread(results, frameBuffer, camera_mode, camera_width, camera_height, ba
     global depth_scale
     global align_to
     global align
-
-    LABELS = [['background',
-               'aeroplane', 'bicycle', 'bird', 'boat',
-               'bottle', 'bus', 'car', 'cat', 'chair',
-               'cow', 'diningtable', 'dog', 'horse',
-               'motorbike', 'person', 'pottedplant',
-               'sheep', 'sofa', 'train', 'tvmonitor'],
-              ['background', 'face']]
 
     # Configure depth and color streams
     #  Or
@@ -168,16 +166,19 @@ def inferencer(results, frameBuffer, ssd_detection_mode, face_detection_mode):
         sys.exit(1)
     print(len(devices))
 
+    # 1:= Enabled MobileNet-SSD Model
     if ssd_detection_mode == 1:
         with open(join(graph_folder, "graph"), mode="rb") as f:
             graph_buffers.append(f.read())
         graphs.append(mvnc.Graph('MobileNet-SSD'))
 
+    # 1:= Enabled Fullweight FaceDetection Model
     if face_detection_mode == 1:
         with open(join(graph_folder, "graph.fullfacedetection"), mode="rb") as f:
             graph_buffers.append(f.read())
         graphs.append(mvnc.Graph('FullFaceDetection'))
 
+    # 2:= Enabled Lightweight FaceDetection Model
     if face_detection_mode == 2:
         with open(join(graph_folder, "graph.shortfacedetection"), mode="rb") as f:
             graph_buffers.append(f.read())
@@ -416,6 +417,9 @@ if __name__ == '__main__':
         if face_detection_mode != 0:
             ssd_detection_mode = 0
 
+    if ssd_detection_mode == 0 and face_detection_mode != 0:
+        del(LABELS[0])
+
     devices = None
     try:
 
@@ -425,7 +429,7 @@ if __name__ == '__main__':
 
         # Start streaming
         p = mp.Process(target=camThread,
-                       args=(results, frameBuffer, camera_mode, camera_width, camera_height, background_transparent_mode, background_img),
+                       args=(LABELS, results, frameBuffer, camera_mode, camera_width, camera_height, background_transparent_mode, background_img),
                        daemon=True)
         p.start()
         processes.append(p)
