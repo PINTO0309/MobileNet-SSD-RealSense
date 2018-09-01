@@ -368,6 +368,14 @@ $ cd ~/MobileNet-SSD-RealSense
 $ python3 MultiStickSSDwithRealSense.py -tp 1
 ```
 
+(Example4) **[MobileNet-SSD + FaceDetection + Neural Compute Stick + USB Camera Mode + Asynchronous ](#realsense-mode-singlesticktransparent-background-in-real-time--asynchronous-screen-drawing--multistickssdwithrealsensepy)**
+```
+$ sudo raspi-config
+"7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
+$ cd ~/MobileNet-SSD-RealSense
+$ python3 MultiStickSSDwithRealSense.py -mod 1 -wd 640 -ht 480 -fd 1
+```
+
 (Example4)
 ```
 $ sudo raspi-config
