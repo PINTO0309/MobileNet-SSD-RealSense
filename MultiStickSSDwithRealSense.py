@@ -30,6 +30,8 @@ camera_width = 320
 camera_height = 240
 window_name = ""
 background_transparent_mode = 0
+ssd_detection_mode = 1
+face_detection_mode = 0
 background_img = None
 depth_sensor = None
 depth_scale = 1.0
@@ -52,12 +54,13 @@ def camThread(results, frameBuffer, camera_mode, camera_width, camera_height, ba
     global align_to
     global align
 
-    LABELS = ('background',
-              'aeroplane', 'bicycle', 'bird', 'boat',
-              'bottle', 'bus', 'car', 'cat', 'chair',
-              'cow', 'diningtable', 'dog', 'horse',
-              'motorbike', 'person', 'pottedplant',
-              'sheep', 'sofa', 'train', 'tvmonitor')
+    LABELS = [['background',
+               'aeroplane', 'bicycle', 'bird', 'boat',
+               'bottle', 'bus', 'car', 'cat', 'chair',
+               'cow', 'diningtable', 'dog', 'horse',
+               'motorbike', 'person', 'pottedplant',
+               'sheep', 'sofa', 'train', 'tvmonitor'],
+              ['background', 'face']]
 
     # Configure depth and color streams
     #  Or
@@ -150,9 +153,11 @@ def camThread(results, frameBuffer, camera_mode, camera_width, camera_height, ba
 
 
 
-def inferencer(results, frameBuffer):
+def inferencer(results, frameBuffer, ssd_detection_mode, face_detection_mode):
 
-    graph = None
+    graphs = []
+    graph_buffers = []
+    graphHandles = []
     graphHandle0 = None
     graphHandle1 = None
 
@@ -163,16 +168,28 @@ def inferencer(results, frameBuffer):
         sys.exit(1)
     print(len(devices))
 
-    with open(join(graph_folder, "graph"), mode="rb") as f:
-        graph_buffer = f.read()
-    graph = mvnc.Graph('MobileNet-SSD')
+    if ssd_detection_mode == 1:
+        with open(join(graph_folder, "graph"), mode="rb") as f:
+            graph_buffers.append(f.read())
+        graphs.append(mvnc.Graph('MobileNet-SSD'))
+
+    if face_detection_mode == 1:
+        with open(join(graph_folder, "graph.fullfacedetection"), mode="rb") as f:
+            graph_buffers.append(f.read())
+        graphs.append(mvnc.Graph('FullFaceDetection'))
+
+    if face_detection_mode == 2:
+        with open(join(graph_folder, "graph.shortfacedetection"), mode="rb") as f:
+            graph_buffers.append(f.read())
+        graphs.append(mvnc.Graph('ShortFaceDetection'))
 
     devopen = False
-    for devnum in range(len(devices)):
+    for device in devices:
         try:
-            device = mvnc.Device(devices[devnum])
+            device = mvnc.Device(device)
             device.open()
-            graphHandle0, graphHandle1 = graph.allocate_with_fifos(device, graph_buffer)
+            for (graph, graph_buffer) in zip(graphs, graph_buffers):
+                graphHandles.append(graph.allocate_with_fifos(device, graph_buffer))
             devopen = True
             break
         except:
@@ -182,7 +199,7 @@ def inferencer(results, frameBuffer):
         print("NCS Devices open Error!!!")
         sys.exit(1)
 
-    print("Loaded Graphs!!! "+str(devnum))
+    print("Loaded Graphs!!! ")
 
     while True:
         try:
@@ -191,9 +208,19 @@ def inferencer(results, frameBuffer):
 
             color_image = frameBuffer.get()
             prepimg = preprocess_image(color_image)
-            graph.queue_inference_with_fifo_elem(graphHandle0, graphHandle1, prepimg.astype(np.float32), None)
-            out, _ = graphHandle1.read_elem()
-            results.put(out)
+            res = None
+            for (graph, graphHandle) in zip(graphs, graphHandles):
+                graphHandle0 = graphHandle[0]
+                graphHandle1 = graphHandle[1]
+                graph.queue_inference_with_fifo_elem(graphHandle0, graphHandle1, prepimg.astype(np.float32), None)
+                out, _ = graphHandle1.read_elem()
+                num_valid_boxes = int(out[0])
+                if num_valid_boxes > 0:
+                    if isinstance(res, type(None)):
+                        res = [out]
+                    else:
+                        res = np.append(res, [out], axis=0)
+            results.put(res)
         except:
             import traceback
             traceback.print_exc()
@@ -213,7 +240,7 @@ def preprocess_image(src):
 
 
 
-def overlay_on_image(frames, object_info, LABELS, camera_mode, background_transparent_mode, background_img, depth_scale=1.0, align=None):
+def overlay_on_image(frames, object_infos, LABELS, camera_mode, background_transparent_mode, background_img, depth_scale=1.0, align=None):
 
     try:
 
@@ -236,7 +263,7 @@ def overlay_on_image(frames, object_info, LABELS, camera_mode, background_transp
         elif camera_mode == 1:
             color_image = frames
 
-        if isinstance(object_info, type(None)):
+        if isinstance(object_infos, type(None)):
             # 0:= No background transparent, 1:= Background transparent
             if background_transparent_mode == 0:
                 return color_image
@@ -248,97 +275,99 @@ def overlay_on_image(frames, object_info, LABELS, camera_mode, background_transp
         width = color_image.shape[1]
         entire_pixel = height * width
         occupancy_threshold = 0.9
-        num_valid_boxes = int(object_info[0])
 
         if background_transparent_mode == 0:
             img_cp = color_image.copy()
         elif background_transparent_mode == 1:
             img_cp = background_img.copy()
 
-        if num_valid_boxes > 0:
+        for (object_info, LABEL) in zip(object_infos, LABELS):
+            num_valid_boxes = int(object_info[0])
 
-            drawing_initial_flag = True
+            if num_valid_boxes > 0:
 
-            for box_index in range(num_valid_boxes):
-                base_index = 7+ box_index * 7
-                if (not np.isfinite(object_info[base_index]) or
-                    not np.isfinite(object_info[base_index + 1]) or
-                    not np.isfinite(object_info[base_index + 2]) or
-                    not np.isfinite(object_info[base_index + 3]) or
-                    not np.isfinite(object_info[base_index + 4]) or
-                    not np.isfinite(object_info[base_index + 5]) or
-                    not np.isfinite(object_info[base_index + 6])):
-                    continue
+                drawing_initial_flag = True
 
-                x1 = max(0, int(object_info[base_index + 3] * height))
-                y1 = max(0, int(object_info[base_index + 4] * width))
-                x2 = min(height, int(object_info[base_index + 5] * height))
-                y2 = min(width, int(object_info[base_index + 6] * width))
+                for box_index in range(num_valid_boxes):
+                    base_index = 7 + box_index * 7
+                    if (not np.isfinite(object_info[base_index]) or
+                        not np.isfinite(object_info[base_index + 1]) or
+                        not np.isfinite(object_info[base_index + 2]) or
+                        not np.isfinite(object_info[base_index + 3]) or
+                        not np.isfinite(object_info[base_index + 4]) or
+                        not np.isfinite(object_info[base_index + 5]) or
+                        not np.isfinite(object_info[base_index + 6])):
+                        continue
 
-                object_info_overlay = object_info[base_index:base_index + 7]
+                    x1 = max(0, int(object_info[base_index + 3] * height))
+                    y1 = max(0, int(object_info[base_index + 4] * width))
+                    x2 = min(height, int(object_info[base_index + 5] * height))
+                    y2 = min(width, int(object_info[base_index + 6] * width))
 
-                # 0:= No background transparent, 1:= Background transparent
-                if background_transparent_mode == 0:
-                    min_score_percent = 60
-                elif background_transparent_mode == 1:
-                    min_score_percent = 20
+                    object_info_overlay = object_info[base_index:base_index + 7]
 
-                source_image_width = width
-                source_image_height = height
+                    # 0:= No background transparent, 1:= Background transparent
+                    if background_transparent_mode == 0:
+                        min_score_percent = 60
+                    elif background_transparent_mode == 1:
+                        min_score_percent = 20
 
-                base_index = 0
-                class_id = object_info_overlay[base_index + 1]
-                percentage = int(object_info_overlay[base_index + 2] * 100)
-                if (percentage <= min_score_percent):
-                    continue
+                    source_image_width = width
+                    source_image_height = height
 
-                box_left = int(object_info_overlay[base_index + 3] * source_image_width)
-                box_top = int(object_info_overlay[base_index + 4] * source_image_height)
-                box_right = int(object_info_overlay[base_index + 5] * source_image_width)
-                box_bottom = int(object_info_overlay[base_index + 6] * source_image_height)
+                    base_index = 0
+                    class_id = object_info_overlay[base_index + 1]
+                    percentage = int(object_info_overlay[base_index + 2] * 100)
+                    if (percentage <= min_score_percent):
+                        continue
 
-                # 0:=RealSense Mode, 1:=USB Camera Mode
-                if camera_mode == 0:
-                    meters = depth_dist.get_distance(box_left+int((box_right-box_left)/2), box_top+int((box_bottom-box_top)/2))
-                    label_text = LABELS[int(class_id)] + " (" + str(percentage) + "%)"+ " {:.2f}".format(meters) + " meters away"
-                elif camera_mode == 1:
-                    label_text = LABELS[int(class_id)] + " (" + str(percentage) + "%)"
+                    box_left = int(object_info_overlay[base_index + 3] * source_image_width)
+                    box_top = int(object_info_overlay[base_index + 4] * source_image_height)
+                    box_right = int(object_info_overlay[base_index + 5] * source_image_width)
+                    box_bottom = int(object_info_overlay[base_index + 6] * source_image_height)
 
-                # 0:= No background transparent, 1:= Background transparent
-                if background_transparent_mode == 0:
-                    box_color = (255, 128, 0)
-                    box_thickness = 1
-                    cv2.rectangle(img_cp, (box_left, box_top), (box_right, box_bottom), box_color, box_thickness)
-                    label_background_color = (125, 175, 75)
-                    label_text_color = (255, 255, 255)
-                    label_size = cv2.getTextSize(label_text, cv2.FONT_HERSHEY_SIMPLEX, 0.5, 1)[0]
-                    label_left = box_left
-                    label_top = box_top - label_size[1]
-                    if (label_top < 1):
-                        label_top = 1
-                    label_right = label_left + label_size[0]
-                    label_bottom = label_top + label_size[1]
-                    cv2.rectangle(img_cp, (label_left - 1, label_top - 1), (label_right + 1, label_bottom + 1), label_background_color, -1)
-                    cv2.putText(img_cp, label_text, (label_left, label_bottom), cv2.FONT_HERSHEY_SIMPLEX, 0.5, label_text_color, 1)
+                    # 0:=RealSense Mode, 1:=USB Camera Mode
+                    if camera_mode == 0:
+                        meters = depth_dist.get_distance(box_left+int((box_right-box_left)/2), box_top+int((box_bottom-box_top)/2))
+                        label_text = LABEL[int(class_id)] + " (" + str(percentage) + "%)"+ " {:.2f}".format(meters) + " meters away"
+                    elif camera_mode == 1:
+                        label_text = LABEL[int(class_id)] + " (" + str(percentage) + "%)"
 
-                elif background_transparent_mode == 1:
-                    clipping_distance = (meters+0.05) / depth_scale
-                    depth_image_3d = np.dstack((depth_image, depth_image, depth_image))
-                    fore = np.where((depth_image_3d > clipping_distance) | (depth_image_3d <= 0), 0, color_image)
+                    # 0:= No background transparent, 1:= Background transparent
+                    if background_transparent_mode == 0:
+                        box_color = (255, 128, 0)
+                        box_thickness = 1
+                        cv2.rectangle(img_cp, (box_left, box_top), (box_right, box_bottom), box_color, box_thickness)
+                        label_background_color = (125, 175, 75)
+                        label_text_color = (255, 255, 255)
+                        label_size = cv2.getTextSize(label_text, cv2.FONT_HERSHEY_SIMPLEX, 0.5, 1)[0]
+                        label_left = box_left
+                        label_top = box_top - label_size[1]
+                        if (label_top < 1):
+                            label_top = 1
+                        label_right = label_left + label_size[0]
+                        label_bottom = label_top + label_size[1]
+                        cv2.rectangle(img_cp, (label_left - 1, label_top - 1), (label_right + 1, label_bottom + 1), label_background_color, -1)
+                        cv2.putText(img_cp, label_text, (label_left, label_bottom), cv2.FONT_HERSHEY_SIMPLEX, 0.5, label_text_color, 1)
 
-                    area = abs(box_bottom - box_top) * abs(box_right - box_left)
-                    occupancy = area / entire_pixel
+                    elif background_transparent_mode == 1:
+                        clipping_distance = (meters+0.05) / depth_scale
+                        depth_image_3d = np.dstack((depth_image, depth_image, depth_image))
+                        fore = np.where((depth_image_3d > clipping_distance) | (depth_image_3d <= 0), 0, color_image)
 
-                    if occupancy <= occupancy_threshold:
-                        if drawing_initial_flag == True:
-                            img_cp = fore
-                            drawing_initial_flag = False
-                        else:
-                            img_cp[box_top:box_bottom, box_left:box_right] = cv2.addWeighted(img_cp[box_top:box_bottom, box_left:box_right],
-                                                                                             0.85,
-                                                                                             fore[box_top:box_bottom, box_left:box_right],
-                                                                                             0.85,
-                                                                                             0)
+                        area = abs(box_bottom - box_top) * abs(box_right - box_left)
+                        occupancy = area / entire_pixel
+
+                        if occupancy <= occupancy_threshold:
+                            if drawing_initial_flag == True:
+                                img_cp = fore
+                                drawing_initial_flag = False
+                            else:
+                                img_cp[box_top:box_bottom, box_left:box_right] = cv2.addWeighted(img_cp[box_top:box_bottom, box_left:box_right],
+                                                                                                 0.85,
+                                                                                                 fore[box_top:box_bottom, box_left:box_right],
+                                                                                                 0.85,
+                                                                                                 0)
 
         cv2.putText(img_cp, fps,       (width-170,15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (38,0,255), 1, cv2.LINE_AA)
         cv2.putText(img_cp, detectfps, (width-170,30), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (38,0,255), 1, cv2.LINE_AA)
@@ -361,6 +390,8 @@ if __name__ == '__main__':
     parser.add_argument('-wd','--width',dest='camera_width',type=int,default=320,help='Width of the frames in the video stream. (USB Camera Mode Only. Default=320)')
     parser.add_argument('-ht','--height',dest='camera_height',type=int,default=240,help='Height of the frames in the video stream. (USB Camera Mode Only. Default=240)')
     parser.add_argument('-tp','--transparent',dest='background_transparent_mode',type=int,default=0,help='TransparentMode. (RealSense Mode Only. 0:=No background transparent, 1:=Background transparent)')
+    parser.add_argument('-sd','--ssddetection',dest='ssd_detection_mode',type=int,default=1,help='SSDDetectionMode. (0:=Disabled, 1:=Enabled Default=1)')
+    parser.add_argument('-fd','--facedetection',dest='face_detection_mode',type=int,default=0,help='FaceDetectionMode. (0:=Disabled, 1:=Full, 2:=Short Default=0)')
     args = parser.parse_args()
 
     graph_folder  = args.graph_folder
@@ -368,6 +399,8 @@ if __name__ == '__main__':
     camera_width  = args.camera_width
     camera_height = args.camera_height
     background_transparent_mode = args.background_transparent_mode
+    ssd_detection_mode = args.ssd_detection_mode
+    face_detection_mode = args.face_detection_mode
 
     # 0:=RealSense Mode, 1:=USB Camera Mode
     if camera_mode != 0 and camera_mode != 1:
@@ -379,6 +412,9 @@ if __name__ == '__main__':
 
     if background_transparent_mode == 1:
         background_img = np.zeros((camera_height, camera_width, 3), dtype=np.uint8)
+
+        if face_detection_mode != 0:
+            ssd_detection_mode = 0
 
     devices = None
     try:
@@ -403,7 +439,7 @@ if __name__ == '__main__':
 
         for devnum in range(len(devices)):
             p = mp.Process(target=inferencer,
-                           args=(results, frameBuffer),
+                           args=(results, frameBuffer, ssd_detection_mode, face_detection_mode),
                            daemon=True)
             p.start()
             processes.append(p)
