@@ -15,7 +15,7 @@ However, It is important to use a good quality USB camera.<br><br>
 ### Verification environment (1)
 |No.|Item|Contents|
 |:-:|:-|:-|
-|1|Video device|USB Camera (No RealSense D435) **ELP-USB8MP02G-L75 $70 Made in China**|
+|1|Video device|USB Camera (No RealSense D435) **ELP-USB8MP02G-L75 $70**|
 |2|Auxiliary equipment|(Required) self-powered USB2.0 HUB|
 |3|Input resolution|640x480|
 |4|Output resolution|640x480|
@@ -31,7 +31,7 @@ However, It is important to use a good quality USB camera.<br><br>
 ### Verification environment (2)
 |No.|Item|Contents|
 |:-:|:-|:-|
-|1|Video device|USB Camera (No RealSense D435) **PlayStationEye $5 Made in Japan**|
+|1|Video device|USB Camera (No RealSense D435) **PlayStationEye $5**|
 |2|Auxiliary equipment|(Required) self-powered USB2.0 HUB|
 |3|Input resolution|320x240|
 |4|Output resolution|320x240|
