@@ -8,24 +8,38 @@ And, This is support for MultiGraph and FaceDetection.<br><br>
 
 ## Summary
 **Performance measurement result each number of sticks. (Detection rate, no Playback rate)**<br>
-Since the core number of RaspberryPi is 4 cores, 3 sticks are the limit.<br>
-Camera Thread(1 process) + 1 Stick(1 process) + 1 Stick(1 process) + 1 Stick(1 process)<br><br>
-### Verification environment
+~~Since the core number of RaspberryPi is 4 cores, 3 sticks are the limit.~~<br>
+~~Camera Thread(1 process) + 1 Stick(1 process) + 1 Stick(1 process) + 1 Stick(1 process)~~<br>
+The best performance can be obtained with QVGA + 4 Sticks.
+However, It is important to use a good quality USB camera.<br><br>
+### Verification environment(1)
 |No.|Item|Contents|
 |:-:|:-|:-|
-|1|Video device|USB Camera (No RealSense D435) ELP-USB8MP02G-L75|
+|1|Video device|USB Camera (No RealSense D435) **ELP-USB8MP02G-L75 $70 Made in China**|
 |2|Auxiliary equipment|(Required) self-powered USB2.0 HUB|
 |3|Input resolution|640x480|
 |4|Output resolution|640x480|
 |5|Execution parameters|$ python3 MultiStickSSDwithRealSense.py -mod 1 -wd 640 -ht 480
-### Result of detection rate
+### Result of detection rate(1)
 |No.|Stick count|FPS|Youtube Movie|Note|
 |:-:|:-|:-|:-|:-|
 |1|1 Stick|6 FPS|**https://youtu.be/lNbhutT8hkA**|base line|
 |2|2 Sticks|12 FPS|**https://youtu.be/zuJOhKWoLwc**|6 FPS increase|
 |3|3 Sticks|16.5 FPS|**https://youtu.be/8UDFIJ1Z4v8**|4.5 FPS increase|
 |4|4 Sticks|16.5 FPS|**https://youtu.be/_2xIZ-IZwZc**|No improvement|
-
+<br><br>
+### Verification environment(2)
+|No.|Item|Contents|
+|:-:|:-|:-|
+|1|Video device|USB Camera (No RealSense D435) **PlayStationEye $5 Made in Japan**|
+|2|Auxiliary equipment|(Required) self-powered USB2.0 HUB|
+|3|Input resolution|320x240|
+|4|Output resolution|320x240|
+|5|Execution parameters|$ python3 MultiStickSSDwithRealSense.py -mod 1 -wd 320 -ht 240
+### Result of detection rate(2)
+|No.|Stick count|FPS|Youtube Movie|Note|
+|:-:|:-|:-|:-|:-|
+|1|4 Stick|25 FPS|**https://youtu.be/v-Cei1TW88c**|best performance|
 <br><br>
 ## Change history
 <details><summary>Change history</summary><div>
