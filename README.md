@@ -348,6 +348,8 @@ $ python3 MultiStickSSDwithRealSense.py <option1> <option2> ...
  -wd　Width of the frames in the video stream. (USB Camera Mode Only. Default=320)
  -ht　Height of the frames in the video stream. (USB Camera Mode Only. Default=240)
  -tp　TransparentMode. (RealSense Mode Only. 0:=No background transparent, 1:=Background transparent. Default=0)
+ -sd　SSDDetectionMode. (0:=Disabled, 1:=Enabled. Default=1)
+ -fd　FaceDetectionMode. (0:=Disabled, 1:=Enabled. Default=0)
 ```
 (Example0) **[MobileNet-SSD + Neural Compute Stick + RealSense D435 Mode + Syncronous](#realsense-mode-about-65-fps-detection--synchronous-screen-drawing--singlestickssdwithrealsensepy)**
 ```
