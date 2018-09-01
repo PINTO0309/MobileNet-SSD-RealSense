@@ -61,6 +61,8 @@ Camera Thread(1 process) + 1 Stick(1 process) + 1 Stick(1 process) + 1 Stick(1 p
 ### **RealSense Mode SingleStick about 5.0 FPS（Transparent background in real time / Asynchronous screen drawing / MultiStickSSDwithRealSense.py）**<br>
 **【YouTube Movie】　https://youtu.be/ApyX-mN_dYA**<br><br>
 ![12](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/12.gif)<br>
+### **USB Camera Mode MultiStick x3 Boosted （Asynchronous screen drawing / MultiGraph(SSD+FaceDetection) / FaceDetection / MultiStickSSDwithRealSense.py）**<br>
+**【YouTube Movie】　https://youtu.be/fQZpuD8mWok**<br><br>
 
 ## Environment
 1．RaspberryPi3 + Raspbian Stretch (USB2.0 Port) or RaspberryPi3 + Ubuntu Mate or PC + Ubuntu16.04<br>
