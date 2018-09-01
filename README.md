@@ -42,6 +42,7 @@ Camera Thread(1 process) + 1 Stick(1 process) + 1 Stick(1 process) + 1 Stick(1 p
 [Aug 22, 2018]　【Experimental】 FaceDetection model replaced [resnet] (graph.facedetection)<br>
 [Aug 23, 2018]　Added steps to build NCSDKv2<br>
 [Aug 25, 2018]　Added "Detection FPS View" [MultiStickSSDwithRealSense.py]<br>
+[Sep 01, 2018]　Added support for MultiGraph and FaceDetection mode [MultiStickSSDwithRealSense.py]<br>
 </div></details><br><br>
 
 ## Motion image
