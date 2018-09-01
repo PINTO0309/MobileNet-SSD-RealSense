@@ -43,6 +43,7 @@ Camera Thread(1 process) + 1 Stick(1 process) + 1 Stick(1 process) + 1 Stick(1 p
 [Aug 22, 2018]　【Experimental】 FaceDetection model replaced [resnet] (graph.facedetection)<br>
 [Aug 23, 2018]　Added steps to build NCSDKv2<br>
 [Aug 25, 2018]　Added "Detection FPS View" [MultiStickSSDwithRealSense.py]<br>
+[Sep 01, 2018]　FaceDetection model replaced [Mobilenet] (graph.fullfacedetection / graph.shortfacedetection)<br>
 [Sep 01, 2018]　Added support for MultiGraph and FaceDetection mode [MultiStickSSDwithRealSense.py]<br>
 </div></details><br><br>
 
@@ -368,7 +369,7 @@ $ cd ~/MobileNet-SSD-RealSense
 $ python3 MultiStickSSDwithRealSense.py -tp 1
 ```
 
-(Example4) **[MobileNet-SSD + FaceDetection + Neural Compute Stick + USB Camera Mode + Asynchronous ](#realsense-mode-singlesticktransparent-background-in-real-time--asynchronous-screen-drawing--multistickssdwithrealsensepy)**
+(Example4) **[MobileNet-SSD + FaceDetection + Neural Compute Stick + USB Camera Mode + Asynchronous ](#usb-camera-mode-multistick-x3-boosted-asynchronous-screen-drawing--multigraphssdfacedetection--facedetection--multistickssdwithrealsensepy)**
 ```
 $ sudo raspi-config
 "7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
@@ -376,7 +377,7 @@ $ cd ~/MobileNet-SSD-RealSense
 $ python3 MultiStickSSDwithRealSense.py -mod 1 -wd 640 -ht 480 -fd 1
 ```
 
-(Example4)
+(Example5)
 ```
 $ sudo raspi-config
 "7.Advanced Options" - "A7 GL Driver" - "G2 GL (Fake KMS)"
@@ -384,7 +385,7 @@ $ realsense-viewer
 ```
 ![05](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/05.gif)
 
-(Example5)
+(Example6)
 ```
 $ sudo raspi-config
 "7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
@@ -394,7 +395,7 @@ $ rs-grabcuts
 ```
 ![06](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/06.gif)
 
-(Example6)
+(Example7)
 ```
 $ sudo raspi-config
 "7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
@@ -404,7 +405,7 @@ $ rs-imshow
 ```
 ![07](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/07.gif)
 
-(Example7) MobileNet-SSD(OpenCV-DNN) + RealSense D435 + Without Neural Compute Stick
+(Example8) MobileNet-SSD(OpenCV-DNN) + RealSense D435 + Without Neural Compute Stick
 ```
 $ sudo raspi-config
 "7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
