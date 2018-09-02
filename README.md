@@ -41,7 +41,7 @@ And, This is support for MultiGraph and FaceDetection, MultiProcessing.<br><br>
 |No.|Stick count|FPS|Youtube Movie|Note|
 |:-:|:-|:-|:-|:-|
 |1|4 Sticks|25 FPS|**https://youtu.be/v-Cei1TW88c**|best performance|
-|2|5 Sticks|Unverified|-|-|
+|2|5 Sticks|Unverified|-|Comming soon|
 
 ## Change history
 <details><summary>Change history</summary><div>
