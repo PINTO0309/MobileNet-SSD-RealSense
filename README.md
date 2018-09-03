@@ -11,7 +11,7 @@ And, This is support for MultiGraph and FaceDetection, MultiProcessing.<br><br>
 **Performance measurement result each number of sticks. (Detection rate, no Playback rate)**<br>
 ~~Since the core number of RaspberryPi is 4 cores, 3 sticks are the limit.~~<br>
 ~~Camera Thread(1 process) + 1 Stick(1 process) + 1 Stick(1 process) + 1 Stick(1 process)~~<br>
-**The best performance can be obtained with QVGA + 4 Sticks.**<br>
+**The best performance can be obtained with QVGA + 5 Sticks.**<br>
 **However, It is important to use a good quality USB camera.**<br><br>
 ### Verification environment (1)
 |No.|Item|Contents|
