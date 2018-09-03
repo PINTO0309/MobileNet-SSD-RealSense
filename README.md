@@ -61,6 +61,7 @@ And, This is support for MultiGraph and FaceDetection, MultiProcessing.<br><br>
 [Aug 25, 2018]　Added "Detection FPS View" [MultiStickSSDwithRealSense.py]<br>
 [Sep 01, 2018]　FaceDetection model replaced [Mobilenet] (graph.fullfacedetection / graph.shortfacedetection)<br>
 [Sep 01, 2018]　Added support for MultiGraph and FaceDetection mode [MultiStickSSDwithRealSense.py]<br>
+[Sep 04, 2018]　Performance measurement result with 5 sticks is posted<br>
 </div></details><br><br>
 
 ## Motion image
