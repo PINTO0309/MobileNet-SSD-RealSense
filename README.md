@@ -40,8 +40,8 @@ And, This is support for MultiGraph and FaceDetection, MultiProcessing.<br><br>
 ### Result of detection rate (2)
 |No.|Stick count|FPS|Youtube Movie|Note|
 |:-:|:-|:-|:-|:-|
-|1|4 Sticks|25 FPS|**https://youtu.be/v-Cei1TW88c**|best performance|
-|2|5 Sticks|Unverified|-|Comming soon|
+|1|4 Sticks|25 FPS|**https://youtu.be/v-Cei1TW88c**||
+|2|5 Sticks|30 FPS+|**https://youtu.be/CL6PTNgWibI**|best performance|
 
 ## Change history
 <details><summary>Change history</summary><div>
