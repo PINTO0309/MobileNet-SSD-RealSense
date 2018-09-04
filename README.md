@@ -721,3 +721,4 @@ https://github.com/RiweiChen/DeepFace.git<br>
 https://github.com/KatsunoriWa/eval_faceDetectors<br>
 https://github.com/BeloborodovDS/MobilenetSSDFace<br>
 https://www.pyimagesearch.com/2018/09/03/semantic-segmentation-with-opencv-and-deep-learning/<br>
+https://blog.amedama.jp/entry/2017/04/03/235901<br>
