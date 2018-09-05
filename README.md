@@ -169,6 +169,7 @@ $ protoc --version
 
 $ sudo -H pip3 install tensorflow --upgrade #tensorflow==1.9.0+
 # Before executing "make examples", insert Neural Compute Stick into the USB port of the device.
+$ cd ~/ncsdk
 $ make examples -j1
 ```
 **【Reference】https://github.com/movidius/ncsdk**<br>
