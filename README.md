@@ -726,3 +726,5 @@ https://github.com/TimoSaemann/ENet/tree/master/Tutorial<br>
 https://blog.amedama.jp/entry/2017/04/03/235901<br>
 https://github.com/NVIDIA/nvidia-docker<br>
 https://hub.docker.com/r/nvidia/cuda/<br>
+https://www.dlology.com/blog/how-to-run-keras-model-on-movidius-neural-compute-stick/<br>
+https://ncsforum.movidius.com/discussion/1106/ncs-temperature-issue<br>
