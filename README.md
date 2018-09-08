@@ -440,10 +440,11 @@ $ rs-dnn
 ```
 ![08](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/08.gif)
 
-(Example9) To prevent thermal runaway, simple clustering function (2 Stick = 1 Cluster)
+(Example9) To prevent thermal runaway, simple clustering function (2 Stick = 1 Cluster)<br>
+**Number of all sticks = 5<br>
 stick_num_of_cluster = 2<br>
-cluster_switch_cycle = 10sec(10000millisec)<br>
-cluster_switch_temperature = 65.0℃<br>
+cluster_switch_cycle = 10sec (10,000millisec)<br>
+cluster_switch_temperature = 65.0℃**<br>
 ```
 $ sudo raspi-config
 "7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
