@@ -62,6 +62,7 @@ And, This is support for MultiGraph and FaceDetection, MultiProcessing, Backgrou
 [Sep 01, 2018]　FaceDetection model replaced [Mobilenet] (graph.fullfacedetection / graph.shortfacedetection)<br>
 [Sep 01, 2018]　Added support for MultiGraph and FaceDetection mode [MultiStickSSDwithRealSense.py]<br>
 [Sep 04, 2018]　Performance measurement result with 5 sticks is posted<br>
+[Sep 08, 2018]　To prevent thermal runaway, simple clustering function of stick was implemented.<br>
 </div></details><br><br>
 
 ## Motion image
