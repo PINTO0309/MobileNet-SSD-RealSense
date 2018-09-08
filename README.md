@@ -440,7 +440,13 @@ $ rs-dnn
 ```
 ![08](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/08.gif)
 
-(Example9) To prevent thermal runaway, simple clustering function (2 Stick = 1 Cluster)<br>
+(Example9) To prevent thermal runaway, simple clustering function (2 Stick = 1 Cluster)<br><br>
+When a certain cycle or constant temperature is reached, the active cluster switches seamlessly automatically.<br>
+You must turn on the clustering enable flag.<br>
+The default switch period is 10 seconds, the default temperature threshold is 65°C.<br>
+The number, cycle, and temperature of sticks constituting one cluster can be specified by the start parameter.<br>
+However, fine-grained control is not performed automatically.<br>
+Depending on your environment, please tune to the optimum parameters yourself.<br><br>
  **[1] Number of all sticks = 5<br>
  [2] stick_num_of_cluster = 2<br>
  [3] cluster_switch_cycle = 10sec (10,000millisec)<br>
