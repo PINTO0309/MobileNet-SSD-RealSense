@@ -84,6 +84,10 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 ### **USB Camera Mode MultiStick x3 Boosted （Asynchronous screen drawing / MultiGraph(SSD+FaceDetection) / FaceDetection / MultiStickSSDwithRealSense.py）**<br>
 **【YouTube Movie】　https://youtu.be/fQZpuD8mWok**<br><br>
 ![13](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/13.gif)<br>
+### **Simple clustering function (MultiStick / MultiCluster / Cluster switch cycle / Cluster switch temperature)**<br>
+![14](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/14.png)<br>
+**[Execution log]**<br>
+![15](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/15.png)
 
 ## Environment
 1．RaspberryPi3 + Raspbian Stretch (USB2.0 Port) or RaspberryPi3 + Ubuntu Mate or PC + Ubuntu16.04<br>
