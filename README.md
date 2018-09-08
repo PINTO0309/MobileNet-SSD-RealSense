@@ -406,45 +406,7 @@ $ cd ~/MobileNet-SSD-RealSense
 $ python3 MultiStickSSDwithRealSense.py -mod 1 -wd 640 -ht 480 -fd 1
 ```
 
-(Example5)
-```
-$ sudo raspi-config
-"7.Advanced Options" - "A7 GL Driver" - "G2 GL (Fake KMS)"
-$ realsense-viewer
-```
-![05](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/05.gif)
-
-(Example6)
-```
-$ sudo raspi-config
-"7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
-
-$ cd ~/librealsense/wrappers/opencv/build/grabcuts
-$ rs-grabcuts
-```
-![06](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/06.gif)
-
-(Example7)
-```
-$ sudo raspi-config
-"7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
-
-$ cd ~/librealsense/wrappers/opencv/build/imshow
-$ rs-imshow
-```
-![07](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/07.gif)
-
-(Example8) MobileNet-SSD(OpenCV-DNN) + RealSense D435 + Without Neural Compute Stick
-```
-$ sudo raspi-config
-"7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
-
-$ cd ~/librealsense/wrappers/opencv/build/dnn
-$ rs-dnn
-```
-![08](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/08.gif)
-
-(Example9) To prevent thermal runaway, simple clustering function (2 Stick = 1 Cluster)<br><br>
+(Example5) **To prevent thermal runaway, simple clustering function (2 Stick = 1 Cluster)**<br><br>
 When a certain cycle or constant temperature is reached, the active cluster switches seamlessly automatically.<br>
 You must turn on the clustering enable flag.<br>
 The default switch period is 10 seconds, the default temperature threshold is 65°C.<br>
@@ -464,7 +426,45 @@ $ python3 MultiStickSSDwithRealSense.py -mod 1 -snc 2 -csc 10000 -cst 65.0
 **[Simplified drawing of cluster switching]**<br>
 ![14](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/14.png)<br>
 **[Execution log]**<br>
-![15](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/15.png)
+![15](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/15.png)<br><br>
+
+(Example6)
+```
+$ sudo raspi-config
+"7.Advanced Options" - "A7 GL Driver" - "G2 GL (Fake KMS)"
+$ realsense-viewer
+```
+![05](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/05.gif)
+
+(Example7)
+```
+$ sudo raspi-config
+"7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
+
+$ cd ~/librealsense/wrappers/opencv/build/grabcuts
+$ rs-grabcuts
+```
+![06](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/06.gif)
+
+(Example8)
+```
+$ sudo raspi-config
+"7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
+
+$ cd ~/librealsense/wrappers/opencv/build/imshow
+$ rs-imshow
+```
+![07](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/07.gif)
+
+(Example9) MobileNet-SSD(OpenCV-DNN) + RealSense D435 + Without Neural Compute Stick
+```
+$ sudo raspi-config
+"7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
+
+$ cd ~/librealsense/wrappers/opencv/build/dnn
+$ rs-dnn
+```
+![08](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/08.gif)
 
 # 【Reference】 MobileNetv2 Model (Caffe) Great Thanks!!
 **https://github.com/xufeifeiWHU/Mobilenet-v2-on-Movidius-stick.git**
