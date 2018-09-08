@@ -445,7 +445,6 @@ When a certain cycle or constant temperature is reached, the active cluster swit
 You must turn on the clustering enable flag.<br>
 The default switch period is 10 seconds, the default temperature threshold is 65°C.<br>
 The number, cycle, and temperature of sticks constituting one cluster can be specified by the start parameter.<br>
-However, fine-grained control is not performed automatically.<br>
 Depending on your environment, please tune to the optimum parameters yourself.<br><br>
  **[1] Number of all sticks = 5<br>
  [2] stick_num_of_cluster = 2<br>
