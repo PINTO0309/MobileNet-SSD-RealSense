@@ -32,6 +32,14 @@ window_name = ""
 background_transparent_mode = 0
 ssd_detection_mode = 1
 face_detection_mode = 0
+elapsedtime = 0.0
+temperature = 0.0
+max_temperature = 0.0
+active_stick_pointer = 0
+mp_active_stick_number = None
+stick_num_of_cluster = 0
+cluster_switch_cycle = 10000
+cluster_switch_temperature = 70.0
 background_img = None
 depth_sensor = None
 depth_scale = 1.0
@@ -151,7 +159,7 @@ def camThread(LABELS, results, frameBuffer, camera_mode, camera_width, camera_he
 
 
 
-def inferencer(results, frameBuffer, ssd_detection_mode, face_detection_mode):
+def inferencer(results, frameBuffer, ssd_detection_mode, face_detection_mode, devnum, mp_active_stick_number, mp_stick_temperature):
 
     graphs = []
     graph_buffers = []
@@ -202,7 +210,17 @@ def inferencer(results, frameBuffer, ssd_detection_mode, face_detection_mode):
 
     print("Loaded Graphs!!! ")
 
+    THERMAL_STATS = mvnc.DeviceOption.RO_THERMAL_STATS
+    temperature = device.get_option
+
     while True:
+        # 0:= Inactive stick, 1:= Active stick
+        if mp_active_stick_number[devnum] == 0:
+            continue
+
+        # Measure the temperature inside the stick
+        mp_stick_temperature[devnum] = temperature(THERMAL_STATS)[0]
+
         try:
             if frameBuffer.empty():
                 continue
@@ -393,6 +411,9 @@ if __name__ == '__main__':
     parser.add_argument('-tp','--transparent',dest='background_transparent_mode',type=int,default=0,help='TransparentMode. (RealSense Mode Only. 0:=No background transparent, 1:=Background transparent)')
     parser.add_argument('-sd','--ssddetection',dest='ssd_detection_mode',type=int,default=1,help='SSDDetectionMode. (0:=Disabled, 1:=Enabled Default=1)')
     parser.add_argument('-fd','--facedetection',dest='face_detection_mode',type=int,default=0,help='FaceDetectionMode. (0:=Disabled, 1:=Full, 2:=Short Default=0)')
+    parser.add_argument('-snc','--sticknumofcluster',dest='stick_num_of_cluster',type=int,default=0,help='Number of sticks to be clustered. (0:=Clustering invalid, n:=Number of sticks Default=0)')
+    parser.add_argument('-csc','--clusterswitchcycle',dest='cluster_switch_cycle',type=int,default=10000,help='Cycle of switching active cluster. (n:=millisecond Default=10000)')
+    parser.add_argument('-cst','--clusterswittemperature',dest='cluster_switch_temperature',type=float,default=65.0,help='Temperature threshold to switch active cluster. (n.n:=temperature(Celsius) Default=65.0)')
     args = parser.parse_args()
 
     graph_folder  = args.graph_folder
@@ -402,6 +423,9 @@ if __name__ == '__main__':
     background_transparent_mode = args.background_transparent_mode
     ssd_detection_mode = args.ssd_detection_mode
     face_detection_mode = args.face_detection_mode
+    stick_num_of_cluster = args.stick_num_of_cluster
+    cluster_switch_cycle = args.cluster_switch_cycle
+    cluster_switch_temperature = args.cluster_switch_temperature
 
     # 0:=RealSense Mode, 1:=USB Camera Mode
     if camera_mode != 0 and camera_mode != 1:
@@ -439,17 +463,90 @@ if __name__ == '__main__':
 
         if len(devices) == 0:
             print("No devices found")
-            quit()
+            sys.exit(0)
+        device_count = len(devices)
 
-        for devnum in range(len(devices)):
+        if stick_num_of_cluster > 0 and stick_num_of_cluster > (device_count // 2):
+            print("`stick_num_of_cluster` must be less than half of the total number of sticks.")
+            sys.exit(0)
+
+        # Initialization of clustering stick
+        mp_active_stick_number = mp.Array('i', device_count)
+        mp_stick_temperature   = mp.Array('f', device_count)
+        # 0:= Clustering invalid, n:= Number of sticks to be clustered
+        if stick_num_of_cluster > 0:
+            # Activate only the sticks in the cluster
+            for devnum in range(stick_num_of_cluster):
+                # 0:= Inactive, 1:= Active
+                mp_active_stick_number[devnum] = 1
+        else:
+            # Activate all sticks
+            for devnum in range(device_count):
+                # 0:= Inactive, 1:= Active
+                mp_active_stick_number[devnum] = 1
+
+        # Activation of inferencer
+        for devnum in range(device_count):
             p = mp.Process(target=inferencer,
-                           args=(results, frameBuffer, ssd_detection_mode, face_detection_mode),
+                           args=(results, frameBuffer, ssd_detection_mode, face_detection_mode, devnum, mp_active_stick_number, mp_stick_temperature),
                            daemon=True)
             p.start()
             processes.append(p)
 
+        # Cluster switching determination
+        t1 = time.perf_counter() * 1000
         while True:
-            sleep(1)
+            #sleep(1)
+            # Swith cluster
+            if stick_num_of_cluster > 0:
+                # Measure inside temperature of stick
+                relative_pointer = active_stick_pointer
+                counta = 0
+                max_temperature = 0.0
+                while True:
+                    temperature = mp_stick_temperature[relative_pointer]
+                    if max_temperature < temperature:
+                        max_temperature = temperature
+                    relative_pointer += 1
+                    counta += 1
+                    if relative_pointer > (device_count - 1):
+                        relative_pointer = 0
+                    if counta >= stick_num_of_cluster:
+                        break
+
+                # Cluster switching judgment
+                if (cluster_switch_cycle > 0 and elapsedtime >= cluster_switch_cycle) or max_temperature >= cluster_switch_temperature:
+                    # Cluster inactivate
+                    counta = 0
+                    while True:
+                        mp_active_stick_number[active_stick_pointer] = 0
+                        active_stick_pointer += 1
+                        counta += 1
+                        if active_stick_pointer > (device_count - 1):
+                            active_stick_pointer = 0
+                        if counta >= stick_num_of_cluster:
+                            break
+
+                    # Cluster activate
+                    relative_pointer = active_stick_pointer
+                    counta = 0
+                    while True:
+                        mp_active_stick_number[relative_pointer] = 1
+                        relative_pointer += 1
+                        counta += 1
+                        if relative_pointer > (device_count - 1):
+                            relative_pointer = 0
+                        if counta >= stick_num_of_cluster:
+                            break
+                    elapsedtime = 0.0
+                    t1 = time.perf_counter() * 1000
+                t2 = time.perf_counter() * 1000
+                elapsedtime = (t2-t1)
+                print("Active Sticks =", mp_active_stick_number[:],
+                      "elapsedtime(millisec) = {:.1f}".format(elapsedtime),
+                      "max_temperature = {:.1f}".format(max_temperature))
+            else:
+                elapsedtime = 0.0
 
     except:
         import traceback
