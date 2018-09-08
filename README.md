@@ -436,6 +436,15 @@ $ rs-dnn
 ```
 ![08](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/08.gif)
 
+(Example9) To prevent thermal runaway, simple clustering function (2 Stick = 1 Cluster)
+```
+$ sudo raspi-config
+"7.Advanced Options" - "A7 GL Driver" - "G3 Legacy"
+
+$ cd ~/MobileNet-SSD-RealSense
+$ python3 MultiStickSSDwithRealSense.py -mod 1 -snc 2 -csc 10000 -cst 65.0
+```
+
 # 【Reference】 MobileNetv2 Model (Caffe) Great Thanks!!
 **https://github.com/xufeifeiWHU/Mobilenet-v2-on-Movidius-stick.git**
 
