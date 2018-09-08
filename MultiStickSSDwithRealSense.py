@@ -496,7 +496,6 @@ if __name__ == '__main__':
         # Cluster switching determination
         t1 = time.perf_counter() * 1000
         while True:
-            #sleep(1)
             # Swith cluster
             if stick_num_of_cluster > 0:
                 # Measure inside temperature of stick
@@ -546,7 +545,7 @@ if __name__ == '__main__':
                       "elapsedtime(millisec) = {:.1f}".format(elapsedtime),
                       "max_temperature = {:.1f}".format(max_temperature))
             else:
-                elapsedtime = 0.0
+                sleep(1)
 
     except:
         import traceback
