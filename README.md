@@ -355,6 +355,9 @@ $ python3 MultiStickSSDwithRealSense.py <option1> <option2> ...
  -tp　TransparentMode. (RealSense Mode Only. 0:=No background transparent, 1:=Background transparent. Default=0)
  -sd　SSDDetectionMode. (0:=Disabled, 1:=Enabled. Default=1)
  -fd　FaceDetectionMode. (0:=Disabled, 1:=Enabled. Default=0)
+ -snc stick_num_of_cluster. Number of sticks to be clustered. (0:=Clustering invalid, n:=Number of sticks Default=0)
+ -csc cluster_switch_cycle. Cycle of switching active cluster. (n:=millisecond Default=10000)
+ -cst cluster_switch_temperature. emperature threshold to switch active cluster. (n.n:=temperature(Celsius) Default=65.0)
 ```
 (Example0) **[MobileNet-SSD + Neural Compute Stick + RealSense D435 Mode + Syncronous](#realsense-mode-about-65-fps-detection--synchronous-screen-drawing--singlestickssdwithrealsensepy)**
 ```
