@@ -452,6 +452,7 @@ $ sudo raspi-config
 $ cd ~/MobileNet-SSD-RealSense
 $ python3 MultiStickSSDwithRealSense.py -mod 1 -snc 2 -csc 10000 -cst 65.0
 ```
+**[Simplified drawing of cluster switching]**<br>
 ![14](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/14.png)
 
 # 【Reference】 MobileNetv2 Model (Caffe) Great Thanks!!
