@@ -2,7 +2,8 @@
 RaspberryPi3(Raspbian Stretch) or Ubuntu16.04/UbuntuMate + Neural Compute Stick(NCS) + RealSense D435(or USB Camera) + MobileNet-SSD(MobileNetSSD)<br><br>
 Measure the distance to the object with RealSense D435 while performing object detection by MobileNet-SSD(MobileNetSSD) with RaspberryPi 3 boosted with Intel Movidius Neural Compute Stick.<br>
 "USB Camera mode" can not measure the distance, but it operates at high speed.<br>
-And, This is support for MultiGraph and FaceDetection, MultiProcessing, Background transparentation.<br><br>
+And, This is support for MultiGraph and FaceDetection, MultiProcessing, Background transparentation.
+And, This is support for simple clustering function(To prevent thermal runaway).<br><br>
 **【Japanese Article1】 https://qiita.com/PINTO/items/1828f97d95fdda45f57d**<br>
 **【Japanese / English Article2】 https://qiita.com/PINTO/items/40abcf33af3ae7ef579d**<br>
 **【Japanese / English Article3】 https://qiita.com/PINTO/items/190daa4fddfd2a21f959**<br><br>
@@ -357,7 +358,7 @@ $ python3 MultiStickSSDwithRealSense.py <option1> <option2> ...
  -fd　FaceDetectionMode. (0:=Disabled, 1:=Enabled. Default=0)
  -snc stick_num_of_cluster. Number of sticks to be clustered. (0:=Clustering invalid, n:=Number of sticks Default=0)
  -csc cluster_switch_cycle. Cycle of switching active cluster. (n:=millisecond Default=10000)
- -cst cluster_switch_temperature. emperature threshold to switch active cluster. (n.n:=temperature(Celsius) Default=65.0)
+ -cst cluster_switch_temperature. Temperature threshold to switch active cluster. (n.n:=temperature(Celsius) Default=65.0)
 ```
 (Example0) **[MobileNet-SSD + Neural Compute Stick + RealSense D435 Mode + Syncronous](#realsense-mode-about-65-fps-detection--synchronous-screen-drawing--singlestickssdwithrealsensepy)**
 ```
