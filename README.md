@@ -6,7 +6,8 @@ And, This is support for MultiGraph and FaceDetection, MultiProcessing, Backgrou
 And, This is support for simple clustering function. (To prevent thermal runaway)<br><br>
 **【Japanese Article1】 https://qiita.com/PINTO/items/1828f97d95fdda45f57d**<br>
 **【Japanese / English Article2】 https://qiita.com/PINTO/items/40abcf33af3ae7ef579d**<br>
-**【Japanese / English Article3】 https://qiita.com/PINTO/items/190daa4fddfd2a21f959**<br><br>
+**【Japanese / English Article3】 https://qiita.com/PINTO/items/190daa4fddfd2a21f959**<br>
+**【Japanese Article4】 https://qiita.com/PINTO/items/62859125c5381690623c**<br><br>
 
 ## Summary
 **Performance measurement result each number of sticks. (Detection rate, no Playback rate)**<br>
