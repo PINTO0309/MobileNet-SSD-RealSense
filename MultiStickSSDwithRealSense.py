@@ -496,7 +496,7 @@ if __name__ == '__main__':
         # Cluster switching determination
         t1 = time.perf_counter() * 1000
         while True:
-            # Swith cluster
+            # Switch cluster
             if stick_num_of_cluster > 0:
                 # Measure inside temperature of stick
                 relative_pointer = active_stick_pointer
