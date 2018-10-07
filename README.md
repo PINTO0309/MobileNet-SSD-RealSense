@@ -65,8 +65,9 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 [Sep 01, 2018]　Added support for MultiGraph and FaceDetection mode [MultiStickSSDwithRealSense.py]<br>
 [Sep 04, 2018]　Performance measurement result with 5 sticks is posted<br>
 [Sep 08, 2018]　To prevent thermal runaway, simple clustering function of stick was implemented.<br>
-[Sep 16, 2018]　【Experimental】 Added Semantic Segmentation model [UNet] (semanticsegmentation_frozen_person.pb)<br>
-[Sep 20, 2018]　【Experimental】 Updated Semantic Segmentation model [UNet]<br>
+[Sep 16, 2018]　【Experimental】 Added Semantic Segmentation model [Tensorflow-UNet] (semanticsegmentation_frozen_person.pb)<br>
+[Sep 20, 2018]　【Experimental】 Updated Semantic Segmentation model [Tensorflow-UNet]<br>
+[Oct 07, 2018]　【Experimental】 Added Semantic Segmentation model [Caffe]<br>
 </div></details><br><br>
 
 ## Motion image
