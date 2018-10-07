@@ -67,7 +67,7 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 [Sep 08, 2018]　To prevent thermal runaway, simple clustering function of stick was implemented.<br>
 [Sep 16, 2018]　【Experimental】 Added Semantic Segmentation model [Tensorflow-UNet] (semanticsegmentation_frozen_person.pb)<br>
 [Sep 20, 2018]　【Experimental】 Updated Semantic Segmentation model [Tensorflow-UNet]<br>
-[Oct 07, 2018]　【Experimental】 Added Semantic Segmentation model [Caffe]<br>
+[Oct 07, 2018]　【Experimental】 Added Semantic Segmentation model [Caffe] (cityscapes5_jsegnet21v2_iter_60000.caffemodel)<br>
 </div></details><br><br>
 
 ## Motion image
