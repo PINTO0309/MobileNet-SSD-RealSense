@@ -946,5 +946,13 @@ layer {
     }
   }
 }
-
+layer {
+  name: "argMaxOut"
+  type: "ArgMax"
+  bottom: "out_deconv_final_up8"
+  top: "argMaxOut"
+  argmax_param {
+    axis: 1
+  }
+}
 
