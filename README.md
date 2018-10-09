@@ -102,7 +102,7 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 5．VFPV3 or TBB (Intel Threading Building Blocks)<br>
 6．Numpy<br>
 7．Python3.5 (Only MultiStickSSDwithRealSense.py is multiprocessing enabled)<br>
-8．NCSDK v2.05.00.02 (It does not work with NCSDK v1.　[v1 version is here](https://github.com/PINTO0309/MobileNet-SSD-RealSense/tree/v1.0))<br>
+8．NCSDK v2.08.01 (It does not work with NCSDK v1.　[v1 version is here](https://github.com/PINTO0309/MobileNet-SSD-RealSense/tree/v1.0))<br>
 9．HDMI Display<br>
 
 ## Firmware update with Windows 10 PC
