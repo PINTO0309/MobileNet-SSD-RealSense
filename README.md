@@ -280,7 +280,8 @@ $ sudo apt update;sudo apt upgrade
 # Ubuntu16.04 Only
 $ sudo apt install mesa-utils* libglu1* libgles2-mesa-dev libopenal-dev
 
-$ git clone https://github.com/IntelRealSense/librealsense.git
+# The latest version is unstable
+$ git clone -b v2.13.0 https://github.com/IntelRealSense/librealsense.git
 $ cd ~/librealsense;mkdir build;cd build
 
 $ cmake .. -DBUILD_EXAMPLES=true -DCMAKE_BUILD_TYPE=Release
