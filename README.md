@@ -68,6 +68,7 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 [Sep 16, 2018]　【Experimental】 Added Semantic Segmentation model [Tensorflow-UNet] (semanticsegmentation_frozen_person.pb)<br>
 [Sep 20, 2018]　【Experimental】 Updated Semantic Segmentation model [Tensorflow-UNet]<br>
 [Oct 07, 2018]　【Experimental】 Added Semantic Segmentation model [Caffe] (cityscapes5_jsegnet21v2_iter_60000.caffemodel)<br>
+[Oct 10, 2018]　Corresponds to NCSDK 2.08.01
 </div></details><br><br>
 
 ## Motion image
@@ -140,12 +141,7 @@ $ cd ~/ncsdk
 $ make uninstall
 $ cd ~;rm -r -f ncsdk
 #=====================================================================================================
-$ wget https://ncs-forum-uploads.s3.amazonaws.com/ncsdk/ncsdk-02_05_00_02-full/ncsdk-2.05.00.02.tar.gz
-$ tar -zxvf ncsdk-2.05.00.02.tar.gz
-$ mv ncsdk-2.05.00.02 ncsdk
-
-or
-
+# [Oct 10, 2018] NCSDK 2.08.01 , Tensorflow 1.9.0
 $ git clone -b ncsdk2 http://github.com/Movidius/ncsdk
 #=====================================================================================================
 $ cd ncsdk
@@ -161,7 +157,6 @@ $ sudo -H pip3 install numpy
 $ sudo -H pip3 install pillow
 $ make install
 
-$ sudo pip3 uninstall tensorflow #tensorflow==1.7.0 is unstable
 $ cd ~
 $ wget https://github.com/google/protobuf/releases/download/v3.5.1/protobuf-all-3.5.1.tar.gz
 $ tar -zxvf protobuf-all-3.5.1.tar.gz
@@ -177,7 +172,6 @@ $ sudo python3 setup.py install --cpp_implementation
 $ sudo ldconfig
 $ protoc --version
 
-$ sudo -H pip3 install tensorflow --upgrade #tensorflow==1.9.0+
 # Before executing "make examples", insert Neural Compute Stick into the USB port of the device.
 $ cd ~/ncsdk
 $ make examples -j1
