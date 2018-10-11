@@ -7,7 +7,8 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 **【Japanese Article1】 https://qiita.com/PINTO/items/1828f97d95fdda45f57d**<br>
 **【Japanese / English Article2】 https://qiita.com/PINTO/items/40abcf33af3ae7ef579d**<br>
 **【Japanese / English Article3】 https://qiita.com/PINTO/items/190daa4fddfd2a21f959**<br>
-**【Japanese Article4】 https://qiita.com/PINTO/items/62859125c5381690623c**<br><br>
+**【Japanese Article4】 https://qiita.com/PINTO/items/62859125c5381690623c**<br>
+**【Japanese Article5】 https://qiita.com/PINTO/items/127c84319822a0776420**<br><br>
 
 ## Summary
 **Performance measurement result each number of sticks. (Detection rate, no Playback rate)**<br>
@@ -67,8 +68,9 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 [Sep 08, 2018]　To prevent thermal runaway, simple clustering function of stick was implemented.<br>
 [Sep 16, 2018]　【Experimental】 Added Semantic Segmentation model [Tensorflow-UNet] (semanticsegmentation_frozen_person.pb)<br>
 [Sep 20, 2018]　【Experimental】 Updated Semantic Segmentation model [Tensorflow-UNet]<br>
-[Oct 07, 2018]　【Experimental】 Added Semantic Segmentation model [Caffe] (cityscapes5_jsegnet21v2_iter_60000.caffemodel)<br>
-[Oct 10, 2018]　Corresponds to NCSDK 2.08.01
+[Oct 07, 2018]　【Experimental】 Added Semantic Segmentation model [caffe-jacinto] (cityscapes5_jsegnet21v2_iter_60000.caffemodel)<br>
+[Oct 10, 2018]　Corresponds to NCSDK 2.08.01<br>
+[Oct 12, 2018]　【Experimental】 Added Semantic Segmentation model [Tensorflow-ENet] (semanticsegmentation_enet.pb) https://github.com/PINTO0309/TensorFlow-ENet.git
 </div></details><br><br>
 
 ## Motion image
