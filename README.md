@@ -11,7 +11,7 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 **【Japanese Article5】 https://qiita.com/PINTO/items/127c84319822a0776420**<br><br>
 
 ## Summary
-**Performance measurement result each number of sticks. (Detection rate, no Playback rate)**<br>
+**Performance measurement result each number of sticks. (It is Detection rate. It is not a Playback rate.)**<br>
 ~~Since the core number of RaspberryPi is 4 cores, 3 sticks are the limit.~~<br>
 ~~Camera Thread(1 process) + 1 Stick(1 process) + 1 Stick(1 process) + 1 Stick(1 process)~~<br>
 **The best performance can be obtained with QVGA + 5 Sticks.**<br>
