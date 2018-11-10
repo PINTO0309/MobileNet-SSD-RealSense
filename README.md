@@ -122,6 +122,14 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 
 ## Work with RaspberryPi3 (or PC + Ubuntu16.04 / RaspberryPi + Ubuntu Mate)
 **Use of Virtualbox is not strongly recommended**<br>
+[Note] Japanese Article<br>
+https://qiita.com/akitooo/items/6aee8c68cefd46d2a5dc<br>
+https://qiita.com/kikuchi_kentaro/items/280ac68ad24759b4c091<br>
+<br>
+[Post of Official Forum]<br>
+https://ncsforum.movidius.com/discussion/950/problems-with-python-multiprocessing-using-sdk-2-0-0-4<br>
+https://ncsforum.movidius.com/discussion/comment/3921<br><br>
+
 1.Execute the following
 ```
 $ sudo apt update;sudo apt upgrade
