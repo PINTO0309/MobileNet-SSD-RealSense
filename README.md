@@ -1,5 +1,6 @@
 # MobileNet-SSD-RealSense
-RaspberryPi3(Raspbian Stretch) or Ubuntu16.04/UbuntuMate + Neural Compute Stick(NCS) + RealSense D435(or USB Camera) + MobileNet-SSD(MobileNetSSD)<br><br>
+RaspberryPi3(Raspbian Stretch) or Ubuntu16.04/UbuntuMate + Neural Compute Stick(NCS) + RealSense D435(or USB Camera) + MobileNet-SSD(MobileNetSSD)  
+**【Warning】 This does not correspond to NCS 2.**<br><br>
 Measure the distance to the object with RealSense D435 while performing object detection by MobileNet-SSD(MobileNetSSD) with RaspberryPi 3 boosted with Intel Movidius Neural Compute Stick.<br>
 "USB Camera mode" can not measure the distance, but it operates at high speed.<br>
 And, This is support for MultiGraph and FaceDetection, MultiProcessing, Background transparentation.<br>
