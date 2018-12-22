@@ -63,6 +63,7 @@ try:
         #num_valid_boxes = int(out[0])
 
         print(out.shape)
+        print(out)
         sys.exit(0)
 
         if num_valid_boxes > 0:
