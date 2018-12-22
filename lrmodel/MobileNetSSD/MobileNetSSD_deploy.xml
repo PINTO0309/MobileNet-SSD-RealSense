@@ -2692,8 +2692,8 @@
 		<MO_version value="1.4.292.6ef7232d"/>
 		<cli_parameters>
 			<data_type value="FP16"/>
-			<disable_fusing value="False"/>
-			<disable_gfusing value="False"/>
+			<disable_fusing value="True"/>
+			<disable_gfusing value="True"/>
 			<disable_nhwc_to_nchw value="False"/>
 			<disable_omitting_optional value="False"/>
 			<disable_resnet_optimization value="False"/>
