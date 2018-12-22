@@ -11,7 +11,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="1" name="Mul1_/Fused_Mul_/FusedScaleShift_" precision="FP16" type="ScaleShift">
+		<layer id="1" name="Add_" precision="FP16" type="ScaleShift">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -2714,7 +2714,7 @@
 			<remove_output_softmax value="False"/>
 			<reverse_input_channels value="False"/>
 			<save_params_from_nd value="False"/>
-			<scale value="127.5"/>
+			<scale value="1.0"/>
 			<scale_values value="()"/>
 			<silent value="False"/>
 			<version value="False"/>
