@@ -53,12 +53,13 @@ try:
         # Prepare input blob and perform an inference
         #blob = cv2.dnn.blobFromImage(frame, size=(300, 300), ddepth=cv2.CV_8U)
         #print(im.depth())
-        blob = cv2.dnn.blobFromImage(im, size=(300, 300), ddepth=cv2.CV_8U)
+        blob = cv2.dnn.blobFromImage(im, ddepth=cv2.CV_8U)
         net.setInput(blob)
 
         # Show images
         height = color_image.shape[0]
         width = color_image.shape[1]
+        out = net.forward()
         num_valid_boxes = int(out[0])
 
         print(out.shape)
