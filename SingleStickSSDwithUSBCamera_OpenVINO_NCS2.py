@@ -45,27 +45,19 @@ try:
         if not ret:
             break
 
+        height = color_image.shape[0]
+        width = color_image.shape[1]
+
         #dnn
         im = cv2.resize(color_image, (300, 300))
         #im = im - 127.5
         #im = im * 0.007843
 
-        # Prepare input blob and perform an inference
-        #blob = cv2.dnn.blobFromImage(frame, size=(300, 300), ddepth=cv2.CV_8U)
-        #print(im.depth())
         blob = cv2.dnn.blobFromImage(im, ddepth=cv2.CV_8U)
         net.setInput(blob)
-
-        # Show images
-        height = color_image.shape[0]
-        width = color_image.shape[1]
         out = net.forward()
-
         out = out.reshape(-1, 7)
         out = out.flatten()
-        #print(out.shape)
-        #print(out)
-        #sys.exit(0)
 
         num_valid_boxes = int(out[0])
 
@@ -139,15 +131,6 @@ except:
     traceback.print_exc()
 
 finally:
-
-    # Stop streaming
-    #pipeline.stop()
-    #for devnum in range(len(devices)):
-    #    graphHandle[devnum][0].destroy()
-    #    graphHandle[devnum][1].destroy()
-    #    graph.destroy()
-    #    devHandle[devnum].close()
-    #    devHandle[devnum].destroy()
 
     print("\n\nFinished\n\n")
     sys.exit()
