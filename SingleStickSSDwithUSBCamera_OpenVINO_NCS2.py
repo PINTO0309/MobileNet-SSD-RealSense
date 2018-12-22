@@ -67,6 +67,7 @@ try:
         #print("out[0][0] =", out[0])
 
         out = out.reshape(-1, 7)
+        out = out.flatten()
         print(out.shape)
         print(out)
         sys.exit(0)
