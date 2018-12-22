@@ -1,5 +1,5 @@
 # MobileNet-SSD-RealSense
-RaspberryPi3(Raspbian Stretch) or Ubuntu16.04/UbuntuMate + Neural Compute Stick(NCS) + RealSense D435(or USB Camera) + MobileNet-SSD(MobileNetSSD)  
+RaspberryPi3(Raspbian Stretch) or Ubuntu16.04/UbuntuMate + Neural Compute Stick(NCS/NCS2) + RealSense D435(or USB Camera) + MobileNet-SSD(MobileNetSSD)  
 **【Warning】 This repository does not support NCS2.**  
 **【Notice】December 19, 2018 OpenVINO has supported RaspberryPi + NCS2 !!  
 https://software.intel.com/en-us/articles/OpenVINO-RelNotes#inpage-nav-2-2**  
