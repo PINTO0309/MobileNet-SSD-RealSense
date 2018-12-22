@@ -4,7 +4,8 @@ RaspberryPi3(Raspbian Stretch) or Ubuntu16.04/UbuntuMate + Neural Compute Stick(
 **【Notice】December 19, 2018 OpenVINO has supported RaspberryPi + NCS2 !!  
 https://software.intel.com/en-us/articles/OpenVINO-RelNotes#inpage-nav-2-2**  
   
-**【December 22, 2018】 In order to correspond to NCS2, I started refactoring the program. It is still incomplete.**
+**【Dec 22, 2018】 In order to correspond to NCS2, I started refactoring the program. It is still incomplete.**  
+**【Dec 22, 2018】 Only "USB Camera + Single thread mode" correspondence with NCS2 is completed.**
 <br><br>
 Measure the distance to the object with RealSense D435 while performing object detection by MobileNet-SSD(MobileNetSSD) with RaspberryPi 3 boosted with Intel Movidius Neural Compute Stick.<br>
 "USB Camera mode" can not measure the distance, but it operates at high speed.<br>
