@@ -62,11 +62,13 @@ try:
         out = net.forward()
         #num_valid_boxes = int(out[0])
 
-        print("out[0] =", out[0])
-        out = out[0]
-        print("out[0][0] =", out[0])
+        #print("out[0] =", out[0])
+        #out = out[0]
+        #print("out[0][0] =", out[0])
+
+        out = out.reshape(-1, 7)
         print(out.shape)
-        #print(out)
+        print(out)
         sys.exit(0)
 
         if num_valid_boxes > 0:
