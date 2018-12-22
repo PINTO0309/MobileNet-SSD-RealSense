@@ -60,7 +60,7 @@ try:
         height = color_image.shape[0]
         width = color_image.shape[1]
         out = net.forward()
-        num_valid_boxes = int(out[0])
+        #num_valid_boxes = int(out[0])
 
         print(out.shape)
         sys.exit(0)
