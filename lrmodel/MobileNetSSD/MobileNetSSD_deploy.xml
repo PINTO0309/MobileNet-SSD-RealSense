@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<net batch="1" name="MobileNet-SSD" version="3">
+<net batch="1" name="MobileNet-SSD" version="4">
 	<layers>
 		<layer id="0" name="data" precision="FP16" type="Input">
 			<output>
@@ -1042,7 +1042,7 @@
 			</output>
 		</layer>
 		<layer id="50" name="conv11_mbox_loc_flat" precision="FP16" type="Flatten">
-			<data axis="1"/>
+			<data axis="1" end_axis="-1"/>
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -1269,7 +1269,7 @@
 			</output>
 		</layer>
 		<layer id="61" name="conv13_mbox_loc_flat" precision="FP16" type="Flatten">
-			<data axis="1"/>
+			<data axis="1" end_axis="-1"/>
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -1412,7 +1412,7 @@
 			</output>
 		</layer>
 		<layer id="68" name="conv14_2_mbox_loc_flat" precision="FP16" type="Flatten">
-			<data axis="1"/>
+			<data axis="1" end_axis="-1"/>
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -1555,7 +1555,7 @@
 			</output>
 		</layer>
 		<layer id="75" name="conv15_2_mbox_loc_flat" precision="FP16" type="Flatten">
-			<data axis="1"/>
+			<data axis="1" end_axis="-1"/>
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -1698,7 +1698,7 @@
 			</output>
 		</layer>
 		<layer id="82" name="conv16_2_mbox_loc_flat" precision="FP16" type="Flatten">
-			<data axis="1"/>
+			<data axis="1" end_axis="-1"/>
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -1841,7 +1841,7 @@
 			</output>
 		</layer>
 		<layer id="89" name="conv17_2_mbox_loc_flat" precision="FP16" type="Flatten">
-			<data axis="1"/>
+			<data axis="1" end_axis="-1"/>
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -1935,7 +1935,7 @@
 			</output>
 		</layer>
 		<layer id="93" name="conv11_mbox_conf_flat" precision="FP16" type="Flatten">
-			<data axis="1"/>
+			<data axis="1" end_axis="-1"/>
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -1994,7 +1994,7 @@
 			</output>
 		</layer>
 		<layer id="96" name="conv13_mbox_conf_flat" precision="FP16" type="Flatten">
-			<data axis="1"/>
+			<data axis="1" end_axis="-1"/>
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -2053,7 +2053,7 @@
 			</output>
 		</layer>
 		<layer id="99" name="conv14_2_mbox_conf_flat" precision="FP16" type="Flatten">
-			<data axis="1"/>
+			<data axis="1" end_axis="-1"/>
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -2112,7 +2112,7 @@
 			</output>
 		</layer>
 		<layer id="102" name="conv15_2_mbox_conf_flat" precision="FP16" type="Flatten">
-			<data axis="1"/>
+			<data axis="1" end_axis="-1"/>
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -2171,7 +2171,7 @@
 			</output>
 		</layer>
 		<layer id="105" name="conv16_2_mbox_conf_flat" precision="FP16" type="Flatten">
-			<data axis="1"/>
+			<data axis="1" end_axis="-1"/>
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -2230,7 +2230,7 @@
 			</output>
 		</layer>
 		<layer id="108" name="conv17_2_mbox_conf_flat" precision="FP16" type="Flatten">
-			<data axis="1"/>
+			<data axis="1" end_axis="-1"/>
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -2315,7 +2315,7 @@
 			</output>
 		</layer>
 		<layer id="112" name="mbox_conf_flatten" precision="FP16" type="Flatten">
-			<data axis="1"/>
+			<data axis="1" end_axis="-1"/>
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -2517,7 +2517,7 @@
 			</output>
 		</layer>
 		<layer id="120" name="detection_out" precision="FP16" type="DetectionOutput">
-			<data background_label_id="0" code_type="caffe.PriorBoxParameter.CENTER_SIZE" confidence_threshold="0.25" eta="1.0" input_height="-1" input_width="-1" keep_top_k="100" nms_threshold="0.44999998807907104" normalized="1" num_classes="21" share_location="1" top_k="100" variance_encoded_in_target="0" visualize="False"/>
+			<data background_label_id="0" code_type="caffe.PriorBoxParameter.CENTER_SIZE" confidence_threshold="0.25" eta="1.0" input_height="1" input_width="1" keep_top_k="100" nms_threshold="0.44999998807907104" normalized="1" num_classes="21" share_location="1" top_k="100" variance_encoded_in_target="0" visualize="False"/>
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -2689,7 +2689,7 @@
 		<edge from-layer="119" from-port="6" to-layer="120" to-port="2"/>
 	</edges>
 	<meta_data>
-		<MO_version value="1.4.292.6ef7232d"/>
+		<MO_version value="1.5.12.49d067a0"/>
 		<cli_parameters>
 			<data_type value="FP16"/>
 			<disable_fusing value="True"/>
