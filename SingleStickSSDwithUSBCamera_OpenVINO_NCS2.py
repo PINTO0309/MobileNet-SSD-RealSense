@@ -60,17 +60,14 @@ try:
         height = color_image.shape[0]
         width = color_image.shape[1]
         out = net.forward()
-        #num_valid_boxes = int(out[0])
-
-        #print("out[0] =", out[0])
-        #out = out[0]
-        #print("out[0][0] =", out[0])
 
         out = out.reshape(-1, 7)
         out = out.flatten()
-        print(out.shape)
-        print(out)
-        sys.exit(0)
+        #print(out.shape)
+        #print(out)
+        #sys.exit(0)
+
+        num_valid_boxes = int(out[0])
 
         if num_valid_boxes > 0:
 
@@ -127,7 +124,7 @@ try:
                 cv2.putText(color_image, label_text, (label_left, label_bottom), cv2.FONT_HERSHEY_SIMPLEX, 0.5, label_text_color, 1)
 
         cv2.namedWindow('RealSense', cv2.WINDOW_AUTOSIZE)
-        cv2.imshow('RealSense', cv2.resize(color_image,(width, height)))
+        cv2.imshow('USB Camera', cv2.resize(color_image,(width, height)))
 
         ## Print FPS
         t2 = time.perf_counter()
