@@ -47,8 +47,8 @@ try:
 
         #dnn
         im = cv2.resize(color_image, (300, 300))
-        im = im - 127.5
-        im = im * 0.007843
+        #im = im - 127.5
+        #im = im * 0.007843
 
         # Prepare input blob and perform an inference
         #blob = cv2.dnn.blobFromImage(frame, size=(300, 300), ddepth=cv2.CV_8U)
