@@ -135,13 +135,13 @@ except:
 finally:
 
     # Stop streaming
-    pipeline.stop()
-    for devnum in range(len(devices)):
-        graphHandle[devnum][0].destroy()
-        graphHandle[devnum][1].destroy()
-        graph.destroy()
-        devHandle[devnum].close()
-        devHandle[devnum].destroy()
+    #pipeline.stop()
+    #for devnum in range(len(devices)):
+    #    graphHandle[devnum][0].destroy()
+    #    graphHandle[devnum][1].destroy()
+    #    graph.destroy()
+    #    devHandle[devnum].close()
+    #    devHandle[devnum].destroy()
 
     print("\n\nFinished\n\n")
     sys.exit()
