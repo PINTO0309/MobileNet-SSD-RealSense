@@ -634,11 +634,13 @@ $ cd ~/librealsense/wrappers/opencv/build/dnn
 $ rs-dnn
 ```
 ![08](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/08.gif)
+<br>
+<br>
 
-# 【Reference】 MobileNetv2 Model (Caffe) Great Thanks!!
+## 【Reference】 MobileNetv2 Model (Caffe) Great Thanks!!
 **https://github.com/xufeifeiWHU/Mobilenet-v2-on-Movidius-stick.git**
 
-# Conversion method from Caffe model to NCS model
+## Conversion method from Caffe model to NCS model
 ```
 $ cd ~/MobileNet-SSD-RealSense
 $ mvNCCompile ./caffemodel/MobileNetSSD/deploy.prototxt -w ./caffemodel/MobileNetSSD/MobileNetSSD_deploy.caffemodel -s 12
@@ -646,7 +648,7 @@ $ mvNCCompile ./caffemodel/Facedetection/fullface_deploy.prototxt -w ./caffemode
 $ mvNCCompile ./caffemodel/Facedetection/shortface_deploy.prototxt -w ./caffemodel/Facedetection/shortfacedetection.caffemodel -s 12
 ```
 
-# Construction of learning environment and simple test for model (Ubuntu16.04 x86_64 PC + GPU[NVIDIA Geforce])
+## Construction of learning environment and simple test for model (Ubuntu16.04 x86_64 PC + GPU[NVIDIA Geforce])
 1.**【Example】** Introduction of NVIDIA-Driver, CUDA and cuDNN to the environment with GPU
 ```
 $ sudo apt-get remove nvidia-*
@@ -900,7 +902,7 @@ $ cd $CAFFE_ROOT
 $ python examples/ssd/ssd_pascal_webcam.py
 ```
 
-# Reference article, thanks
+## Reference article, thanks
 https://github.com/movidius/ncappzoo/tree/master/caffe/SSD_MobileNet<br>
 https://github.com/FreeApe/VGG-or-MobileNet-SSD<br>
 https://github.com/chuanqi305/MobileNet-SSD<br>
