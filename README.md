@@ -142,19 +142,19 @@ https://ncsforum.movidius.com/discussion/950/problems-with-python-multiprocessin
 https://ncsforum.movidius.com/discussion/comment/3921<br><br>
 
 1.Execute the following
-```
+```bash
 $ sudo apt update;sudo apt upgrade
 $ sudo reboot
 ```
 2.Extend the SWAP area (RaspberryPi+Raspbian Stretch / RaspberryPi+Ubuntu Mate Only)
-```
+```bash
 $ sudo nano /etc/dphys-swapfile
 CONF_SWAPSIZE=2048
 
 $ sudo /etc/init.d/dphys-swapfile restart swapon -s
 ```
 3.Install NSCDK<br>
-```
+```bash
 $ sudo apt install python-pip python3-pip
 $ sudo pip3 install --upgrade pip
 $ sudo pip2 install --upgrade pip
@@ -201,7 +201,7 @@ $ make examples -j1
 **【Reference】https://github.com/movidius/ncsdk**<br>
 
 4.Update udev rule
-```
+```bash
 $ sudo apt install -y git libssl-dev libusb-1.0-0-dev pkg-config libgtk-3-dev
 $ sudo apt install -y libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev
 
@@ -210,7 +210,7 @@ $ sudo wget https://raw.githubusercontent.com/IntelRealSense/librealsense/master
 $ sudo udevadm control --reload-rules && udevadm trigger
 ```
 5.Upgrade to "cmake 3.11.4"
-```
+```bash
 $ cd ~
 $ wget https://cmake.org/files/v3.11/cmake-3.11.4.tar.gz
 $ tar -zxvf cmake-3.11.4.tar.gz;rm cmake-3.11.4.tar.gz
@@ -224,14 +224,14 @@ $ cmake --version
 cmake version 3.11.4
 ```
 6.Register LD_LIBRARY_PATH
-```
+```bash
 $ nano ~/.bashrc
 export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 
 $ source ~/.bashrc
 ```
 7.Install TBB (Intel Threading Building Blocks)
-```
+```bash
 $ cd ~
 $ wget https://github.com/PINTO0309/TBBonARMv7/raw/master/libtbb-dev_2018U2_armhf.deb
 $ sudo dpkg -i ~/libtbb-dev_2018U2_armhf.deb
@@ -239,7 +239,7 @@ $ sudo ldconfig
 ```
 8.Uninstall old OpenCV (RaspberryPi Only)<br>
 **[Very Important] The highest performance can not be obtained unless VFPV3 is enabled.**
-```
+```bash
 $ cd ~/opencv-3.x.x/build
 $ sudo make uninstall
 $ cd ~
@@ -249,7 +249,7 @@ $ rm -r -f opencv_contrib-3.x.x
 9.Build install "OpenCV 3.4.2" or Install by deb package.<br>
 **[Very Important] The highest performance can not be obtained unless VFPV3 is enabled.**<br><br>
 **9.1 Build Install (RaspberryPi Only)**
-```
+```bash
 $ sudo apt update && sudo apt upgrade
 $ sudo apt install build-essential cmake pkg-config libjpeg-dev libtiff5-dev \
 libjasper-dev libavcodec-dev libavformat-dev libswscale-dev \
@@ -286,7 +286,7 @@ $ sudo make install
 $ sudo ldconfig
 ```
 **9.2 Install by deb package (RaspberryPi Only) [I already activated VFPV3 and built it]**
-```
+```bash
 $ cd ~
 $ sudo apt autoremove libopencv3
 $ wget https://github.com/PINTO0309/OpenCVonARMv7/raw/master/libopencv3_3.4.2-20180709.1_armhf.deb
@@ -295,7 +295,7 @@ $ sudo ldconfig
 ```
 
 10.Install Intel® RealSense™ SDK 2.0
-```
+```bash
 $ cd ~
 $ sudo apt update;sudo apt upgrade
 
@@ -311,7 +311,7 @@ $ make -j1
 $ sudo make install
 ```
 11.Install OpenCV Wrapper
-```
+```bash
 $ cd ~/librealsense/wrappers/opencv;mkdir build;cd build
 $ cmake ..
 $ nano ../latency-tool/CMakeLists.txt
@@ -321,7 +321,7 @@ $ make -j $(($(nproc) + 1))
 $ sudo make install
 ```
 12.Install Python binding
-```
+```bash
 $ cd ~/librealsense/build
 
 #When using with Python 3.x series
@@ -336,14 +336,14 @@ $ make -j1
 $ sudo make install
 ```
 13.Update PYTHON_PATH
-```
+```bash
 $ nano ~/.bashrc
 export PYTHONPATH=$PYTHONPATH:/usr/local/lib
 
 $ source ~/.bashrc
 ```
 14.RealSense SDK import test
-```
+```bash
 $ python3
 Python 3.5.3 (default, Jan 19 2017, 14:11:04) 
 [GCC 6.3.0 20170124] on linux
@@ -352,24 +352,60 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> exit()
 ```
 15.Installing the OpenGL package for Python
-```
+```bash
 $ sudo apt-get install python-opengl
 $ sudo -H pip3 install pyopengl
 $ sudo -H pip3 install pyopengl_accelerate
 ```
 16.Reduce the SWAP area to the default size (RaspberryPi+Raspbian Stretch / RaspberryPi+Ubuntu Mate Only)
-```
+```bash
 $ sudo nano /etc/dphys-swapfile
 CONF_SWAPSIZE=100
 
 $ sudo /etc/init.d/dphys-swapfile restart swapon -s
 ```
 17.Clone a set of resources
-```
+```bash
 $ git clone https://github.com/PINTO0309/MobileNet-SSD-RealSense.git
 ```
 ### 2.OpenVINO ver (Corresponds to NCS2)
+1.Execute the following
+```bash
+$ sudo apt update;sudo apt upgrade
+$ sudo reboot
+```
+2.Extend the SWAP area (RaspberryPi+Raspbian Stretch / RaspberryPi+Ubuntu Mate Only)
+```bash
+$ sudo nano /etc/dphys-swapfile
+CONF_SWAPSIZE=2048
 
+$ sudo /etc/init.d/dphys-swapfile restart swapon -s
+```
+3.Install OpenVINO
+```bash
+$ wget https://drive.google.com/open?id=1rBl_3kU4gsx-x2NG2I5uIhvA3fPqm8uE -o l_openvino_toolkit_ie_p_2018.5.445.tgz
+$ tar -zxf l_openvino_toolkit_ie_p_2018.5.445.tgz
+$ rm l_openvino_toolkit_ie_p_2018.5.445.tgz
+$ sed -i "s|<INSTALLDIR>|$(pwd)/inference_engine_vpu_arm|" inference_engine_vpu_arm/bin/setupvars.sh
+$ nano ~/.bashrc
+### Add 1 row below
+source /home/pi/inference_engine_vpu_arm/bin/setupvars.sh
+
+$ source ~/.bashrc
+### Successful if displayed as below
+[setupvars.sh] OpenVINO environment initialized
+
+$ sudo usermod -a -G users "$(whoami)"
+$ sudo reboot
+
+$ uname -a
+Linux raspberrypi 4.14.79-v7+ #1159 SMP Sun Nov 4 17:50:20 GMT 2018 armv7l GNU/Linux
+
+$ sh inference_engine_vpu_arm/install_dependencies/install_NCS_udev_rules.sh
+### It is displayed as follows
+Update udev rules so that the toolkit can communicate with your neural compute stick
+[install_NCS_udev_rules.sh] udev rules installed
+```
 
 ## Execute the program
 ```
