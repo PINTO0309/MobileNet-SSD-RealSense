@@ -15,7 +15,8 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 **【Japanese / English Article2】 https://qiita.com/PINTO/items/40abcf33af3ae7ef579d**<br>
 **【Japanese / English Article3】 https://qiita.com/PINTO/items/190daa4fddfd2a21f959**<br>
 **【Japanese Article4】 https://qiita.com/PINTO/items/62859125c5381690623c**<br>
-**【Japanese Article5】 https://qiita.com/PINTO/items/127c84319822a0776420**<br><br>
+**【Japanese Article5】 https://qiita.com/PINTO/items/127c84319822a0776420**<br>
+**【Japanese Article6】 https://qiita.com/PINTO/items/fc1fcecce4d5600c20bb**<br><br>
 
 ## Summary
 **Performance measurement result each number of sticks. (It is Detection rate. It is not a Playback rate.)**<br>
