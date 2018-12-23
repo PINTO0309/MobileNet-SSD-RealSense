@@ -369,6 +369,9 @@ $ sudo /etc/init.d/dphys-swapfile restart swapon -s
 ```bash
 $ git clone https://github.com/PINTO0309/MobileNet-SSD-RealSense.git
 ```
+<br>
+<br>
+
 ### 2.OpenVINO ver (Corresponds to NCS2)
 1.Execute the following
 ```bash
@@ -511,6 +514,9 @@ $ sudo /etc/init.d/dphys-swapfile restart swapon -s
 ```bash
 $ git clone https://github.com/PINTO0309/MobileNet-SSD-RealSense.git
 ```
+<br>
+<br>
+
 ## Execute the program
 ```
 $ python3 MultiStickSSDwithRealSense.py <option1> <option2> ...
