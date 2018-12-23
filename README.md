@@ -20,8 +20,6 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 
 ## Summary
 **Performance measurement result each number of sticks. (It is Detection rate. It is not a Playback rate.)**<br>
-~~Since the core number of RaspberryPi is 4 cores, 3 sticks are the limit.~~<br>
-~~Camera Thread(1 process) + 1 Stick(1 process) + 1 Stick(1 process) + 1 Stick(1 process)~~<br>
 **The best performance can be obtained with QVGA + 5 Sticks.**<br>
 **However, It is important to use a good quality USB camera.**<br><br>
 ### Verification environment (1)
@@ -108,14 +106,15 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 ## Environment
 1．RaspberryPi3 + Raspbian Stretch (USB2.0 Port) or RaspberryPi3 + Ubuntu Mate or PC + Ubuntu16.04<br>
 2．Intel RealSense D435 (Firmware Ver 5.9.13) or USB Camera<br>
-3．Intel Movidius Neural Compute Stick x１piece or more<br>
-4．OpenCV3.4.2<br>
+3．Intel Neural Compute Stick v1/v2 x１piece or more<br>
+4．OpenCV 4.0.1-openvino  
 5．VFPV3 or TBB (Intel Threading Building Blocks)<br>
 6．Numpy<br>
 7．Python3.5 (Only MultiStickSSDwithRealSense.py is multiprocessing enabled)<br>
 8．NCSDK v2.08.01 (It does not work with NCSDK v1.　[v1 version is here](https://github.com/PINTO0309/MobileNet-SSD-RealSense/tree/v1.0))<br>
-9．RealSenseSDK v2.13.0 (The latest version is unstable)<br>
-10．HDMI Display<br>
+9. OpenVINO R5 2018.5.445  
+10．RealSenseSDK v2.13.0 (The latest version is unstable)<br>
+11．HDMI Display<br>
 
 ## Firmware update with Windows 10 PC
 1．ZIP 2 types [(1) Firmware update tool for Windows 10](https://downloadmirror.intel.com/27514/eng/Intel%20RealSense%20D400%20Series%20DFU%20Tool%20for%20Windows.zip)　[(2) The latest firmware bin file](https://downloadmirror.intel.com/27924/eng/Intel%C2%AE%20RealSense%E2%84%A2D400%20Series%20Signed%20Production%20Firmware%20v5_9_13.zip) Download and decompress<br>
@@ -128,8 +127,8 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 7．Firmware version check 「2」<br>
 ![02](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/02.png)
 
-
 ## Work with RaspberryPi3 (or PC + Ubuntu16.04 / RaspberryPi + Ubuntu Mate)
+### 1.NCSDK ver (Not compatible with NCS2)
 **Use of Virtualbox is not strongly recommended**<br>
 [Note] Japanese Article<br>
 https://qiita.com/akitooo/items/6aee8c68cefd46d2a5dc<br>
@@ -366,6 +365,8 @@ $ sudo /etc/init.d/dphys-swapfile restart swapon -s
 ```
 $ git clone https://github.com/PINTO0309/MobileNet-SSD-RealSense.git
 ```
+### 2.OpenVINO ver (Corresponds to NCS2)
+
 
 ## Execute the program
 ```
