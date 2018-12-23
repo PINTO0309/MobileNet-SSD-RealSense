@@ -110,7 +110,7 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 1．RaspberryPi3 + Raspbian Stretch (USB2.0 Port) or RaspberryPi3 + Ubuntu Mate or PC + Ubuntu16.04<br>
 2．Intel RealSense D435 (Firmware Ver 5.9.13) or USB Camera<br>
 3．Intel Neural Compute Stick v1/v2 x１piece or more<br>
-4-1．OpenCV 3.4.2 (NCSDK)
+4-1．OpenCV 3.4.2 (NCSDK)  
 4-2．OpenCV 4.0.1-openvino (OpenVINO)  
 5．VFPV3 or TBB (Intel Threading Building Blocks)<br>
 6．Numpy<br>
