@@ -5,6 +5,7 @@ from os import system
 import io, time
 from os.path import isfile, join
 import re
+from openvino.inference_engine import IENetwork, IEPlugin
 
 fps = ""
 detectfps = ""
@@ -23,13 +24,16 @@ LABELS = ('background',
 camera_width = 320
 camera_height = 240
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 cap.set(cv2.CAP_PROP_FPS, 30)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, camera_width)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, camera_height)
 
-net = cv2.dnn.readNet('lrmodel/MobileNetSSD/MobileNetSSD_deploy.xml', 'lrmodel/MobileNetSSD/MobileNetSSD_deploy.bin')
-net.setPreferableTarget(cv2.dnn.DNN_TARGET_MYRIAD)
+plugin = IEPlugin(device="MYRIAD")
+plugin.set_config({"VPU_FORCE_RESET": "NO"})
+net = IENetwork("lrmodel/MobileNetSSD/MobileNetSSD_deploy.xml", "lrmodel/MobileNetSSD/MobileNetSSD_deploy.bin")
+input_blob = next(iter(net.inputs))
+exec_net = plugin.load(network=net)
 
 try:
 
@@ -43,10 +47,13 @@ try:
         height = color_image.shape[0]
         width = color_image.shape[1]
 
-        blob = cv2.dnn.blobFromImage(color_image, 0.007843, size=(300, 300), mean=(127.5,127.5,127.5), swapRB=False, crop=False)
-        net.setInput(blob)
-        out = net.forward()
-        out = out.flatten()
+        prepimg = cv2.resize(color_image, (300, 300))
+        prepimg = prepimg - 127.5
+        prepimg = prepimg * 0.007843
+        prepimg = prepimg[np.newaxis, :, :, :]
+        prepimg = prepimg.transpose((0, 3, 1, 2))  #NHWC to NCHW
+        out = exec_net.infer(inputs={input_blob: prepimg})
+        out = out["detection_out"].flatten()
 
         for box_index in range(100):
             if out[box_index + 1] == 0.0:
