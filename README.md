@@ -20,8 +20,6 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 
 ## Summary
 **Performance measurement result each number of sticks. (It is Detection rate. It is not a Playback rate.)**<br>
-~~Since the core number of RaspberryPi is 4 cores, 3 sticks are the limit.~~<br>
-~~Camera Thread(1 process) + 1 Stick(1 process) + 1 Stick(1 process) + 1 Stick(1 process)~~<br>
 **The best performance can be obtained with QVGA + 5 Sticks.**<br>
 **However, It is important to use a good quality USB camera.**<br><br>
 ### Verification environment (1)
@@ -104,18 +102,23 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 ![14](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/14.png)<br>
 **[Execution log]**<br>
 ![15](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/15.png)
+### **USB Camera Mode NCS2 SingleStick （Synchronous screen drawing / SingleStickSSDwithUSBCamera_OpenVINO_NCS2.py）**<br>
+**【YouTube Movie】　https://youtu.be/GJNkX-ZBuC8**<br><br>
+![16](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/16.gif)<br>
 
 ## Environment
 1．RaspberryPi3 + Raspbian Stretch (USB2.0 Port) or RaspberryPi3 + Ubuntu Mate or PC + Ubuntu16.04<br>
 2．Intel RealSense D435 (Firmware Ver 5.9.13) or USB Camera<br>
-3．Intel Movidius Neural Compute Stick x１piece or more<br>
-4．OpenCV3.4.2<br>
+3．Intel Neural Compute Stick v1/v2 x１piece or more<br>
+4-1．OpenCV 3.4.2 (NCSDK)  
+4-2．OpenCV 4.0.1-openvino (OpenVINO)  
 5．VFPV3 or TBB (Intel Threading Building Blocks)<br>
 6．Numpy<br>
 7．Python3.5 (Only MultiStickSSDwithRealSense.py is multiprocessing enabled)<br>
 8．NCSDK v2.08.01 (It does not work with NCSDK v1.　[v1 version is here](https://github.com/PINTO0309/MobileNet-SSD-RealSense/tree/v1.0))<br>
-9．RealSenseSDK v2.13.0 (The latest version is unstable)<br>
-10．HDMI Display<br>
+9. OpenVINO R5 2018.5.445  
+10．RealSenseSDK v2.13.0 (The latest version is unstable)<br>
+11．HDMI Display<br>
 
 ## Firmware update with Windows 10 PC
 1．ZIP 2 types [(1) Firmware update tool for Windows 10](https://downloadmirror.intel.com/27514/eng/Intel%20RealSense%20D400%20Series%20DFU%20Tool%20for%20Windows.zip)　[(2) The latest firmware bin file](https://downloadmirror.intel.com/27924/eng/Intel%C2%AE%20RealSense%E2%84%A2D400%20Series%20Signed%20Production%20Firmware%20v5_9_13.zip) Download and decompress<br>
@@ -128,8 +131,8 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 7．Firmware version check 「2」<br>
 ![02](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/02.png)
 
-
 ## Work with RaspberryPi3 (or PC + Ubuntu16.04 / RaspberryPi + Ubuntu Mate)
+### 1.NCSDK ver (Not compatible with NCS2)
 **Use of Virtualbox is not strongly recommended**<br>
 [Note] Japanese Article<br>
 https://qiita.com/akitooo/items/6aee8c68cefd46d2a5dc<br>
@@ -140,19 +143,19 @@ https://ncsforum.movidius.com/discussion/950/problems-with-python-multiprocessin
 https://ncsforum.movidius.com/discussion/comment/3921<br><br>
 
 1.Execute the following
-```
+```bash
 $ sudo apt update;sudo apt upgrade
 $ sudo reboot
 ```
 2.Extend the SWAP area (RaspberryPi+Raspbian Stretch / RaspberryPi+Ubuntu Mate Only)
-```
+```bash
 $ sudo nano /etc/dphys-swapfile
 CONF_SWAPSIZE=2048
 
 $ sudo /etc/init.d/dphys-swapfile restart swapon -s
 ```
 3.Install NSCDK<br>
-```
+```bash
 $ sudo apt install python-pip python3-pip
 $ sudo pip3 install --upgrade pip
 $ sudo pip2 install --upgrade pip
@@ -199,7 +202,7 @@ $ make examples -j1
 **【Reference】https://github.com/movidius/ncsdk**<br>
 
 4.Update udev rule
-```
+```bash
 $ sudo apt install -y git libssl-dev libusb-1.0-0-dev pkg-config libgtk-3-dev
 $ sudo apt install -y libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev
 
@@ -208,7 +211,7 @@ $ sudo wget https://raw.githubusercontent.com/IntelRealSense/librealsense/master
 $ sudo udevadm control --reload-rules && udevadm trigger
 ```
 5.Upgrade to "cmake 3.11.4"
-```
+```bash
 $ cd ~
 $ wget https://cmake.org/files/v3.11/cmake-3.11.4.tar.gz
 $ tar -zxvf cmake-3.11.4.tar.gz;rm cmake-3.11.4.tar.gz
@@ -222,14 +225,14 @@ $ cmake --version
 cmake version 3.11.4
 ```
 6.Register LD_LIBRARY_PATH
-```
+```bash
 $ nano ~/.bashrc
 export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 
 $ source ~/.bashrc
 ```
 7.Install TBB (Intel Threading Building Blocks)
-```
+```bash
 $ cd ~
 $ wget https://github.com/PINTO0309/TBBonARMv7/raw/master/libtbb-dev_2018U2_armhf.deb
 $ sudo dpkg -i ~/libtbb-dev_2018U2_armhf.deb
@@ -237,7 +240,7 @@ $ sudo ldconfig
 ```
 8.Uninstall old OpenCV (RaspberryPi Only)<br>
 **[Very Important] The highest performance can not be obtained unless VFPV3 is enabled.**
-```
+```bash
 $ cd ~/opencv-3.x.x/build
 $ sudo make uninstall
 $ cd ~
@@ -247,7 +250,7 @@ $ rm -r -f opencv_contrib-3.x.x
 9.Build install "OpenCV 3.4.2" or Install by deb package.<br>
 **[Very Important] The highest performance can not be obtained unless VFPV3 is enabled.**<br><br>
 **9.1 Build Install (RaspberryPi Only)**
-```
+```bash
 $ sudo apt update && sudo apt upgrade
 $ sudo apt install build-essential cmake pkg-config libjpeg-dev libtiff5-dev \
 libjasper-dev libavcodec-dev libavformat-dev libswscale-dev \
@@ -284,7 +287,7 @@ $ sudo make install
 $ sudo ldconfig
 ```
 **9.2 Install by deb package (RaspberryPi Only) [I already activated VFPV3 and built it]**
-```
+```bash
 $ cd ~
 $ sudo apt autoremove libopencv3
 $ wget https://github.com/PINTO0309/OpenCVonARMv7/raw/master/libopencv3_3.4.2-20180709.1_armhf.deb
@@ -293,7 +296,7 @@ $ sudo ldconfig
 ```
 
 10.Install Intel® RealSense™ SDK 2.0
-```
+```bash
 $ cd ~
 $ sudo apt update;sudo apt upgrade
 
@@ -309,7 +312,7 @@ $ make -j1
 $ sudo make install
 ```
 11.Install OpenCV Wrapper
-```
+```bash
 $ cd ~/librealsense/wrappers/opencv;mkdir build;cd build
 $ cmake ..
 $ nano ../latency-tool/CMakeLists.txt
@@ -319,7 +322,7 @@ $ make -j $(($(nproc) + 1))
 $ sudo make install
 ```
 12.Install Python binding
-```
+```bash
 $ cd ~/librealsense/build
 
 #When using with Python 3.x series
@@ -334,14 +337,14 @@ $ make -j1
 $ sudo make install
 ```
 13.Update PYTHON_PATH
-```
+```bash
 $ nano ~/.bashrc
 export PYTHONPATH=$PYTHONPATH:/usr/local/lib
 
 $ source ~/.bashrc
 ```
 14.RealSense SDK import test
-```
+```bash
 $ python3
 Python 3.5.3 (default, Jan 19 2017, 14:11:04) 
 [GCC 6.3.0 20170124] on linux
@@ -350,22 +353,169 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> exit()
 ```
 15.Installing the OpenGL package for Python
-```
+```bash
 $ sudo apt-get install python-opengl
 $ sudo -H pip3 install pyopengl
 $ sudo -H pip3 install pyopengl_accelerate
 ```
 16.Reduce the SWAP area to the default size (RaspberryPi+Raspbian Stretch / RaspberryPi+Ubuntu Mate Only)
-```
+```bash
 $ sudo nano /etc/dphys-swapfile
 CONF_SWAPSIZE=100
 
 $ sudo /etc/init.d/dphys-swapfile restart swapon -s
 ```
 17.Clone a set of resources
-```
+```bash
 $ git clone https://github.com/PINTO0309/MobileNet-SSD-RealSense.git
 ```
+<br>
+<br>
+
+### 2.OpenVINO ver (Corresponds to NCS2)
+1.Execute the following
+```bash
+$ sudo apt update;sudo apt upgrade
+$ sudo reboot
+```
+2.Extend the SWAP area (RaspberryPi+Raspbian Stretch / RaspberryPi+Ubuntu Mate Only)
+```bash
+$ sudo nano /etc/dphys-swapfile
+CONF_SWAPSIZE=2048
+
+$ sudo /etc/init.d/dphys-swapfile restart swapon -s
+```
+3.Install OpenVINO
+```bash
+$ wget https://drive.google.com/open?id=1rBl_3kU4gsx-x2NG2I5uIhvA3fPqm8uE -o l_openvino_toolkit_ie_p_2018.5.445.tgz
+$ tar -zxf l_openvino_toolkit_ie_p_2018.5.445.tgz
+$ rm l_openvino_toolkit_ie_p_2018.5.445.tgz
+$ sed -i "s|<INSTALLDIR>|$(pwd)/inference_engine_vpu_arm|" inference_engine_vpu_arm/bin/setupvars.sh
+$ nano ~/.bashrc
+### Add 1 row below
+source /home/pi/inference_engine_vpu_arm/bin/setupvars.sh
+
+$ source ~/.bashrc
+### Successful if displayed as below
+[setupvars.sh] OpenVINO environment initialized
+
+$ sudo usermod -a -G users "$(whoami)"
+$ sudo reboot
+
+$ uname -a
+Linux raspberrypi 4.14.79-v7+ #1159 SMP Sun Nov 4 17:50:20 GMT 2018 armv7l GNU/Linux
+
+$ sh inference_engine_vpu_arm/install_dependencies/install_NCS_udev_rules.sh
+### It is displayed as follows
+Update udev rules so that the toolkit can communicate with your neural compute stick
+[install_NCS_udev_rules.sh] udev rules installed
+```
+2.Update udev rule
+```bash
+$ sudo apt install -y git libssl-dev libusb-1.0-0-dev pkg-config libgtk-3-dev
+$ sudo apt install -y libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev
+
+$ cd /etc/udev/rules.d/
+$ sudo wget https://raw.githubusercontent.com/IntelRealSense/librealsense/master/config/99-realsense-libusb.rules
+$ sudo udevadm control --reload-rules && udevadm trigger
+```
+3.Upgrade to "cmake 3.11.4"
+```bash
+$ cd ~
+$ wget https://cmake.org/files/v3.11/cmake-3.11.4.tar.gz
+$ tar -zxvf cmake-3.11.4.tar.gz;rm cmake-3.11.4.tar.gz
+$ cd cmake-3.11.4
+$ ./configure --prefix=/home/pi/cmake-3.11.4
+$ make -j1
+$ sudo make install
+$ export PATH=/home/pi/cmake-3.11.4/bin:$PATH
+$ source ~/.bashrc
+$ cmake --version
+cmake version 3.11.4
+```
+4.Register LD_LIBRARY_PATH
+```bash
+$ nano ~/.bashrc
+export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+
+$ source ~/.bashrc
+```
+5.Install Intel® RealSense™ SDK 2.0
+```bash
+$ cd ~
+$ sudo apt update;sudo apt upgrade
+
+# Ubuntu16.04 Only
+$ sudo apt install mesa-utils* libglu1* libgles2-mesa-dev libopenal-dev
+
+# The latest version is unstable
+$ git clone -b v2.13.0 https://github.com/IntelRealSense/librealsense.git
+$ cd ~/librealsense;mkdir build;cd build
+
+$ cmake .. -DBUILD_EXAMPLES=true -DCMAKE_BUILD_TYPE=Release
+$ make -j1
+$ sudo make install
+```
+6.Install OpenCV Wrapper
+```bash
+$ cd ~/librealsense/wrappers/opencv;mkdir build;cd build
+$ cmake ..
+$ nano ../latency-tool/CMakeLists.txt
+target_link_libraries(rs-latency-tool ${DEPENDENCIES} pthread)
+
+$ make -j $(($(nproc) + 1))
+$ sudo make install
+```
+7.Install Python binding
+```bash
+$ cd ~/librealsense/build
+
+#When using with Python 3.x series
+$ cmake .. -DBUILD_PYTHON_BINDINGS=bool:true -DPYTHON_EXECUTABLE=$(which python3)
+
+OR
+
+#When using with Python 2.x series
+$ cmake .. -DBUILD_PYTHON_BINDINGS=bool:true -DPYTHON_EXECUTABLE=$(which python)
+
+$ make -j1
+$ sudo make install
+```
+8.Update PYTHON_PATH
+```bash
+$ nano ~/.bashrc
+export PYTHONPATH=$PYTHONPATH:/usr/local/lib
+
+$ source ~/.bashrc
+```
+9.RealSense SDK import test
+```bash
+$ python3
+Python 3.5.3 (default, Jan 19 2017, 14:11:04) 
+[GCC 6.3.0 20170124] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import pyrealsense2
+>>> exit()
+```
+10.Installing the OpenGL package for Python
+```bash
+$ sudo apt-get install python-opengl
+$ sudo -H pip3 install pyopengl
+$ sudo -H pip3 install pyopengl_accelerate
+```
+11.Reduce the SWAP area to the default size (RaspberryPi+Raspbian Stretch / RaspberryPi+Ubuntu Mate Only)
+```bash
+$ sudo nano /etc/dphys-swapfile
+CONF_SWAPSIZE=100
+
+$ sudo /etc/init.d/dphys-swapfile restart swapon -s
+```
+12.Clone a set of resources
+```bash
+$ git clone https://github.com/PINTO0309/MobileNet-SSD-RealSense.git
+```
+<br>
+<br>
 
 ## Execute the program
 ```
@@ -484,11 +634,13 @@ $ cd ~/librealsense/wrappers/opencv/build/dnn
 $ rs-dnn
 ```
 ![08](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/08.gif)
+<br>
+<br>
 
-# 【Reference】 MobileNetv2 Model (Caffe) Great Thanks!!
+## 【Reference】 MobileNetv2 Model (Caffe) Great Thanks!!
 **https://github.com/xufeifeiWHU/Mobilenet-v2-on-Movidius-stick.git**
 
-# Conversion method from Caffe model to NCS model
+## Conversion method from Caffe model to NCS model
 ```
 $ cd ~/MobileNet-SSD-RealSense
 $ mvNCCompile ./caffemodel/MobileNetSSD/deploy.prototxt -w ./caffemodel/MobileNetSSD/MobileNetSSD_deploy.caffemodel -s 12
@@ -496,7 +648,7 @@ $ mvNCCompile ./caffemodel/Facedetection/fullface_deploy.prototxt -w ./caffemode
 $ mvNCCompile ./caffemodel/Facedetection/shortface_deploy.prototxt -w ./caffemodel/Facedetection/shortfacedetection.caffemodel -s 12
 ```
 
-# Construction of learning environment and simple test for model (Ubuntu16.04 x86_64 PC + GPU[NVIDIA Geforce])
+## Construction of learning environment and simple test for model (Ubuntu16.04 x86_64 PC + GPU[NVIDIA Geforce])
 1.**【Example】** Introduction of NVIDIA-Driver, CUDA and cuDNN to the environment with GPU
 ```
 $ sudo apt-get remove nvidia-*
@@ -750,7 +902,7 @@ $ cd $CAFFE_ROOT
 $ python examples/ssd/ssd_pascal_webcam.py
 ```
 
-# Reference article, thanks
+## Reference article, thanks
 https://github.com/movidius/ncappzoo/tree/master/caffe/SSD_MobileNet<br>
 https://github.com/FreeApe/VGG-or-MobileNet-SSD<br>
 https://github.com/chuanqi305/MobileNet-SSD<br>
