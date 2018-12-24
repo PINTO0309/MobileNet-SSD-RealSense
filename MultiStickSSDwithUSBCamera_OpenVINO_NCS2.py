@@ -30,10 +30,10 @@ cap.set(cv2.CAP_PROP_FRAME_WIDTH, camera_width)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, camera_height)
 
 plugin = IEPlugin(device="MYRIAD")
-plugin.set_config({"VPU_FORCE_RESET": "NO"})
+plugin.set_config({"KEY_VPU_FORCE_RESET": "NO"})
 net = IENetwork("lrmodel/MobileNetSSD/MobileNetSSD_deploy.xml", "lrmodel/MobileNetSSD/MobileNetSSD_deploy.bin")
 input_blob = next(iter(net.inputs))
-exec_net = plugin.load(network=net, num_requests=2)
+exec_net = plugin.load(network=net)
 
 try:
 
