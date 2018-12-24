@@ -33,7 +33,7 @@ plugin = IEPlugin(device="MYRIAD")
 plugin.set_config({"VPU_FORCE_RESET": "NO"})
 net = IENetwork("lrmodel/MobileNetSSD/MobileNetSSD_deploy.xml", "lrmodel/MobileNetSSD/MobileNetSSD_deploy.bin")
 input_blob = next(iter(net.inputs))
-exec_net = plugin.load(network=net)
+exec_net = plugin.load(network=net, num_requests=2)
 
 try:
 
