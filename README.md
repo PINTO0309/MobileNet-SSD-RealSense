@@ -102,7 +102,7 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 ![14](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/14.png)<br>
 **[Execution log]**<br>
 ![15](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/15.png)
-### **USB Camera Mode NCS2 SingleStick （Synchronous screen drawing / SingleStickSSDwithUSBCamera_OpenVINO_NCS2.py）**<br>
+### **USB Camera Mode NCS2 SingleStick + RaspberryPi3（Synchronous screen drawing / SingleStickSSDwithUSBCamera_OpenVINO_NCS2.py）**<br>
 **【YouTube Movie】　https://youtu.be/GJNkX-ZBuC8**<br><br>
 ![16](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/16.gif)<br>
 ### **USB Camera Mode NCS2 SingleStick + Core i7（Synchronous screen drawing / MultiStickSSDwithUSBCamera_OpenVINO_NCS2.py）**<br>
