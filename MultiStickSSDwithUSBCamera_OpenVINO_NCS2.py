@@ -24,13 +24,13 @@ LABELS = ('background',
 camera_width = 320
 camera_height = 240
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 cap.set(cv2.CAP_PROP_FPS, 30)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, camera_width)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, camera_height)
 
 plugin = IEPlugin(device="MYRIAD")
-#plugin.set_config({"VPU_FORCE_RESET": "NO"})
+plugin.set_config({"VPU_FORCE_RESET": "NO"})
 net = IENetwork("lrmodel/MobileNetSSD/MobileNetSSD_deploy.xml", "lrmodel/MobileNetSSD/MobileNetSSD_deploy.bin")
 input_blob = next(iter(net.inputs))
 exec_net = plugin.load(network=net)
