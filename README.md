@@ -52,7 +52,7 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 |1|4 Sticks|　 25 FPS|**https://youtu.be/v-Cei1TW88c**||
 |2|5 Sticks|:star: 30 FPS|**https://youtu.be/CL6PTNgWibI**|best performance|
 
-**Performance comparison as a mobile application (Based on sensory comparison)**  
+## Performance comparison as a mobile application (Based on sensory comparison)
 ◯=HIGH, △=MEDIUM, ×=LOW  
 
 |No.|Model|Speed|Accuracy|
