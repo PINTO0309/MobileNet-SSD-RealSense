@@ -52,6 +52,16 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 |1|4 Sticks|　 25 FPS|**https://youtu.be/v-Cei1TW88c**||
 |2|5 Sticks|:star: 30 FPS|**https://youtu.be/CL6PTNgWibI**|best performance|
 
+**Performance comparison as a mobile application (Based on sensory comparison)**  
+◯=HIGH, △=MEDIUM, ×=LOW  
+
+|No.|Model|Speed|Accuracy|
+|:-:|:-|:-:|:-:|
+|1|SSD|×|◯|
+|2|**[MobileNet-SSD](https://github.com/PINTO0309/MobileNet-SSD-RealSense.git)**|△|△|
+|3|**[YoloV3](https://github.com/PINTO0309/OpenVINO-YoloV3.git)**|×|◯|
+|4|**[tiny-YoloV3](https://github.com/PINTO0309/OpenVINO-YoloV3.git)**|◯|×|
+
 ## Change history
 <details><summary>Change history</summary><div>
 [July 14, 2018]　Corresponds to NCSDK v2.05.00.02<br>
