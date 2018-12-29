@@ -55,12 +55,12 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 ## Performance comparison as a mobile application (Based on sensory comparison)
 ◯=HIGH, △=MEDIUM, ×=LOW  
 
-|No.|Model|Speed|Accuracy|
-|:-:|:-|:-:|:-:|
-|1|SSD|×|◯|
-|2|**[MobileNet-SSD](https://github.com/PINTO0309/MobileNet-SSD-RealSense.git)**|△|△|
-|3|**[YoloV3](https://github.com/PINTO0309/OpenVINO-YoloV3.git)**|×|◯|
-|4|**[tiny-YoloV3](https://github.com/PINTO0309/OpenVINO-YoloV3.git)**|◯|×|
+|No.|Model|Speed|Accuracy|Adaptive distance|
+|:-:|:-|:-:|:-:|:-|
+|1|SSD|×|◯|ALL|
+|2|**[MobileNet-SSD](https://github.com/PINTO0309/MobileNet-SSD-RealSense.git)**|△|△|Short distance|
+|3|**[YoloV3](https://github.com/PINTO0309/OpenVINO-YoloV3.git)**|×|◯|ALL|
+|4|**[tiny-YoloV3](https://github.com/PINTO0309/OpenVINO-YoloV3.git)**|◯|×|Long distance|
 
 ## Change history
 <details><summary>Change history</summary><div>
