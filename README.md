@@ -118,6 +118,9 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 ### **USB Camera Mode NCS2 SingleStick + Core i7（Synchronous screen drawing / MultiStickSSDwithUSBCamera_OpenVINO_NCS2.py）**<br>
 **【YouTube Movie】　https://youtu.be/1ogge90EuqI**<br><br>
 ![17](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/17.gif)<br>
+### **USB Camera Mode NCS2 x 4 Sticks + Core i7（Asynchronous screen drawing / MultiStickSSDwithRealSense_OpenVINO_NCS2.py）**<br>
+**【YouTube Movie】　https://youtu.be/HJLMB3an_Rw**<br><br>
+![18](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/18.gif)<br>
 
 ## Environment
 1．RaspberryPi3 + Raspbian Stretch (USB2.0 Port) or RaspberryPi3 + Ubuntu Mate or PC + Ubuntu16.04<br>
