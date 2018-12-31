@@ -86,8 +86,8 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 [Oct 07, 2018]　【Experimental】 Added Semantic Segmentation model [caffe-jacinto] (cityscapes5_jsegnet21v2_iter_60000.caffemodel)<br>
 [Oct 10, 2018]　Corresponds to NCSDK 2.08.01<br>
 [Oct 12, 2018]　【Experimental】 Added Semantic Segmentation model [Tensorflow-ENet] (semanticsegmentation_enet.pb) https://github.com/PINTO0309/TensorFlow-ENet.git<br>
-[Dec 22, 2018]　Only "USB Camera + single thread mode" correspondence with NCS 2 is completed  
-[Dec 31, 2018]　"USB Camera + MultiStick + MultiProcess mode" correspondence with NCS2 is completed
+[Dec 22, 2018]　Only "USB Camera + single thread mode" correspondence with NCS 2 is completed<br>
+[Dec 31, 2018]　"USB Camera + MultiStick + MultiProcess mode" correspondence with NCS2 is completed<br>
 </div></details><br><br>
 
 ## Motion image
