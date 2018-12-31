@@ -159,7 +159,7 @@ def camThread(LABELS, results, frameBuffer, camera_mode, camera_width, camera_he
 
 
 
-def inferencer(results, frameBuffer, ssd_detection_mode, face_detection_mode, devnum, mp_active_stick_number, mp_stick_temperature):
+def inferencer(graph_folder, results, frameBuffer, ssd_detection_mode, face_detection_mode, devnum, device_count, mp_active_stick_number, mp_stick_temperature):
 
     plugin = None
     net = None
@@ -169,7 +169,7 @@ def inferencer(results, frameBuffer, ssd_detection_mode, face_detection_mode, de
     plugin = IEPlugin(device="MYRIAD")
     net = IENetwork(model=model_xml, weights=model_bin)
     input_blob = next(iter(net.inputs))
-    exec_net = plugin.load(network=net)
+    exec_net = plugin.load(network=net, num_requests=device_count)
 
     while True:
         # 0:= Inactive stick, 1:= Active stick
@@ -254,7 +254,7 @@ def overlay_on_image(frames, object_infos, LABELS, camera_mode, background_trans
             drawing_initial_flag = True
 
             for box_index in range(100):
-                if out[box_index + 1] == 0.0:
+                if object_info[box_index + 1] == 0.0:
                     break
                 base_index = box_index * 7
                 if (not np.isfinite(object_info[base_index]) or
@@ -410,7 +410,7 @@ if __name__ == '__main__':
         processes.append(p)
 
         # Start detection MultiStick
-        device_count = len(number_of_ncs)
+        device_count = number_of_ncs
 
         if stick_num_of_cluster > 0 and stick_num_of_cluster > (device_count // 2):
             print("`stick_num_of_cluster` must be less than half of the total number of sticks.")
@@ -434,7 +434,7 @@ if __name__ == '__main__':
         # Activation of inferencer
         for devnum in range(device_count):
             p = mp.Process(target=inferencer,
-                           args=(results, frameBuffer, ssd_detection_mode, face_detection_mode, devnum, mp_active_stick_number, mp_stick_temperature),
+                           args=(graph_folder, results, frameBuffer, ssd_detection_mode, face_detection_mode, devnum, device_count, mp_active_stick_number, mp_stick_temperature),
                            daemon=True)
             p.start()
             processes.append(p)
