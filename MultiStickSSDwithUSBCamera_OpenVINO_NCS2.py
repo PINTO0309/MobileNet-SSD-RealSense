@@ -5,7 +5,6 @@ if sys.version_info.major < 3 or sys.version_info.minor < 4:
 import pyrealsense2 as rs
 import numpy as np
 import cv2, io, time, argparse, re
-#from mvnc import mvncapi as mvnc
 from os import system
 from os.path import isfile, join
 from time import sleep
@@ -162,39 +161,15 @@ def camThread(LABELS, results, frameBuffer, camera_mode, camera_width, camera_he
 
 def inferencer(results, frameBuffer, ssd_detection_mode, face_detection_mode, devnum, mp_active_stick_number, mp_stick_temperature):
 
-    graphs = []
-    graph_buffers = []
-    graphHandles = []
-    #graphHandle0 = None
-    #graphHandle1 = None
-
     plugin = None
     net = None
 
-    ## 1:= Enabled MobileNet-SSD Model
-    #if ssd_detection_mode == 1:
-    #    with open(join(graph_folder, "graph"), mode="rb") as f:
-    #        graph_buffers.append(f.read())
-    #    graphs.append(mvnc.Graph('MobileNet-SSD'))
-    #
-    ## 1:= Enabled Fullweight FaceDetection Model
-    #if face_detection_mode == 1:
-    #    with open(join(graph_folder, "graph.fullfacedetection"), mode="rb") as f:
-    #        graph_buffers.append(f.read())
-    #    graphs.append(mvnc.Graph('FullFaceDetection'))
-    #
-    ## 2:= Enabled Lightweight FaceDetection Model
-    #if face_detection_mode == 2:
-    #    with open(join(graph_folder, "graph.shortfacedetection"), mode="rb") as f:
-    #        graph_buffers.append(f.read())
-    #    graphs.append(mvnc.Graph('ShortFaceDetection'))
-
-    model_xml = join(graph_folder, "MobileNetSSD_deploy") + ".xml"
-    model_bin = join(graph_folder, "MobileNetSSD_deploy") + ".bin"
+    model_xml = join(graph_folder, "MobileNetSSD_deploy.xml")
+    model_bin = join(graph_folder, "MobileNetSSD_deploy.bin")
     plugin = IEPlugin(device="MYRIAD")
-    net = IENetwork.from_ir(model=model_xml, weights=model_bin)
+    net = IENetwork(model=model_xml, weights=model_bin)
     input_blob = next(iter(net.inputs))
-    exec_net = exec_net = plugin.load(network=net)
+    exec_net = plugin.load(network=net)
 
     while True:
         # 0:= Inactive stick, 1:= Active stick
@@ -207,24 +182,11 @@ def inferencer(results, frameBuffer, ssd_detection_mode, face_detection_mode, de
 
             color_image = frameBuffer.get()
             prepimg = preprocess_image(color_image)
-            res = None
-            #for (graph, graphHandle) in zip(graphs, graphHandles):
-            #    graphHandle0 = graphHandle[0]
-            #    graphHandle1 = graphHandle[1]
-            #    graph.queue_inference_with_fifo_elem(graphHandle0, graphHandle1, prepimg.astype(np.float32), None)
-            #    out, _ = graphHandle1.read_elem()
-            #
-            #    num_valid_boxes = int(out[0])
-            #    if num_valid_boxes > 0:
-            #        if isinstance(res, type(None)):
-            #            res = [out]
-            #        else:
-            #            res = np.append(res, [out], axis=0)
-            #results.put(res)
-
-            out = exec_net.infer(inputs={input_blob: prepimg})
-            out = out["detection_out"].flatten()
+            exec_net.start_async(request_id=devnum, inputs={input_blob: prepimg})
+            exec_net.requests[devnum].wait()
+            out = exec_net.requests[devnum].outputs["detection_out"].flatten()
             results.put([out])
+
         except:
             import traceback
             traceback.print_exc()
