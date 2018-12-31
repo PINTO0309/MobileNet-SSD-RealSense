@@ -77,11 +77,11 @@ def camThread(LABELS, results, frameBuffer, camera_mode, camera_width, camera_he
         align = rs.align(align_to)
         window_name = "RealSense"
     elif camera_mode == 1:
-        cam = cv2.VideoCapture(1)
+        cam = cv2.VideoCapture(0)
         if cam.isOpened() != True:
             print("USB Camera Open Error!!!")
             sys.exit(0)
-        cam.set(cv2.CAP_PROP_FPS, 60)
+        cam.set(cv2.CAP_PROP_FPS, 30)
         cam.set(cv2.CAP_PROP_FRAME_WIDTH, camera_width)
         cam.set(cv2.CAP_PROP_FRAME_HEIGHT, camera_height)
         window_name = "USB Camera"
