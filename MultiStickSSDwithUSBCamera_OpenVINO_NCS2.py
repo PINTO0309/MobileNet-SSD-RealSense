@@ -203,13 +203,14 @@ def inferencer(graph_folder, results, frameBuffer, ssd_detection_mode, face_dete
                     inferred_cnt = 0
                 heapq.heappush(heap_request, (inferred_cnt, reqnum))
 
-            inferred_cnt, dev = heapq.heappop(heap_request)
-            if exec_net.requests[dev].wait(-1) == 0:
+            cnt, dev = heapq.heappop(heap_request)
+            if exec_net.requests[dev].wait(0) == 0:
+                exec_net.requests[dev].wait(-1)
                 out = exec_net.requests[dev].outputs["detection_out"].flatten()
                 results.put([out])
                 inferred_request[dev] = 0
             else:
-                heapq.heappush(heap_request, (inferred_cnt, dev))
+                heapq.heappush(heap_request, (cnt, dev))
 
         except:
             import traceback
@@ -456,12 +457,6 @@ if __name__ == '__main__':
                 mp_active_stick_number[devnum] = 1
 
         # Activation of inferencer
-        #for devnum in range(device_count):
-        #    p = mp.Process(target=inferencer,
-        #                   args=(graph_folder, results, frameBuffer, ssd_detection_mode, face_detection_mode, devnum, device_count, mp_active_stick_number, mp_stick_temperature),
-        #                   daemon=True)
-        #    p.start()
-        #    processes.append(p)
         p = mp.Process(target=inferencer,
                        args=(graph_folder, results, frameBuffer, ssd_detection_mode, face_detection_mode, device_count, mp_active_stick_number, mp_stick_temperature),
                        daemon=True)
