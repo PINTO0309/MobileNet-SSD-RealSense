@@ -10,6 +10,7 @@ from os.path import isfile, join
 from time import sleep
 import multiprocessing as mp
 from openvino.inference_engine import IENetwork, IEPlugin
+import heapq
 
 pipeline = None
 lastresults = None
@@ -158,11 +159,22 @@ def camThread(LABELS, results, frameBuffer, camera_mode, camera_width, camera_he
         time2 += elapsedTime
 
 
+# l = Search list
+# x = Search target value
+def searchlist(l, x, notfoundvalue=-1):
+    if x in l:
+        return l.index(x)
+    else:
+        return notfoundvalue
 
-def inferencer(graph_folder, results, frameBuffer, ssd_detection_mode, face_detection_mode, devnum, device_count, mp_active_stick_number, mp_stick_temperature):
+
+def inferencer(graph_folder, results, frameBuffer, ssd_detection_mode, face_detection_mode, device_count, mp_active_stick_number, mp_stick_temperature):
 
     plugin = None
     net = None
+    inferred_request = [0] * device_count
+    heap_request = []
+    inferred_cnt = 0
 
     model_xml = join(graph_folder, "MobileNetSSD_deploy.xml")
     model_bin = join(graph_folder, "MobileNetSSD_deploy.bin")
@@ -172,20 +184,32 @@ def inferencer(graph_folder, results, frameBuffer, ssd_detection_mode, face_dete
     exec_net = plugin.load(network=net, num_requests=device_count)
 
     while True:
-        # 0:= Inactive stick, 1:= Active stick
-        if mp_active_stick_number[devnum] == 0:
-            continue
 
         try:
+
             if frameBuffer.empty():
                 continue
-
             color_image = frameBuffer.get()
             prepimg = preprocess_image(color_image)
-            exec_net.start_async(request_id=devnum, inputs={input_blob: prepimg})
-            exec_net.requests[devnum].wait()
-            out = exec_net.requests[devnum].outputs["detection_out"].flatten()
-            results.put([out])
+
+            reqnum = searchlist(inferred_request, 0)
+            if reqnum > -1:
+                exec_net.start_async(request_id=reqnum, inputs={input_blob: prepimg})
+                inferred_request[reqnum] = 1
+                inferred_cnt += 1
+                if inferred_cnt == sys.maxsize:
+                    inferred_request = [0] * device_count
+                    heap_request = []
+                    inferred_cnt = 0
+                heapq.heappush(heap_request, (inferred_cnt, reqnum))
+
+            inferred_cnt, dev = heapq.heappop(heap_request)
+            if exec_net.requests[dev].wait(-1) == 0:
+                out = exec_net.requests[dev].outputs["detection_out"].flatten()
+                results.put([out])
+                inferred_request[dev] = 0
+            else:
+                heapq.heappush(heap_request, (inferred_cnt, dev))
 
         except:
             import traceback
@@ -359,8 +383,8 @@ if __name__ == '__main__':
     parser.add_argument('-tp','--transparent',dest='background_transparent_mode',type=int,default=0,help='TransparentMode. (RealSense Mode Only. 0:=No background transparent, 1:=Background transparent)')
     parser.add_argument('-sd','--ssddetection',dest='ssd_detection_mode',type=int,default=1,help='[Future functions] SSDDetectionMode. (0:=Disabled, 1:=Enabled Default=1)')
     parser.add_argument('-fd','--facedetection',dest='face_detection_mode',type=int,default=0,help='[Future functions] FaceDetectionMode. (0:=Disabled, 1:=Full, 2:=Short Default=0)')
-    parser.add_argument('-snc','--sticknumofcluster',dest='stick_num_of_cluster',type=int,default=0,help='[Future functions] Number of sticks to be clustered. (0:=Clustering invalid, n:=Number of sticks Default=0)')
-    parser.add_argument('-csc','--clusterswitchcycle',dest='cluster_switch_cycle',type=int,default=10000,help='[Future functions] Cycle of switching active cluster. (n:=millisecond Default=10000)')
+    parser.add_argument('-snc','--sticknumofcluster',dest='stick_num_of_cluster',type=int,default=0,help='[Deplicated] Number of sticks to be clustered. (0:=Clustering invalid, n:=Number of sticks Default=0)')
+    parser.add_argument('-csc','--clusterswitchcycle',dest='cluster_switch_cycle',type=int,default=10000,help='[Deplicated] Cycle of switching active cluster. (n:=millisecond Default=10000)')
     parser.add_argument('-cst','--clusterswittemperature',dest='cluster_switch_temperature',type=float,default=65.0,help='[Deplicated] Temperature threshold to switch active cluster. (n.n:=temperature(Celsius) Default=65.0)')
     parser.add_argument('-numncs','--numberofncs',dest='number_of_ncs',type=int,default=1,help='Number of NCS. (Default=1)')
 
@@ -432,12 +456,17 @@ if __name__ == '__main__':
                 mp_active_stick_number[devnum] = 1
 
         # Activation of inferencer
-        for devnum in range(device_count):
-            p = mp.Process(target=inferencer,
-                           args=(graph_folder, results, frameBuffer, ssd_detection_mode, face_detection_mode, devnum, device_count, mp_active_stick_number, mp_stick_temperature),
-                           daemon=True)
-            p.start()
-            processes.append(p)
+        #for devnum in range(device_count):
+        #    p = mp.Process(target=inferencer,
+        #                   args=(graph_folder, results, frameBuffer, ssd_detection_mode, face_detection_mode, devnum, device_count, mp_active_stick_number, mp_stick_temperature),
+        #                   daemon=True)
+        #    p.start()
+        #    processes.append(p)
+        p = mp.Process(target=inferencer,
+                       args=(graph_folder, results, frameBuffer, ssd_detection_mode, face_detection_mode, device_count, mp_active_stick_number, mp_stick_temperature),
+                       daemon=True)
+        p.start()
+        processes.append(p)
 
         # Cluster switching determination
         t1 = time.perf_counter() * 1000
