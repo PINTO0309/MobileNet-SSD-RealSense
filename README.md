@@ -11,7 +11,7 @@ Measure the distance to the object with RealSense D435 while performing object d
 And, This is support for MultiGraph and FaceDetection, MultiProcessing, Background transparentation.<br>
 And, This is support for simple clustering function. (To prevent thermal runaway)<br><br>
 **【Japanese Article1】 https://qiita.com/PINTO/items/1828f97d95fdda45f57d**<br>
-**【Japanese / English Article2】 https://qiita.com/PINTO/items/40abcf33af3ae7ef579d**<br>
+**【Japanese / English Article2】 [Intel also praised me again ヽ(ﾟ∀ﾟ)ﾉ Yeah MobileNet-SSD(MobileNetSSD) object detection and RealSense distance measurement (640x480) with RaspberryPi3 At least 25FPS playback frame rate + 12FPS prediction rate](https://qiita.com/PINTO/items/40abcf33af3ae7ef579d#-english-article)**<br>
 **【Japanese / English Article3】 [Detection rate approx. 30FPS RaspberryPi3 Model B(plus none) is slightly later than TX2, acquires object detection rate of MobilenetSSD and corresponds to MultiModel VOC+WIDER FACE](https://qiita.com/PINTO/items/190daa4fddfd2a21f959#-detection-rate-approx-30fps-raspberrypi3-model-bplus-none-is-slightly-later-than-tx2-acquires-object-detection-rate-of-mobilenetssd-and-corresponds-to-multimodel-vocwider-face)**<br>
 **【Japanese Article4】 https://qiita.com/PINTO/items/62859125c5381690623c**<br>
 **【Japanese Article5】 https://qiita.com/PINTO/items/127c84319822a0776420**<br>
