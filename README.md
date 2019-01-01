@@ -16,7 +16,7 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 **【Japanese Article4】 https://qiita.com/PINTO/items/62859125c5381690623c**<br>
 **【Japanese Article5】 https://qiita.com/PINTO/items/127c84319822a0776420**<br>
 **【Japanese / English Article6】 https://qiita.com/PINTO/items/fc1fcecce4d5600c20bb**<br>
-**【Japanese / English Article7】 https://qiita.com/PINTO/items/94d5557fca9911cc892d**<br><br>
+**【Japanese / English Article7】 [[24 FPS] Boost RaspberryPi3 with four Neural Compute Stick 2 (NCS2) MobileNet-SSD / YoloV3 [48 FPS for Core i7]](https://qiita.com/PINTO/items/94d5557fca9911cc892d#24-fps-boost-raspberrypi3-with-four-neural-compute-stick-2-ncs2-mobilenet-ssd--yolov3-48-fps-for-core-i7)**<br><br>
 
 ## Summary
 **Performance measurement result each number of sticks. (It is Detection rate. It is not a Playback rate.)**<br>
