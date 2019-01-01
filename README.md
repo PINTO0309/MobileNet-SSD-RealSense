@@ -12,7 +12,7 @@ And, This is support for MultiGraph and FaceDetection, MultiProcessing, Backgrou
 And, This is support for simple clustering function. (To prevent thermal runaway)<br><br>
 **【Japanese Article1】 https://qiita.com/PINTO/items/1828f97d95fdda45f57d**<br>
 **【Japanese / English Article2】 https://qiita.com/PINTO/items/40abcf33af3ae7ef579d**<br>
-**【Japanese / English Article3】 https://qiita.com/PINTO/items/190daa4fddfd2a21f959**<br>
+**【Japanese / English Article3】 [Detection rate approx. 30FPS RaspberryPi3 Model B(plus none) is slightly later than TX2, acquires object detection rate of MobilenetSSD and corresponds to MultiModel VOC+WIDER FACE](https://qiita.com/PINTO/items/190daa4fddfd2a21f959#-detection-rate-approx-30fps-raspberrypi3-model-bplus-none-is-slightly-later-than-tx2-acquires-object-detection-rate-of-mobilenetssd-and-corresponds-to-multimodel-vocwider-face)**<br>
 **【Japanese Article4】 https://qiita.com/PINTO/items/62859125c5381690623c**<br>
 **【Japanese Article5】 https://qiita.com/PINTO/items/127c84319822a0776420**<br>
 **【Japanese / English Article6】 [Boost RaspberryPi3 with Neural Compute Stick 2 (1 x NCS2) and feel the explosion performance of MobileNet-SSD　(If it is Core i7, 21 FPS)](https://qiita.com/PINTO/items/fc1fcecce4d5600c20bb#boost-raspberrypi3-with-neural-compute-stick-2-1-x-ncs2-and-feel-the-explosion-performance-of-mobilenet-ssdif-it-is-core-i7-21-fps)**<br>
