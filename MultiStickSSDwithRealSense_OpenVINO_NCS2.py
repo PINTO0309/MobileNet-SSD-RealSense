@@ -11,6 +11,7 @@ from time import sleep
 import multiprocessing as mp
 from openvino.inference_engine import IENetwork, IEPlugin
 import heapq
+import threading
 
 pipeline = None
 lastresults = None
@@ -24,7 +25,6 @@ framecount = 0
 detectframecount = 0
 time1 = 0
 time2 = 0
-graph_folder = ""
 cam = None
 camera_mode = 0
 camera_width = 320
@@ -161,69 +161,93 @@ def searchlist(l, x, notfoundvalue=-1):
         return notfoundvalue
 
 
-def inferencer(graph_folder, results, frameBuffer, ssd_detection_mode, face_detection_mode, device_count):
-
-    plugin = None
-    net = None
-    inferred_request = [0] * device_count
-    heap_request = []
-    inferred_cnt = 0
-
-    model_xml = join(graph_folder, "MobileNetSSD_deploy.xml")
-    model_bin = join(graph_folder, "MobileNetSSD_deploy.bin")
-    plugin = IEPlugin(device="MYRIAD")
-    net = IENetwork(model=model_xml, weights=model_bin)
-    input_blob = next(iter(net.inputs))
-    exec_net = plugin.load(network=net, num_requests=device_count)
+def async_infer(ncsworker):
 
     while True:
+        ncsworker.predict_async()
 
+
+class NcsWorker(object):
+
+    def __init__(self, devid, frameBuffer, results, camera_mode, camera_width, camera_height, number_of_ncs):
+        self.devid = devid
+        self.frameBuffer = frameBuffer
+        self.model_xml = "./lrmodel/MobileNetSSD/MobileNetSSD_deploy.xml"
+        self.model_bin = "./lrmodel/MobileNetSSD/MobileNetSSD_deploy.bin"
+        self.camera_width = camera_width
+        self.camera_height = camera_height
+        self.num_requests = 4
+        self.inferred_request = [0] * self.num_requests
+        self.heap_request = []
+        self.inferred_cnt = 0
+        self.plugin = IEPlugin(device="MYRIAD")
+        self.net = IENetwork(model=self.model_xml, weights=self.model_bin)
+        self.input_blob = next(iter(self.net.inputs))
+        self.exec_net = self.plugin.load(network=self.net, num_requests=self.num_requests)
+        self.results = results
+        self.camera_mode = camera_mode
+        self.number_of_ncs = number_of_ncs
+
+
+    def image_preprocessing(self, color_image):
+
+        if self.camera_mode == 0:
+            prepimg = cv2.resize(color_image,(532,400))
+            prepimg = prepimg[100:100+300,116:116+300]
+        else:
+            prepimg = cv2.resize(color_image, (300, 300))
+        prepimg = prepimg - 127.5
+        prepimg = prepimg * 0.007843
+        prepimg = prepimg[np.newaxis, :, :, :]     # Batch size axis add
+        prepimg = prepimg.transpose((0, 3, 1, 2))  # NHWC to NCHW
+        return prepimg
+
+
+    def predict_async(self):
         try:
 
-            if frameBuffer.empty():
-                continue
-            color_image = frameBuffer.get()
-            prepimg = preprocess_image(color_image)
+            if self.frameBuffer.empty():
+                return
 
-            reqnum = searchlist(inferred_request, 0)
+            prepimg = self.image_preprocessing(self.frameBuffer.get())
+            reqnum = searchlist(self.inferred_request, 0)
+
             if reqnum > -1:
-                exec_net.start_async(request_id=reqnum, inputs={input_blob: prepimg})
-                inferred_request[reqnum] = 1
-                inferred_cnt += 1
-                if inferred_cnt == sys.maxsize:
-                    inferred_request = [0] * device_count
-                    heap_request = []
-                    inferred_cnt = 0
-                heapq.heappush(heap_request, (inferred_cnt, reqnum))
+                self.exec_net.start_async(request_id=reqnum, inputs={self.input_blob: prepimg})
+                self.inferred_request[reqnum] = 1
+                self.inferred_cnt += 1
+                if self.inferred_cnt == sys.maxsize:
+                    self.inferred_request = [0] * self.num_requests
+                    self.heap_request = []
+                    self.inferred_cnt = 0
+                heapq.heappush(self.heap_request, (self.inferred_cnt, reqnum))
 
-            cnt, dev = heapq.heappop(heap_request)
-            if exec_net.requests[dev].wait(0) == 0:
-                exec_net.requests[dev].wait(-1)
-                out = exec_net.requests[dev].outputs["detection_out"].flatten()
-                results.put([out])
-                inferred_request[dev] = 0
+            cnt, dev = heapq.heappop(self.heap_request)
+
+            if self.exec_net.requests[dev].wait(0) == 0:
+                self.exec_net.requests[dev].wait(-1)
+                out = self.exec_net.requests[dev].outputs["detection_out"].flatten()
+                self.results.put([out])
+                self.inferred_request[dev] = 0
             else:
-                heapq.heappush(heap_request, (cnt, dev))
+                heapq.heappush(self.heap_request, (cnt, dev))
 
         except:
             import traceback
             traceback.print_exc()
 
 
+def inferencer(results, frameBuffer, ssd_detection_mode, face_detection_mode, camera_mode, camera_width, camera_height, number_of_ncs):
 
-def preprocess_image(src):
+    # Init infer threads
+    threads = []
+    for devid in range(number_of_ncs):
+        thworker = threading.Thread(target=async_infer, args=(NcsWorker(devid, frameBuffer, results, camera_mode, camera_width, camera_height, number_of_ncs),))
+        thworker.start()
+        threads.append(thworker)
 
-    try:
-        img = cv2.resize(src, (300, 300))
-        img = img - 127.5
-        img = img * 0.007843
-        img = img[np.newaxis, :, :, :]     # Batch size axis add
-        img = img.transpose((0, 3, 1, 2))  # NHWC to NCHW
-        return img
-    except:
-        import traceback
-        traceback.print_exc()
-
+    for th in threads:
+        th.join()
 
 
 def overlay_on_image(frames, object_infos, LABELS, camera_mode, background_transparent_mode, background_img, depth_scale=1.0, align=None):
@@ -363,14 +387,9 @@ def overlay_on_image(frames, object_infos, LABELS, camera_mode, background_trans
         traceback.print_exc()
 
 
-
-
-
-
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('-grp','--graph',dest='graph_folder',type=str,default='./lrmodel/MobileNetSSD/',help='OpenVINO lrmodels Path. (Default=./lrmodel/MobileNetSSD/)')
     parser.add_argument('-mod','--mode',dest='camera_mode',type=int,default=0,help='Camera Mode. (0:=RealSense Mode, 1:=USB Camera Mode. Defalut=0)')
     parser.add_argument('-wd','--width',dest='camera_width',type=int,default=320,help='Width of the frames in the video stream. (USB Camera Mode Only. Default=320)')
     parser.add_argument('-ht','--height',dest='camera_height',type=int,default=240,help='Height of the frames in the video stream. (USB Camera Mode Only. Default=240)')
@@ -381,7 +400,6 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    graph_folder  = args.graph_folder
     camera_mode   = args.camera_mode
     camera_width  = args.camera_width
     camera_height = args.camera_height
@@ -423,7 +441,7 @@ if __name__ == '__main__':
         # Start detection MultiStick
         # Activation of inferencer
         p = mp.Process(target=inferencer,
-                       args=(graph_folder, results, frameBuffer, ssd_detection_mode, face_detection_mode, number_of_ncs),
+                       args=(results, frameBuffer, ssd_detection_mode, face_detection_mode, camera_mode, camera_width, camera_height, number_of_ncs),
                        daemon=True)
         p.start()
         processes.append(p)
