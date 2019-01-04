@@ -89,6 +89,7 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 [Oct 12, 2018]　【Experimental】 Added Semantic Segmentation model [Tensorflow-ENet] (semanticsegmentation_enet.pb) https://github.com/PINTO0309/TensorFlow-ENet.git<br>
 [Dec 22, 2018]　Only "USB Camera + single thread mode" correspondence with NCS 2 is completed<br>
 [Dec 31, 2018]　"USB Camera + MultiStick + MultiProcess mode" correspondence with NCS2 is completed<br>
+[Jan 04, 2019]　Tune performance four times. MultiStickSSDwithRealSense_OpenVINO_NCS2.py<br>
 </div></details><br><br>
 
 ## Motion image
