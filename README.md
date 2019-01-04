@@ -4,7 +4,8 @@ RaspberryPi3(Raspbian Stretch) or Ubuntu16.04/UbuntuMate + Neural Compute Stick(
 **【Notice】December 19, 2018 OpenVINO has supported RaspberryPi + NCS2 !!  
 https://software.intel.com/en-us/articles/OpenVINO-RelNotes#inpage-nav-2-2**  
   
-**【Dec 31, 2018】 `USB Camera + MultiStick + MultiProcess mode` correspondence with NCS2 is completed.**
+**【Dec 31, 2018】 `USB Camera + MultiStick + MultiProcess mode` correspondence with NCS2 is completed.**<br>
+**【Jan 04, 2019】 Tune performance four times. MultiStickSSDwithRealSense_OpenVINO_NCS2.py. Core i7 -> NCS2 x1, 48 FPS**
 <br><br>
 Measure the distance to the object with RealSense D435 while performing object detection by MobileNet-SSD(MobileNetSSD) with RaspberryPi 3 boosted with Intel Movidius Neural Compute Stick.<br>
 "USB Camera mode" can not measure the distance, but it operates at high speed.<br>
@@ -89,6 +90,7 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 [Oct 12, 2018]　【Experimental】 Added Semantic Segmentation model [Tensorflow-ENet] (semanticsegmentation_enet.pb) https://github.com/PINTO0309/TensorFlow-ENet.git<br>
 [Dec 22, 2018]　Only "USB Camera + single thread mode" correspondence with NCS 2 is completed<br>
 [Dec 31, 2018]　"USB Camera + MultiStick + MultiProcess mode" correspondence with NCS2 is completed<br>
+[Jan 04, 2019]　Tune performance four times. MultiStickSSDwithRealSense_OpenVINO_NCS2.py<br>
 </div></details><br><br>
 
 ## Motion image
