@@ -27,8 +27,8 @@ time1 = 0
 time2 = 0
 cam = None
 camera_mode = 0
-camera_width = 320
-camera_height = 240
+camera_width = 640
+camera_height = 480
 window_name = ""
 background_transparent_mode = 0
 ssd_detection_mode = 1
@@ -48,7 +48,7 @@ LABELS = [['background',
            'sheep', 'sofa', 'train', 'tvmonitor'],
           ['background', 'face']]
 
-def camThread(LABELS, results, frameBuffer, camera_mode, camera_width, camera_height, background_transparent_mode, background_img):
+def camThread(LABELS, results, frameBuffer, camera_mode, camera_width, camera_height, background_transparent_mode, background_img, vidfps):
     global fps
     global detectfps
     global lastresults
@@ -68,8 +68,8 @@ def camThread(LABELS, results, frameBuffer, camera_mode, camera_width, camera_he
     if camera_mode == 0:
         pipeline = rs.pipeline()
         config = rs.config()
-        config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 30)
-        config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
+        config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, vidfps)
+        config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, vidfps)
         profile = pipeline.start(config)
         depth_sensor = profile.get_device().first_depth_sensor()
         depth_scale = depth_sensor.get_depth_scale()
@@ -81,7 +81,7 @@ def camThread(LABELS, results, frameBuffer, camera_mode, camera_width, camera_he
         if cam.isOpened() != True:
             print("USB Camera Open Error!!!")
             sys.exit(0)
-        cam.set(cv2.CAP_PROP_FPS, 30)
+        cam.set(cv2.CAP_PROP_FPS, vidfps)
         cam.set(cv2.CAP_PROP_FRAME_WIDTH, camera_width)
         cam.set(cv2.CAP_PROP_FRAME_HEIGHT, camera_height)
         window_name = "USB Camera"
@@ -163,13 +163,15 @@ def searchlist(l, x, notfoundvalue=-1):
 
 def async_infer(ncsworker):
 
+    #ncsworker.skip_frame_measurement()
+
     while True:
         ncsworker.predict_async()
 
 
 class NcsWorker(object):
 
-    def __init__(self, devid, frameBuffer, results, camera_mode, camera_width, camera_height, number_of_ncs):
+    def __init__(self, devid, frameBuffer, results, camera_mode, camera_width, camera_height, number_of_ncs, vidfps, skpfrm):
         self.devid = devid
         self.frameBuffer = frameBuffer
         self.model_xml = "./lrmodel/MobileNetSSD/MobileNetSSD_deploy.xml"
@@ -187,14 +189,15 @@ class NcsWorker(object):
         self.results = results
         self.camera_mode = camera_mode
         self.number_of_ncs = number_of_ncs
-
+        if self.camera_mode == 0:
+            self.skip_frame = skpfrm
+        else:
+            self.skip_frame = 0
+        self.roop_frame = 0
+        self.vidfps = vidfps
 
     def image_preprocessing(self, color_image):
 
-        #if self.camera_mode == 0:
-        #    prepimg = cv2.resize(color_image,(532,400))
-        #    prepimg = prepimg[100:100+300,116:116+300]
-        #else:
         prepimg = cv2.resize(color_image, (300, 300))
         prepimg = prepimg - 127.5
         prepimg = prepimg * 0.007843
@@ -208,6 +211,12 @@ class NcsWorker(object):
 
             if self.frameBuffer.empty():
                 return
+
+            self.roop_frame += 1
+            if self.roop_frame <= self.skip_frame:
+               self.frameBuffer.get()
+               return
+            self.roop_frame = 0
 
             prepimg = self.image_preprocessing(self.frameBuffer.get())
             reqnum = searchlist(self.inferred_request, 0)
@@ -237,12 +246,12 @@ class NcsWorker(object):
             traceback.print_exc()
 
 
-def inferencer(results, frameBuffer, ssd_detection_mode, face_detection_mode, camera_mode, camera_width, camera_height, number_of_ncs):
+def inferencer(results, frameBuffer, ssd_detection_mode, face_detection_mode, camera_mode, camera_width, camera_height, number_of_ncs, vidfps, skpfrm):
 
     # Init infer threads
     threads = []
     for devid in range(number_of_ncs):
-        thworker = threading.Thread(target=async_infer, args=(NcsWorker(devid, frameBuffer, results, camera_mode, camera_width, camera_height, number_of_ncs),))
+        thworker = threading.Thread(target=async_infer, args=(NcsWorker(devid, frameBuffer, results, camera_mode, camera_width, camera_height, number_of_ncs, vidfps, skpfrm),))
         thworker.start()
         threads.append(thworker)
 
@@ -397,6 +406,8 @@ if __name__ == '__main__':
     parser.add_argument('-sd','--ssddetection',dest='ssd_detection_mode',type=int,default=1,help='[Future functions] SSDDetectionMode. (0:=Disabled, 1:=Enabled Default=1)')
     parser.add_argument('-fd','--facedetection',dest='face_detection_mode',type=int,default=0,help='[Future functions] FaceDetectionMode. (0:=Disabled, 1:=Full, 2:=Short Default=0)')
     parser.add_argument('-numncs','--numberofncs',dest='number_of_ncs',type=int,default=1,help='Number of NCS. (Default=1)')
+    parser.add_argument('-vidfps','--fpsofvideo',dest='fps_of_video',type=int,default=30,help='FPS of Video. (USB Camera Mode Only. Default=30)')
+    parser.add_argument('-skpfrm','--skipframe',dest='number_of_frame_skip',type=int,default=7,help='Number of frame skip. (RealSense Mode Only. Default=7)')
 
     args = parser.parse_args()
 
@@ -407,6 +418,8 @@ if __name__ == '__main__':
     ssd_detection_mode = args.ssd_detection_mode
     face_detection_mode = args.face_detection_mode
     number_of_ncs = args.number_of_ncs
+    vidfps = args.fps_of_video
+    skpfrm = args.number_of_frame_skip
 
     # 0:=RealSense Mode, 1:=USB Camera Mode
     if camera_mode != 0 and camera_mode != 1:
@@ -433,7 +446,7 @@ if __name__ == '__main__':
 
         # Start streaming
         p = mp.Process(target=camThread,
-                       args=(LABELS, results, frameBuffer, camera_mode, camera_width, camera_height, background_transparent_mode, background_img),
+                       args=(LABELS, results, frameBuffer, camera_mode, camera_width, camera_height, background_transparent_mode, background_img, vidfps),
                        daemon=True)
         p.start()
         processes.append(p)
@@ -441,7 +454,7 @@ if __name__ == '__main__':
         # Start detection MultiStick
         # Activation of inferencer
         p = mp.Process(target=inferencer,
-                       args=(results, frameBuffer, ssd_detection_mode, face_detection_mode, camera_mode, camera_width, camera_height, number_of_ncs),
+                       args=(results, frameBuffer, ssd_detection_mode, face_detection_mode, camera_mode, camera_width, camera_height, number_of_ncs, vidfps, skpfrm),
                        daemon=True)
         p.start()
         processes.append(p)
