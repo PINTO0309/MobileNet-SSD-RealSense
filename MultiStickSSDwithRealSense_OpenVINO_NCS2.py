@@ -191,11 +191,11 @@ class NcsWorker(object):
 
     def image_preprocessing(self, color_image):
 
-        if self.camera_mode == 0:
-            prepimg = cv2.resize(color_image,(532,400))
-            prepimg = prepimg[100:100+300,116:116+300]
-        else:
-            prepimg = cv2.resize(color_image, (300, 300))
+        #if self.camera_mode == 0:
+        #    prepimg = cv2.resize(color_image,(532,400))
+        #    prepimg = prepimg[100:100+300,116:116+300]
+        #else:
+        prepimg = cv2.resize(color_image, (300, 300))
         prepimg = prepimg - 127.5
         prepimg = prepimg * 0.007843
         prepimg = prepimg[np.newaxis, :, :, :]     # Batch size axis add
