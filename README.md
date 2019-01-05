@@ -17,7 +17,8 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 **【Japanese Article4】 https://qiita.com/PINTO/items/62859125c5381690623c**<br>
 **【Japanese Article5】 https://qiita.com/PINTO/items/127c84319822a0776420**<br>
 **【Japanese / English Article6】 [Boost RaspberryPi3 with Neural Compute Stick 2 (1 x NCS2) and feel the explosion performance of MobileNet-SSD　(If it is Core i7, 21 FPS)](https://qiita.com/PINTO/items/fc1fcecce4d5600c20bb#boost-raspberrypi3-with-neural-compute-stick-2-1-x-ncs2-and-feel-the-explosion-performance-of-mobilenet-ssdif-it-is-core-i7-21-fps)**<br>
-**【Japanese / English Article7】 [[24 FPS] Boost RaspberryPi3 with four Neural Compute Stick 2 (NCS2) MobileNet-SSD / YoloV3 [48 FPS for Core i7]](https://qiita.com/PINTO/items/94d5557fca9911cc892d#24-fps-boost-raspberrypi3-with-four-neural-compute-stick-2-ncs2-mobilenet-ssd--yolov3-48-fps-for-core-i7)**<br><br>
+**【Japanese / English Article7】 [[24 FPS] Boost RaspberryPi3 with four Neural Compute Stick 2 (NCS2) MobileNet-SSD / YoloV3 [48 FPS for Core i7]](https://qiita.com/PINTO/items/94d5557fca9911cc892d#24-fps-boost-raspberrypi3-with-four-neural-compute-stick-2-ncs2-mobilenet-ssd--yolov3-48-fps-for-core-i7)**<br>
+**【Japanese / English Article8】 [[24 FPS, 48 FPS] RaspberryPi3 + Neural Compute Stick 2, The day when the true power of one NCS2 was drawn out and "Goku" became a true "super saiya-jin"](https://qiita.com/PINTO/items/cb7ba1dae4bfc74a5966#24-fps-48-fps-raspberrypi3--neural-compute-stick-2-the-day-when-the-true-power-of-one-ncs2-was-drawn-out-and-goku-became-a-true-super-saiya-jin)**<br><br>
 
 ## Summary
 **Performance measurement result each number of sticks. (It is Detection rate. It is not a Playback rate.)**<br>
