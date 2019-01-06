@@ -134,7 +134,10 @@ $ python3 MultiStickSSDwithRealSense_OpenVINO_NCS2.py -mod 1 -numncs 1
 $ python3 MultiStickSSDwithRealSense_OpenVINO_NCS2.py -mod 1 -numncs 1
 ```
 ![24](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/24.gif)<br>
-  
+### **USB Camera Mode NCS2 x 1 Stick + LattePanda Alpha（Asynchronous screen drawing / MultiStickSSDwithRealSense_OpenVINO_NCS2.py）[48 FPS]**<br>
+**https://twitter.com/PINTO03091/status/1081575747314057219**<br>
+<br>
+<br>
 ![20](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/20.png)<br>
 ## Environment
 1．RaspberryPi3 + Raspbian Stretch (USB2.0 Port) or RaspberryPi3 + Ubuntu Mate or PC + Ubuntu16.04<br>
