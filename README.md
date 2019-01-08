@@ -443,7 +443,7 @@ $ sh inference_engine_vpu_arm/install_dependencies/install_NCS_udev_rules.sh
 Update udev rules so that the toolkit can communicate with your neural compute stick
 [install_NCS_udev_rules.sh] udev rules installed
 ```
-2.Update udev rule
+4.Update udev rule
 ```bash
 $ sudo apt install -y git libssl-dev libusb-1.0-0-dev pkg-config libgtk-3-dev
 $ sudo apt install -y libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev
@@ -452,7 +452,7 @@ $ cd /etc/udev/rules.d/
 $ sudo wget https://raw.githubusercontent.com/IntelRealSense/librealsense/master/config/99-realsense-libusb.rules
 $ sudo udevadm control --reload-rules && udevadm trigger
 ```
-3.Upgrade to "cmake 3.11.4"
+5.Upgrade to "cmake 3.11.4"
 ```bash
 $ cd ~
 $ wget https://cmake.org/files/v3.11/cmake-3.11.4.tar.gz
@@ -466,14 +466,14 @@ $ source ~/.bashrc
 $ cmake --version
 cmake version 3.11.4
 ```
-4.Register LD_LIBRARY_PATH
+6.Register LD_LIBRARY_PATH
 ```bash
 $ nano ~/.bashrc
 export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 
 $ source ~/.bashrc
 ```
-5.Install Intel® RealSense™ SDK 2.0
+7.Install Intel® RealSense™ SDK 2.0
 ```bash
 $ cd ~
 $ sudo apt update;sudo apt upgrade
@@ -489,17 +489,7 @@ $ cmake .. -DBUILD_EXAMPLES=false -DCMAKE_BUILD_TYPE=Release
 $ make -j1
 $ sudo make install
 ```
-6.Install OpenCV Wrapper
-```bash
-$ cd ~/librealsense/wrappers/opencv;mkdir build;cd build
-$ cmake ..
-$ nano ../latency-tool/CMakeLists.txt
-target_link_libraries(rs-latency-tool ${DEPENDENCIES} pthread)
-
-$ make -j $(($(nproc) + 1))
-$ sudo make install
-```
-7.Install Python binding
+8.Install Python binding
 ```bash
 $ cd ~/librealsense/build
 
@@ -514,14 +504,14 @@ $ cmake .. -DBUILD_PYTHON_BINDINGS=bool:true -DPYTHON_EXECUTABLE=$(which python)
 $ make -j1
 $ sudo make install
 ```
-8.Update PYTHON_PATH
+9.Update PYTHON_PATH
 ```bash
 $ nano ~/.bashrc
 export PYTHONPATH=$PYTHONPATH:/usr/local/lib
 
 $ source ~/.bashrc
 ```
-9.RealSense SDK import test
+10.RealSense SDK import test
 ```bash
 $ python3
 Python 3.5.3 (default, Jan 19 2017, 14:11:04) 
@@ -530,20 +520,20 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> import pyrealsense2
 >>> exit()
 ```
-10.Installing the OpenGL package for Python
+11.Installing the OpenGL package for Python
 ```bash
 $ sudo apt-get install python-opengl
 $ sudo -H pip3 install pyopengl
 $ sudo -H pip3 install pyopengl_accelerate
 ```
-11.Reduce the SWAP area to the default size (RaspberryPi+Raspbian Stretch / RaspberryPi+Ubuntu Mate Only)
+12.Reduce the SWAP area to the default size (RaspberryPi+Raspbian Stretch / RaspberryPi+Ubuntu Mate Only)
 ```bash
 $ sudo nano /etc/dphys-swapfile
 CONF_SWAPSIZE=100
 
 $ sudo /etc/init.d/dphys-swapfile restart swapon -s
 ```
-12.Clone a set of resources
+13.Clone a set of resources
 ```bash
 $ git clone https://github.com/PINTO0309/MobileNet-SSD-RealSense.git
 ```
