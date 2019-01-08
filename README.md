@@ -344,17 +344,7 @@ $ cmake .. -DBUILD_EXAMPLES=true -DCMAKE_BUILD_TYPE=Release
 $ make -j1
 $ sudo make install
 ```
-11.Install OpenCV Wrapper
-```bash
-$ cd ~/librealsense/wrappers/opencv;mkdir build;cd build
-$ cmake ..
-$ nano ../latency-tool/CMakeLists.txt
-target_link_libraries(rs-latency-tool ${DEPENDENCIES} pthread)
-
-$ make -j $(($(nproc) + 1))
-$ sudo make install
-```
-12.Install Python binding
+11.Install Python binding
 ```bash
 $ cd ~/librealsense/build
 
@@ -369,14 +359,14 @@ $ cmake .. -DBUILD_PYTHON_BINDINGS=bool:true -DPYTHON_EXECUTABLE=$(which python)
 $ make -j1
 $ sudo make install
 ```
-13.Update PYTHON_PATH
+12.Update PYTHON_PATH
 ```bash
 $ nano ~/.bashrc
 export PYTHONPATH=$PYTHONPATH:/usr/local/lib
 
 $ source ~/.bashrc
 ```
-14.RealSense SDK import test
+13.RealSense SDK import test
 ```bash
 $ python3
 Python 3.5.3 (default, Jan 19 2017, 14:11:04) 
@@ -385,20 +375,20 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> import pyrealsense2
 >>> exit()
 ```
-15.Installing the OpenGL package for Python
+14.Installing the OpenGL package for Python
 ```bash
 $ sudo apt-get install python-opengl
 $ sudo -H pip3 install pyopengl
 $ sudo -H pip3 install pyopengl_accelerate
 ```
-16.Reduce the SWAP area to the default size (RaspberryPi+Raspbian Stretch / RaspberryPi+Ubuntu Mate Only)
+15.Reduce the SWAP area to the default size (RaspberryPi+Raspbian Stretch / RaspberryPi+Ubuntu Mate Only)
 ```bash
 $ sudo nano /etc/dphys-swapfile
 CONF_SWAPSIZE=100
 
 $ sudo /etc/init.d/dphys-swapfile restart swapon -s
 ```
-17.Clone a set of resources
+16.Clone a set of resources
 ```bash
 $ git clone https://github.com/PINTO0309/MobileNet-SSD-RealSense.git
 ```
