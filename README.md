@@ -185,7 +185,7 @@ $ sudo reboot
 $ sudo nano /etc/dphys-swapfile
 CONF_SWAPSIZE=2048
 
-$ sudo /etc/init.d/dphys-swapfile restart swapon -s
+$ sudo /etc/init.d/dphys-swapfile restart;swapon -s
 ```
 3.Install NSCDK<br>
 ```bash
@@ -406,7 +406,7 @@ $ sudo reboot
 $ sudo nano /etc/dphys-swapfile
 CONF_SWAPSIZE=2048
 
-$ sudo /etc/init.d/dphys-swapfile restart swapon -s
+$ sudo /etc/init.d/dphys-swapfile restart;swapon -s
 ```
 3.Install OpenVINO
 ```bash
