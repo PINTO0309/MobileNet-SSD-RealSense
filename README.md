@@ -386,7 +386,7 @@ $ sudo -H pip3 install pyopengl_accelerate
 $ sudo nano /etc/dphys-swapfile
 CONF_SWAPSIZE=100
 
-$ sudo /etc/init.d/dphys-swapfile restart swapon -s
+$ sudo /etc/init.d/dphys-swapfile restart;swapon -s
 ```
 16.Clone a set of resources
 ```bash
@@ -523,7 +523,7 @@ $ sudo -H pip3 install pyopengl_accelerate
 $ sudo nano /etc/dphys-swapfile
 CONF_SWAPSIZE=100
 
-$ sudo /etc/init.d/dphys-swapfile restart swapon -s
+$ sudo /etc/init.d/dphys-swapfile restart;swapon -s
 ```
 13.Clone a set of resources
 ```bash
