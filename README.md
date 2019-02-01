@@ -11,14 +11,22 @@ Measure the distance to the object with RealSense D435 while performing object d
 "USB Camera mode" can not measure the distance, but it operates at high speed.<br>
 And, This is support for MultiGraph and FaceDetection, MultiProcessing, Background transparentation.<br>
 And, This is support for simple clustering function. (To prevent thermal runaway)<br><br>
-**【Japanese Article1】 https://qiita.com/PINTO/items/1828f97d95fdda45f57d**<br>
-**【Japanese / English Article2】 [Intel also praised me again ヽ(ﾟ∀ﾟ)ﾉ Yeah MobileNet-SSD(MobileNetSSD) object detection and RealSense distance measurement (640x480) with RaspberryPi3 At least 25FPS playback frame rate + 12FPS prediction rate](https://qiita.com/PINTO/items/40abcf33af3ae7ef579d#-english-article)**<br>
-**【Japanese / English Article3】 [Detection rate approx. 30FPS RaspberryPi3 Model B(plus none) is slightly later than TX2, acquires object detection rate of MobilenetSSD and corresponds to MultiModel VOC+WIDER FACE](https://qiita.com/PINTO/items/190daa4fddfd2a21f959#-detection-rate-approx-30fps-raspberrypi3-model-bplus-none-is-slightly-later-than-tx2-acquires-object-detection-rate-of-mobilenetssd-and-corresponds-to-multimodel-vocwider-face)**<br>
-**【Japanese Article4】 https://qiita.com/PINTO/items/62859125c5381690623c**<br>
-**【Japanese Article5】 https://qiita.com/PINTO/items/127c84319822a0776420**<br>
-**【Japanese / English Article6】 [Boost RaspberryPi3 with Neural Compute Stick 2 (1 x NCS2) and feel the explosion performance of MobileNet-SSD　(If it is Core i7, 21 FPS)](https://qiita.com/PINTO/items/fc1fcecce4d5600c20bb#boost-raspberrypi3-with-neural-compute-stick-2-1-x-ncs2-and-feel-the-explosion-performance-of-mobilenet-ssdif-it-is-core-i7-21-fps)**<br>
-**【Japanese / English Article7】 [[24 FPS] Boost RaspberryPi3 with four Neural Compute Stick 2 (NCS2) MobileNet-SSD / YoloV3 [48 FPS for Core i7]](https://qiita.com/PINTO/items/94d5557fca9911cc892d#24-fps-boost-raspberrypi3-with-four-neural-compute-stick-2-ncs2-mobilenet-ssd--yolov3-48-fps-for-core-i7)**<br>
-**【Japanese / English Article8】 [[24 FPS, 48 FPS] RaspberryPi3 + Neural Compute Stick 2, The day when the true power of one NCS2 was drawn out and "Goku" became a true "super saiya-jin"](https://qiita.com/PINTO/items/cb7ba1dae4bfc74a5966#24-fps-48-fps-raspberrypi3--neural-compute-stick-2-the-day-when-the-true-power-of-one-ncs2-was-drawn-out-and-goku-became-a-true-super-saiya-jin)**<br><br>
+**【Japanese Article1】  
+https://qiita.com/PINTO/items/1828f97d95fdda45f57d**<br>
+**【Japanese / English Article2】  
+[Intel also praised me again ヽ(ﾟ∀ﾟ)ﾉ Yeah MobileNet-SSD(MobileNetSSD) object detection and RealSense distance measurement (640x480) with RaspberryPi3 At least 25FPS playback frame rate + 12FPS prediction rate](https://qiita.com/PINTO/items/40abcf33af3ae7ef579d#-english-article)**<br>
+**【Japanese / English Article3】  
+[Detection rate approx. 30FPS RaspberryPi3 Model B(plus none) is slightly later than TX2, acquires object detection rate of MobilenetSSD and corresponds to MultiModel VOC+WIDER FACE](https://qiita.com/PINTO/items/190daa4fddfd2a21f959#-detection-rate-approx-30fps-raspberrypi3-model-bplus-none-is-slightly-later-than-tx2-acquires-object-detection-rate-of-mobilenetssd-and-corresponds-to-multimodel-vocwider-face)**<br>
+**【Japanese Article4】  
+https://qiita.com/PINTO/items/62859125c5381690623c**<br>
+**【Japanese Article5】  
+https://qiita.com/PINTO/items/127c84319822a0776420**<br>
+**【Japanese / English Article6】  
+[Boost RaspberryPi3 with Neural Compute Stick 2 (1 x NCS2) and feel the explosion performance of MobileNet-SSD　(If it is Core i7, 21 FPS)](https://qiita.com/PINTO/items/fc1fcecce4d5600c20bb#boost-raspberrypi3-with-neural-compute-stick-2-1-x-ncs2-and-feel-the-explosion-performance-of-mobilenet-ssdif-it-is-core-i7-21-fps)**<br>
+**【Japanese / English Article7】  
+[[24 FPS] Boost RaspberryPi3 with four Neural Compute Stick 2 (NCS2) MobileNet-SSD / YoloV3 [48 FPS for Core i7]](https://qiita.com/PINTO/items/94d5557fca9911cc892d#24-fps-boost-raspberrypi3-with-four-neural-compute-stick-2-ncs2-mobilenet-ssd--yolov3-48-fps-for-core-i7)**<br>
+**【Japanese / English Article8】  
+[[24 FPS, 48 FPS] RaspberryPi3 + Neural Compute Stick 2, The day when the true power of one NCS2 was drawn out and "Goku" became a true "super saiya-jin"](https://qiita.com/PINTO/items/cb7ba1dae4bfc74a5966#24-fps-48-fps-raspberrypi3--neural-compute-stick-2-the-day-when-the-true-power-of-one-ncs2-was-drawn-out-and-goku-became-a-true-super-saiya-jin)**<br><br>
 
 ## Summary
 **Performance measurement result each number of sticks. (It is Detection rate. It is not a Playback rate.)**<br>
@@ -92,6 +100,7 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 [Dec 22, 2018]　Only "USB Camera + single thread mode" correspondence with NCS 2 is completed<br>
 [Dec 31, 2018]　"USB Camera + MultiStick + MultiProcess mode" correspondence with NCS2 is completed<br>
 [Jan 04, 2019]　Tune performance four times. MultiStickSSDwithRealSense_OpenVINO_NCS2.py<br>
+[Jan 01, 2019]　Pull request merged. Fix Typo. Thanks, nguyen-alexa!!
 </div></details><br><br>
 
 ## Motion image
