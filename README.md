@@ -392,6 +392,7 @@ $ sudo -H pip3 install pyopengl_accelerate
 ```
 15.Installation of the imutils package. (For PiCamera)
 ```bash
+$ sudo apt-get install python3-picamera
 $ sudo -H pip3 install imutils --upgrade
 ```
 16.Reduce the SWAP area to the default size (RaspberryPi+Raspbian Stretch / RaspberryPi+Ubuntu Mate Only)
@@ -533,6 +534,7 @@ $ sudo -H pip3 install pyopengl_accelerate
 ```
 12.Installation of the imutils package. (For PiCamera)
 ```bash
+$ sudo apt-get install python3-picamera
 $ sudo -H pip3 install imutils --upgrade
 ```
 13.Reduce the SWAP area to the default size (RaspberryPi+Raspbian Stretch / RaspberryPi+Ubuntu Mate Only)
