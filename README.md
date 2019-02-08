@@ -390,14 +390,18 @@ $ sudo apt-get install python-opengl
 $ sudo -H pip3 install pyopengl
 $ sudo -H pip3 install pyopengl_accelerate
 ```
-15.Reduce the SWAP area to the default size (RaspberryPi+Raspbian Stretch / RaspberryPi+Ubuntu Mate Only)
+15.Installation of the imutils package. (For PiCamera)
+```bash
+$ sudo -H pip3 install imutils --upgrade
+```
+16.Reduce the SWAP area to the default size (RaspberryPi+Raspbian Stretch / RaspberryPi+Ubuntu Mate Only)
 ```bash
 $ sudo nano /etc/dphys-swapfile
 CONF_SWAPSIZE=100
 
 $ sudo /etc/init.d/dphys-swapfile restart;swapon -s
 ```
-16.Clone a set of resources
+17.Clone a set of resources
 ```bash
 $ git clone https://github.com/PINTO0309/MobileNet-SSD-RealSense.git
 ```
@@ -527,14 +531,18 @@ $ sudo apt-get install python-opengl
 $ sudo -H pip3 install pyopengl
 $ sudo -H pip3 install pyopengl_accelerate
 ```
-12.Reduce the SWAP area to the default size (RaspberryPi+Raspbian Stretch / RaspberryPi+Ubuntu Mate Only)
+12.Installation of the imutils package. (For PiCamera)
+```bash
+$ sudo -H pip3 install imutils --upgrade
+```
+13.Reduce the SWAP area to the default size (RaspberryPi+Raspbian Stretch / RaspberryPi+Ubuntu Mate Only)
 ```bash
 $ sudo nano /etc/dphys-swapfile
 CONF_SWAPSIZE=100
 
 $ sudo /etc/init.d/dphys-swapfile restart;swapon -s
 ```
-13.Clone a set of resources
+14.Clone a set of resources
 ```bash
 $ git clone https://github.com/PINTO0309/MobileNet-SSD-RealSense.git
 ```
