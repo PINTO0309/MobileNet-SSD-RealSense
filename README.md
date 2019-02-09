@@ -44,14 +44,14 @@ https://qiita.com/PINTO/items/127c84319822a0776420**<br>
 　　**4-1-4. [RealSense Mode SingleStick about 5.0 FPS（Transparent background in real time / Asynchronous screen drawing / MultiStickSSDwithRealSense.py）](#realsense-mode-singlestick-about-50-fpstransparent-background-in-real-time--asynchronous-screen-drawing--multistickssdwithrealsensepy)**  
 　　**4-1-5. [USB Camera Mode MultiStick x3 Boosted （Asynchronous screen drawing / MultiGraph(SSD+FaceDetection) / FaceDetection / MultiStickSSDwithRealSense.py）](#usb-camera-mode-multistick-x3-boosted-asynchronous-screen-drawing--multigraphssdfacedetection--facedetection--multistickssdwithrealsensepy)**  
 　　**4-1-6. [Simple clustering function (MultiStick / MultiCluster / Cluster switch cycle / Cluster switch temperature)](#simple-clustering-function-multistick--multicluster--cluster-switch-cycle--cluster-switch-temperature)**  
-　**4-2. OpenVINO ver**
+　**4-2. OpenVINO ver**  
 　　**4-2-1. [USB Camera Mode NCS2 SingleStick + RaspberryPi3（Synchronous screen drawing / SingleStickSSDwithUSBCamera_OpenVINO_NCS2.py）](#usb-camera-mode-ncs2-singlestick--raspberrypi3synchronous-screen-drawing--singlestickssdwithusbcamera_openvino_ncs2py)**  
 　　**4-2-2. [USB Camera Mode NCS2 SingleStick + Core i7（Synchronous screen drawing / SingleStickSSDwithUSBCamera_OpenVINO_NCS2.py）](#usb-camera-mode-ncs2-singlestick--core-i7synchronous-screen-drawing--singlestickssdwithusbcamera_openvino_ncs2py)**  
 　　**4-2-3. [USB Camera Mode NCS2 x 1 Stick + Core i7（Asynchronous screen drawing / MultiStickSSDwithRealSense_OpenVINO_NCS2.py）](#usb-camera-mode-ncs2-x-1-stick--core-i7asynchronous-screen-drawing--multistickssdwithrealsense_openvino_ncs2py)**  
 　　**4-2-4. [USB Camera Mode NCS2 x 1 Stick + RaspberryPi3（Asynchronous screen drawing / MultiStickSSDwithRealSense_OpenVINO_NCS2.py）](#usb-camera-mode-ncs2-x-1-stick--raspberrypi3asynchronous-screen-drawing--multistickssdwithrealsense_openvino_ncs2py)**  
 　　**4-2-5. [USB Camera Mode NCS2 x 1 Stick + LattePanda Alpha（Asynchronous screen drawing / MultiStickSSDwithRealSense_OpenVINO_NCS2.py）48 FPS](#usb-camera-mode-ncs2-x-1-stick--lattepanda-alphaasynchronous-screen-drawing--multistickssdwithrealsense_openvino_ncs2py48-fps)**  
 　　**4-2-6. [PiCamera Mode NCS2 x 1 Stick + RaspberryPi3（Asynchronous screen drawing / MultiStickSSDwithPiCamera_OpenVINO_NCS2.py）](#picamera-mode-ncs2-x-1-stick--raspberrypi3asynchronous-screen-drawing--multistickssdwithpicamera_openvino_ncs2py)**  
-**5. [Motion diagram of MultiStick](#motion-image)**  
+**5. [Motion diagram of MultiStick](#motion-diagram-of-multistick)**  
 
 ## Summary
 **Performance measurement result each number of sticks. (It is Detection rate. It is not a Playback rate.)**<br>
