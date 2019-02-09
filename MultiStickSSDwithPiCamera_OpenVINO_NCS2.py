@@ -12,6 +12,7 @@ from openvino.inference_engine import IENetwork, IEPlugin
 import heapq
 import threading
 from imutils.video.pivideostream import PiVideoStream
+from imutils.video.filevideostream import FileVideoStream
 import imutils
 
 lastresults = None
@@ -32,6 +33,7 @@ window_name = ""
 ssd_detection_mode = 1
 face_detection_mode = 0
 elapsedtime = 0.0
+vs = None
 
 LABELS = [['background',
            'aeroplane', 'bicycle', 'bird', 'boat',
@@ -41,7 +43,7 @@ LABELS = [['background',
            'sheep', 'sofa', 'train', 'tvmonitor'],
           ['background', 'face']]
 
-def camThread(LABELS, results, frameBuffer, camera_width, camera_height, vidfps):
+def camThread(LABELS, results, frameBuffer, camera_width, camera_height, vidfps, video_file_path):
     global fps
     global detectfps
     global lastresults
@@ -51,10 +53,16 @@ def camThread(LABELS, results, frameBuffer, camera_width, camera_height, vidfps)
     global time2
     global cam
     global window_name
+    global vs
 
-    vs = PiVideoStream((camera_width, camera_height), vidfps).start()
+    if video_file_path != "":
+        vs = FileVideoStream(video_file_path).start()
+        window_name = "Movie File"
+    else:
+        vs = PiVideoStream((camera_width, camera_height), vidfps).start()
+        window_name = "PiCamera"
     time.sleep(2)
-    window_name = "PiCamera"
+
 
     cv2.namedWindow(window_name, cv2.WINDOW_AUTOSIZE)
 
@@ -278,6 +286,7 @@ def overlay_on_image(frames, object_infos, LABELS):
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
+    parser.add_argument('-vf','--video',dest='video_file_path',default="",help='Path to input video file. (Default="")')
     parser.add_argument('-wd','--width',dest='camera_width',type=int,default=320,help='Width of the frames in the video stream. (Default=320)')
     parser.add_argument('-ht','--height',dest='camera_height',type=int,default=240,help='Height of the frames in the video stream. (Default=240)')
     parser.add_argument('-sd','--ssddetection',dest='ssd_detection_mode',type=int,default=1,help='[Future functions] SSDDetectionMode. (0:=Disabled, 1:=Enabled Default=1)')
@@ -287,6 +296,7 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
+    video_file_path = args.video_file_path
     camera_width  = args.camera_width
     camera_height = args.camera_height
     ssd_detection_mode = args.ssd_detection_mode
@@ -305,7 +315,7 @@ if __name__ == '__main__':
 
         # Start streaming
         p = mp.Process(target=camThread,
-                       args=(LABELS, results, frameBuffer, camera_width, camera_height, vidfps),
+                       args=(LABELS, results, frameBuffer, camera_width, camera_height, vidfps, video_file_path),
                        daemon=True)
         p.start()
         processes.append(p)
