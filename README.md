@@ -412,6 +412,18 @@ $ sudo /etc/init.d/dphys-swapfile restart;swapon -s
 ```bash
 $ git clone https://github.com/PINTO0309/MobileNet-SSD-RealSense.git
 ```
+18.[Optional] Create a RAM disk folder for movie file placement
+```bash
+$ cd /etc
+$ sudo cp fstab fstab_org
+$ sudo nano fstab
+
+# Mount "/home/pi/movie" on RAM disk.
+# Add below.
+tmpfs /home/pi/movie tmpfs defaults,size=32m,noatime,mode=0777 0 0
+
+$ sudo reboot
+```
 <br>
 <br>
 
@@ -553,6 +565,18 @@ $ sudo /etc/init.d/dphys-swapfile restart;swapon -s
 14.Clone a set of resources
 ```bash
 $ git clone https://github.com/PINTO0309/MobileNet-SSD-RealSense.git
+```
+15.[Optional] Create a RAM disk folder for movie file placement
+```bash
+$ cd /etc
+$ sudo cp fstab fstab_org
+$ sudo nano fstab
+
+# Mount "/home/pi/movie" on RAM disk.
+# Add below.
+tmpfs /home/pi/movie tmpfs defaults,size=32m,noatime,mode=0777 0 0
+
+$ sudo reboot
 ```
 <br>
 <br>
