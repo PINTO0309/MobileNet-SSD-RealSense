@@ -1,5 +1,5 @@
 # MobileNet-SSD-RealSense
-RaspberryPi3(Raspbian Stretch) or Ubuntu16.04/UbuntuMate + Neural Compute Stick(NCS/NCS2) + RealSense D435(or USB Camera) + MobileNet-SSD(MobileNetSSD)  
+RaspberryPi3(Raspbian Stretch) or Ubuntu16.04/UbuntuMate + Neural Compute Stick(NCS/NCS2) + RealSense D435(or USB Camera or PiCamera) + MobileNet-SSD(MobileNetSSD)  
 
 **【Notice】December 19, 2018 OpenVINO has supported RaspberryPi + NCS2 !!  
 https://software.intel.com/en-us/articles/OpenVINO-RelNotes#inpage-nav-2-2**  
@@ -100,7 +100,8 @@ https://qiita.com/PINTO/items/127c84319822a0776420**<br>
 [Dec 22, 2018]　Only "USB Camera + single thread mode" correspondence with NCS 2 is completed<br>
 [Dec 31, 2018]　"USB Camera + MultiStick + MultiProcess mode" correspondence with NCS2 is completed<br>
 [Jan 04, 2019]　Tune performance four times. MultiStickSSDwithRealSense_OpenVINO_NCS2.py<br>
-[Jan 01, 2019]　Pull request merged. Fix Typo. Thanks, nguyen-alexa!!
+[Jan 01, 2019]　Pull request merged. Fix Typo. Thanks, nguyen-alexa!!<br>
+[Feb 09, 2019]　Corresponds to PiCamera.
 </div></details><br><br>
 
 ## Motion image
