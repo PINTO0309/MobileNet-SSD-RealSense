@@ -11,6 +11,8 @@ import multiprocessing as mp
 from openvino.inference_engine import IENetwork, IEPlugin
 import heapq
 import threading
+from imutils.video.pivideostream import PiVideoStream
+import imutils
 
 lastresults = None
 threads = []
@@ -39,7 +41,7 @@ LABELS = [['background',
            'sheep', 'sofa', 'train', 'tvmonitor'],
           ['background', 'face']]
 
-def camThread(LABELS, results, frameBuffer, camera_width, camera_height, vidfps, number_of_camera):
+def camThread(LABELS, results, frameBuffer, camera_width, camera_height, vidfps):
     global fps
     global detectfps
     global lastresults
@@ -50,24 +52,17 @@ def camThread(LABELS, results, frameBuffer, camera_width, camera_height, vidfps,
     global cam
     global window_name
 
-    cam = cv2.VideoCapture(number_of_camera)
-    if cam.isOpened() != True:
-        print("USB Camera Open Error!!!")
-        sys.exit(0)
-    cam.set(cv2.CAP_PROP_FPS, vidfps)
-    cam.set(cv2.CAP_PROP_FRAME_WIDTH, camera_width)
-    cam.set(cv2.CAP_PROP_FRAME_HEIGHT, camera_height)
-    window_name = "USB Camera"
+    vs = PiVideoStream((camera_width, camera_height), vidfps).start()
+    time.sleep(2)
+    window_name = "PiCamera"
 
     cv2.namedWindow(window_name, cv2.WINDOW_AUTOSIZE)
 
     while True:
         t1 = time.perf_counter()
 
-        # USB Camera Stream Read
-        s, color_image = cam.read()
-        if not s:
-            continue
+        # PiCamera Stream Read
+        color_image = vs.read()
         if frameBuffer.full():
             frameBuffer.get()
         frames = color_image
@@ -283,7 +278,6 @@ def overlay_on_image(frames, object_infos, LABELS):
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('-cn','--numberofcamera',dest='number_of_camera',type=int,default=0,help='USB camera number. (Default=0)')
     parser.add_argument('-wd','--width',dest='camera_width',type=int,default=320,help='Width of the frames in the video stream. (Default=320)')
     parser.add_argument('-ht','--height',dest='camera_height',type=int,default=240,help='Height of the frames in the video stream. (Default=240)')
     parser.add_argument('-sd','--ssddetection',dest='ssd_detection_mode',type=int,default=1,help='[Future functions] SSDDetectionMode. (0:=Disabled, 1:=Enabled Default=1)')
@@ -293,7 +287,6 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    number_of_camera = args.number_of_camera
     camera_width  = args.camera_width
     camera_height = args.camera_height
     ssd_detection_mode = args.ssd_detection_mode
@@ -312,7 +305,7 @@ if __name__ == '__main__':
 
         # Start streaming
         p = mp.Process(target=camThread,
-                       args=(LABELS, results, frameBuffer, camera_width, camera_height, vidfps, number_of_camera),
+                       args=(LABELS, results, frameBuffer, camera_width, camera_height, vidfps),
                        daemon=True)
         p.start()
         processes.append(p)
