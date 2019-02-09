@@ -18,7 +18,7 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 **【Japanese / English Article3】  
 [Detection rate approx. 30FPS RaspberryPi3 Model B(plus none) is slightly later than TX2, acquires object detection rate of MobilenetSSD and corresponds to MultiModel VOC+WIDER FACE](https://qiita.com/PINTO/items/190daa4fddfd2a21f959#-detection-rate-approx-30fps-raspberrypi3-model-bplus-none-is-slightly-later-than-tx2-acquires-object-detection-rate-of-mobilenetssd-and-corresponds-to-multimodel-vocwider-face)**<br>
 **【Japanese Article4】  
-https://qiita.com/PINTO/items/62859125c5381690623c**<br>
+[RaspberryPi3で複数のMovidius Neural Compute Stick をシームレスにクラスタ切り替えして高速推論性能を維持しつつ熱暴走(内部温度70℃前後)を回避する](https://qiita.com/PINTO/items/62859125c5381690623c)**<br>
 **【Japanese Article5】  
 https://qiita.com/PINTO/items/127c84319822a0776420**<br>
 **【Japanese / English Article6】  
