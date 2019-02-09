@@ -42,7 +42,7 @@ https://qiita.com/PINTO/items/127c84319822a0776420**<br>
 　　**4-1-2. [RealSense Mode about 25.0 FPS （Asynchronous screen drawing）](#realsense-mode-about-250-fps-asynchronous-screen-drawing--multistickssdwithrealsensepy)**  
 　　**4-1-3. [USB Camera Mode MultiStick x4 Boosted 16.0 FPS+ （Asynchronous screen drawing）](#usb-camera-mode-multistick-x4-boosted-160-fps-asynchronous-screen-drawing--multistickssdwithrealsensepy)**  
 　　**4-1-4. [RealSense Mode SingleStick about 5.0 FPS（Transparent background / Asynchronous screen drawing](#realsense-mode-singlestick-about-50-fpstransparent-background-in-real-time--asynchronous-screen-drawing--multistickssdwithrealsensepy)**  
-　　**4-1-5. [USB Camera Mode MultiStick x3 Boosted （Asynchronous screen drawing / MultiGraph(SSD+FaceDetection)](#usb-camera-mode-multistick-x3-boosted-asynchronous-screen-drawing--multigraphssdfacedetection--facedetection--multistickssdwithrealsensepy)**  
+　　**4-1-5. [USB Camera Mode MultiStick x3 Boosted （Asynchronous screen drawing / MultiGraph](#usb-camera-mode-multistick-x3-boosted-asynchronous-screen-drawing--multigraphssdfacedetection--facedetection--multistickssdwithrealsensepy)**  
 　　**4-1-6. [Simple clustering function (MultiStick / MultiCluster / Cluster switch cycle / Cluster switch temperature)](#simple-clustering-function-multistick--multicluster--cluster-switch-cycle--cluster-switch-temperature)**  
 　**4-2. OpenVINO ver**  
 　　**4-2-1. [USB Camera Mode NCS2 SingleStick + RaspberryPi3（Synchronous screen drawing）](#usb-camera-mode-ncs2-singlestick--raspberrypi3synchronous-screen-drawing--singlestickssdwithusbcamera_openvino_ncs2py)**  
