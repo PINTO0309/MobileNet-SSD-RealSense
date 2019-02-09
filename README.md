@@ -11,6 +11,7 @@ Measure the distance to the object with RealSense D435 while performing object d
 "USB Camera mode / PiCamera mode" can not measure the distance, but it operates at high speed.<br>
 And, This is support for MultiGraph and FaceDetection, MultiProcessing, Background transparentation.<br>
 And, This is support for simple clustering function. (To prevent thermal runaway)<br><br>
+## My blog
 **【Japanese Article1】  
 [RaspberryPi3 (Raspbian Stretch) + Intel Movidius Neural Compute Stick(NCS) + RealSenseD435 + MobileNet-SSD(MobileNetSSD) で高速に物体検出しつつ悟空やモニタまでの距離を測る](https://qiita.com/PINTO/items/1828f97d95fdda45f57d)**<br>
 **【Japanese / English Article2】  
