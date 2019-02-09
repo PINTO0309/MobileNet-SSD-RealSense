@@ -11,22 +11,58 @@ Measure the distance to the object with RealSense D435 while performing object d
 "USB Camera mode / PiCamera mode" can not measure the distance, but it operates at high speed.<br>
 And, This is support for MultiGraph and FaceDetection, MultiProcessing, Background transparentation.<br>
 And, This is support for simple clustering function. (To prevent thermal runaway)<br><br>
+## My blog
 **【Japanese Article1】  
-https://qiita.com/PINTO/items/1828f97d95fdda45f57d**<br>
+[RaspberryPi3 (Raspbian Stretch) + Intel Movidius Neural Compute Stick(NCS) + RealSenseD435 + MobileNet-SSD(MobileNetSSD) で高速に物体検出しつつ悟空やモニタまでの距離を測る](https://qiita.com/PINTO/items/1828f97d95fdda45f57d)**<br>
 **【Japanese / English Article2】  
 [Intel also praised me again ヽ(ﾟ∀ﾟ)ﾉ Yeah MobileNet-SSD(MobileNetSSD) object detection and RealSense distance measurement (640x480) with RaspberryPi3 At least 25FPS playback frame rate + 12FPS prediction rate](https://qiita.com/PINTO/items/40abcf33af3ae7ef579d#-english-article)**<br>
 **【Japanese / English Article3】  
 [Detection rate approx. 30FPS RaspberryPi3 Model B(plus none) is slightly later than TX2, acquires object detection rate of MobilenetSSD and corresponds to MultiModel VOC+WIDER FACE](https://qiita.com/PINTO/items/190daa4fddfd2a21f959#-detection-rate-approx-30fps-raspberrypi3-model-bplus-none-is-slightly-later-than-tx2-acquires-object-detection-rate-of-mobilenetssd-and-corresponds-to-multimodel-vocwider-face)**<br>
 **【Japanese Article4】  
-https://qiita.com/PINTO/items/62859125c5381690623c**<br>
+[RaspberryPi3で複数のMovidius Neural Compute Stick をシームレスにクラスタ切り替えして高速推論性能を維持しつつ熱暴走(内部温度70℃前後)を回避する](https://qiita.com/PINTO/items/62859125c5381690623c)**<br>
 **【Japanese Article5】  
-https://qiita.com/PINTO/items/127c84319822a0776420**<br>
+[Caffeで超軽量な "Semantic Segmentation" のモデルを生成する Sparse-Quantized CNN 512x1024_10MB_軽量モデル_その１](https://qiita.com/PINTO/items/127c84319822a0776420)**<br>
 **【Japanese / English Article6】  
 [Boost RaspberryPi3 with Neural Compute Stick 2 (1 x NCS2) and feel the explosion performance of MobileNet-SSD　(If it is Core i7, 21 FPS)](https://qiita.com/PINTO/items/fc1fcecce4d5600c20bb#boost-raspberrypi3-with-neural-compute-stick-2-1-x-ncs2-and-feel-the-explosion-performance-of-mobilenet-ssdif-it-is-core-i7-21-fps)**<br>
 **【Japanese / English Article7】  
 [[24 FPS] Boost RaspberryPi3 with four Neural Compute Stick 2 (NCS2) MobileNet-SSD / YoloV3 [48 FPS for Core i7]](https://qiita.com/PINTO/items/94d5557fca9911cc892d#24-fps-boost-raspberrypi3-with-four-neural-compute-stick-2-ncs2-mobilenet-ssd--yolov3-48-fps-for-core-i7)**<br>
 **【Japanese / English Article8】  
 [[24 FPS, 48 FPS] RaspberryPi3 + Neural Compute Stick 2, The day when the true power of one NCS2 was drawn out and "Goku" became a true "super saiya-jin"](https://qiita.com/PINTO/items/cb7ba1dae4bfc74a5966#24-fps-48-fps-raspberrypi3--neural-compute-stick-2-the-day-when-the-true-power-of-one-ncs2-was-drawn-out-and-goku-became-a-true-super-saiya-jin)**<br><br>
+
+## Table of contents
+**1. [Summary](#summary)**  
+　**1.1 [Verification environment NCSDK (1)](#verification-environment-1)**  
+　**1.2 [Result of detection rate NCSDK (1)](#result-of-detection-rate-1)**  
+　**1.3 [Verification environment NCSDK (2)](#verification-environment-2)**  
+　**1.4 [Result of detection rate NCSDK (2)](#result-of-detection-rate-2)**  
+**2. [Performance comparison as a mobile application (Based on sensory comparison)](#performance-comparison-as-a-mobile-application-based-on-sensory-comparison)**  
+**3. [Change history](#change-history)**  
+**4. [Motion image](#motion-image)**  
+　**4-1. NCSDK ver**  
+　　**4-1-1. [RealSense Mode about 6.5 FPS （Synchronous screen drawing）](#realsense-mode-about-65-fps-detection--synchronous-screen-drawing--singlestickssdwithrealsensepy)**  
+　　**4-1-2. [RealSense Mode about 25.0 FPS （Asynchronous screen drawing）](#realsense-mode-about-250-fps-asynchronous-screen-drawing--multistickssdwithrealsensepy)**  
+　　**4-1-3. [USB Camera Mode MultiStick x4 Boosted 16.0 FPS+ （Asynchronous screen drawing）](#usb-camera-mode-multistick-x4-boosted-160-fps-asynchronous-screen-drawing--multistickssdwithrealsensepy)**  
+　　**4-1-4. [RealSense Mode SingleStick about 5.0 FPS（Transparent background / Asynchronous screen drawing](#realsense-mode-singlestick-about-50-fpstransparent-background-in-real-time--asynchronous-screen-drawing--multistickssdwithrealsensepy)**  
+　　**4-1-5. [USB Camera Mode MultiStick x3 Boosted （Asynchronous screen drawing / MultiGraph](#usb-camera-mode-multistick-x3-boosted-asynchronous-screen-drawing--multigraphssdfacedetection--facedetection--multistickssdwithrealsensepy)**  
+　　**4-1-6. [Simple clustering function (MultiStick / MultiCluster / Cluster switch cycle / Cluster switch temperature)](#simple-clustering-function-multistick--multicluster--cluster-switch-cycle--cluster-switch-temperature)**  
+　**4-2. OpenVINO ver**  
+　　**4-2-1. [USB Camera Mode NCS2 x 1 Stick + RaspberryPi3（Synchronous screen drawing）](#usb-camera-mode-ncs2-singlestick--raspberrypi3synchronous-screen-drawing--singlestickssdwithusbcamera_openvino_ncs2py)**  
+　　**4-2-2. [USB Camera Mode NCS2 x 1 Stick + Core i7（Synchronous screen drawing）](#usb-camera-mode-ncs2-singlestick--core-i7synchronous-screen-drawing--singlestickssdwithusbcamera_openvino_ncs2py)**  
+　　**4-2-3. [USB Camera Mode NCS2 x 1 Stick + Core i7（Asynchronous screen drawing）](#usb-camera-mode-ncs2-x-1-stick--core-i7asynchronous-screen-drawing--multistickssdwithrealsense_openvino_ncs2py)**  
+　　**4-2-4. [USB Camera Mode NCS2 x 1 Stick + RaspberryPi3（Asynchronous screen drawing）](#usb-camera-mode-ncs2-x-1-stick--raspberrypi3asynchronous-screen-drawing--multistickssdwithrealsense_openvino_ncs2py)**  
+　　**4-2-5. [USB Camera Mode NCS2 x 1 Stick + LattePanda Alpha（Asynchronous screen drawing）48 FPS](#usb-camera-mode-ncs2-x-1-stick--lattepanda-alphaasynchronous-screen-drawing--multistickssdwithrealsense_openvino_ncs2py48-fps)**  
+　　**4-2-6. [PiCamera Mode NCS2 x 1 Stick + RaspberryPi3（Asynchronous screen drawing）](#picamera-mode-ncs2-x-1-stick--raspberrypi3asynchronous-screen-drawing--multistickssdwithpicamera_openvino_ncs2py)**  
+**5. [Motion diagram of MultiStick](#motion-diagram-of-multistick)**  
+**6. [Environment](#environment)**  
+**7. [Firmware update with Windows 10 PC](#firmware-update-with-windows-10-pc)**  
+**8. [Work with RaspberryPi3 (or PC + Ubuntu16.04 / RaspberryPi + Ubuntu Mate)](#work-with-raspberrypi3-or-pc--ubuntu1604--raspberrypi--ubuntu-mate)**  
+　**8-1. [NCSDK ver (Not compatible with NCS2)](#1ncsdk-ver-not-compatible-with-ncs2)**  
+　**8-2. [OpenVINO ver (Corresponds to NCS2)](#2openvino-ver-corresponds-to-ncs2)**  
+**9. [Execute the program](#execute-the-program)**  
+**10. [【Reference】 MobileNetv2 Model (Caffe) Great Thanks!!](#reference-mobilenetv2-model-caffe-great-thanks)**  
+**11. [Conversion method from Caffe model to NCS model (NCSDK)](#conversion-method-from-caffe-model-to-ncs-model)**  
+**12. [Construction of learning environment and simple test for model (Ubuntu16.04 x86_64 PC + GPU NVIDIA Geforce)](#construction-of-learning-environment-and-simple-test-for-model-ubuntu1604-x86_64-pc--gpunvidia-geforce)**  
+**13. [Reference articles, thanks](#reference-articles-thanks)**  
 
 ## Summary
 **Performance measurement result each number of sticks. (It is Detection rate. It is not a Playback rate.)**<br>
@@ -153,16 +189,17 @@ $ python3 MultiStickSSDwithPiCamera_OpenVINO_NCS2.py
 ![25](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/25.gif)<br>
 <br>
 <br>
+## Motion diagram of MultiStick
 ![20](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/20.png)<br>
 ## Environment
 1．RaspberryPi3 + Raspbian Stretch (USB2.0 Port) or RaspberryPi3 + Ubuntu Mate or PC + Ubuntu16.04<br>
-2．Intel RealSense D435 (Firmware Ver 5.9.13) or USB Camera<br>
+2．Intel RealSense D435 (Firmware Ver 5.9.13) or USB Camera or PiCamera<br>
 3．Intel Neural Compute Stick v1/v2 x１piece or more<br>
 4-1．OpenCV 3.4.2 (NCSDK)  
 4-2．OpenCV 4.0.1-openvino (OpenVINO)  
 5．VFPV3 or TBB (Intel Threading Building Blocks)<br>
 6．Numpy<br>
-7．Python3.5 (Only MultiStickSSDwithRealSense.py is multiprocessing enabled)<br>
+7．Python3.5<br>
 8．NCSDK v2.08.01 (It does not work with NCSDK v1.　[v1 version is here](https://github.com/PINTO0309/MobileNet-SSD-RealSense/tree/v1.0))<br>
 9. OpenVINO R5 2018.5.445  
 10．RealSenseSDK v2.13.0 (The latest version is unstable)<br>
@@ -412,6 +449,18 @@ $ sudo /etc/init.d/dphys-swapfile restart;swapon -s
 ```bash
 $ git clone https://github.com/PINTO0309/MobileNet-SSD-RealSense.git
 ```
+18.[Optional] Create a RAM disk folder for movie file placement
+```bash
+$ cd /etc
+$ sudo cp fstab fstab_org
+$ sudo nano fstab
+
+# Mount "/home/pi/movie" on RAM disk.
+# Add below.
+tmpfs /home/pi/movie tmpfs defaults,size=32m,noatime,mode=0777 0 0
+
+$ sudo reboot
+```
 <br>
 <br>
 
@@ -553,6 +602,18 @@ $ sudo /etc/init.d/dphys-swapfile restart;swapon -s
 14.Clone a set of resources
 ```bash
 $ git clone https://github.com/PINTO0309/MobileNet-SSD-RealSense.git
+```
+15.[Optional] Create a RAM disk folder for movie file placement
+```bash
+$ cd /etc
+$ sudo cp fstab fstab_org
+$ sudo nano fstab
+
+# Mount "/home/pi/movie" on RAM disk.
+# Add below.
+tmpfs /home/pi/movie tmpfs defaults,size=32m,noatime,mode=0777 0 0
+
+$ sudo reboot
 ```
 <br>
 <br>
@@ -942,7 +1003,7 @@ $ cd $CAFFE_ROOT
 $ python examples/ssd/ssd_pascal_webcam.py
 ```
 
-## Reference article, thanks
+## Reference articles, thanks
 https://github.com/movidius/ncappzoo/tree/master/caffe/SSD_MobileNet<br>
 https://github.com/FreeApe/VGG-or-MobileNet-SSD<br>
 https://github.com/chuanqi305/MobileNet-SSD<br>
