@@ -53,6 +53,16 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 　　**4-2-5. [USB Camera Mode NCS2 x 1 Stick + LattePanda Alpha（Asynchronous screen drawing）48 FPS](#usb-camera-mode-ncs2-x-1-stick--lattepanda-alphaasynchronous-screen-drawing--multistickssdwithrealsense_openvino_ncs2py48-fps)**  
 　　**4-2-6. [PiCamera Mode NCS2 x 1 Stick + RaspberryPi3（Asynchronous screen drawing）](#picamera-mode-ncs2-x-1-stick--raspberrypi3asynchronous-screen-drawing--multistickssdwithpicamera_openvino_ncs2py)**  
 **5. [Motion diagram of MultiStick](#motion-diagram-of-multistick)**  
+**6. [Environment](#environment)**  
+**7. [Firmware update with Windows 10 PC](#firmware-update-with-windows-10-pc)**  
+**8. [Work with RaspberryPi3 (or PC + Ubuntu16.04 / RaspberryPi + Ubuntu Mate)](#work-with-raspberrypi3-or-pc--ubuntu1604--raspberrypi--ubuntu-mate)**  
+　**8-1. [NCSDK ver (Not compatible with NCS2)](#1ncsdk-ver-not-compatible-with-ncs2)**  
+　**8-2. [OpenVINO ver (Corresponds to NCS2)](#2openvino-ver-corresponds-to-ncs2)**  
+**9. [Execute the program](#execute-the-program)**  
+**10. [【Reference】 MobileNetv2 Model (Caffe) Great Thanks!!](#reference-mobilenetv2-model-caffe-great-thanks)**  
+**11. [Conversion method from Caffe model to NCS model](#conversion-method-from-caffe-model-to-ncs-model)**  
+**12. [Construction of learning environment and simple test for model (Ubuntu16.04 x86_64 PC + GPU NVIDIA Geforce)](#construction-of-learning-environment-and-simple-test-for-model-ubuntu1604-x86_64-pc--gpunvidia-geforce)**  
+**13. [Reference articles, thanks](#reference-articles-thanks)**  
 
 ## Summary
 **Performance measurement result each number of sticks. (It is Detection rate. It is not a Playback rate.)**<br>
@@ -183,13 +193,13 @@ $ python3 MultiStickSSDwithPiCamera_OpenVINO_NCS2.py
 ![20](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/20.png)<br>
 ## Environment
 1．RaspberryPi3 + Raspbian Stretch (USB2.0 Port) or RaspberryPi3 + Ubuntu Mate or PC + Ubuntu16.04<br>
-2．Intel RealSense D435 (Firmware Ver 5.9.13) or USB Camera<br>
+2．Intel RealSense D435 (Firmware Ver 5.9.13) or USB Camera or PiCamera<br>
 3．Intel Neural Compute Stick v1/v2 x１piece or more<br>
 4-1．OpenCV 3.4.2 (NCSDK)  
 4-2．OpenCV 4.0.1-openvino (OpenVINO)  
 5．VFPV3 or TBB (Intel Threading Building Blocks)<br>
 6．Numpy<br>
-7．Python3.5 (Only MultiStickSSDwithRealSense.py is multiprocessing enabled)<br>
+7．Python3.5<br>
 8．NCSDK v2.08.01 (It does not work with NCSDK v1.　[v1 version is here](https://github.com/PINTO0309/MobileNet-SSD-RealSense/tree/v1.0))<br>
 9. OpenVINO R5 2018.5.445  
 10．RealSenseSDK v2.13.0 (The latest version is unstable)<br>
@@ -993,7 +1003,7 @@ $ cd $CAFFE_ROOT
 $ python examples/ssd/ssd_pascal_webcam.py
 ```
 
-## Reference article, thanks
+## Reference articles, thanks
 https://github.com/movidius/ncappzoo/tree/master/caffe/SSD_MobileNet<br>
 https://github.com/FreeApe/VGG-or-MobileNet-SSD<br>
 https://github.com/chuanqi305/MobileNet-SSD<br>
