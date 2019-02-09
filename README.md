@@ -20,7 +20,7 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 **【Japanese Article4】  
 [RaspberryPi3で複数のMovidius Neural Compute Stick をシームレスにクラスタ切り替えして高速推論性能を維持しつつ熱暴走(内部温度70℃前後)を回避する](https://qiita.com/PINTO/items/62859125c5381690623c)**<br>
 **【Japanese Article5】  
-https://qiita.com/PINTO/items/127c84319822a0776420**<br>
+[Caffeで超軽量な "Semantic Segmentation" のモデルを生成する Sparse-Quantized CNN 512x1024_10MB_軽量モデル_その１](https://qiita.com/PINTO/items/127c84319822a0776420)**<br>
 **【Japanese / English Article6】  
 [Boost RaspberryPi3 with Neural Compute Stick 2 (1 x NCS2) and feel the explosion performance of MobileNet-SSD　(If it is Core i7, 21 FPS)](https://qiita.com/PINTO/items/fc1fcecce4d5600c20bb#boost-raspberrypi3-with-neural-compute-stick-2-1-x-ncs2-and-feel-the-explosion-performance-of-mobilenet-ssdif-it-is-core-i7-21-fps)**<br>
 **【Japanese / English Article7】  
