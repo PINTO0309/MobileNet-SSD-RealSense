@@ -21,13 +21,14 @@ LABELS = ('background',
           'motorbike', 'person', 'pottedplant',
           'sheep', 'sofa', 'train', 'tvmonitor')
 
-camera_width = 320
-camera_height = 240
+# Configure depth and color streams
+pipeline = rs.pipeline()
+config = rs.config()
+config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 30)
+config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
 
-cap = cv2.VideoCapture(0)
-cap.set(cv2.CAP_PROP_FPS, 30)
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, camera_width)
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, camera_height)
+# Start streaming
+pipeline.start(config)
 
 net = cv2.dnn.readNet('lrmodel/MobileNetSSD/MobileNetSSD_deploy.xml', 'lrmodel/MobileNetSSD/MobileNetSSD_deploy.bin')
 net.setPreferableTarget(cv2.dnn.DNN_TARGET_MYRIAD)
@@ -37,9 +38,16 @@ try:
     while True:
         t1 = time.perf_counter()
 
-        ret, color_image = cap.read()
-        if not ret:
-            break
+        # Wait for a coherent pair of frames: depth and color
+        frames = pipeline.wait_for_frames()
+        depth_frame = frames.get_depth_frame()
+        color_frame = frames.get_color_frame()
+        if not depth_frame or not color_frame:
+            continue
+
+        # Convert images to numpy arrays
+        depth_image = np.asanyarray(depth_frame.get_data())
+        color_image = np.asanyarray(color_frame.get_data())
 
         height = color_image.shape[0]
         width = color_image.shape[1]
@@ -86,7 +94,8 @@ try:
             box_top = int(object_info_overlay[base_index + 4] * source_image_height)
             box_right = int(object_info_overlay[base_index + 5] * source_image_width)
             box_bottom = int(object_info_overlay[base_index + 6] * source_image_height)
-            label_text = LABELS[int(class_id)] + " (" + str(percentage) + "%)"
+            meters = depth_frame.as_depth_frame().get_distance(box_left+int((box_right-box_left)/2), box_top+int((box_bottom-box_top)/2))
+            label_text = LABELS[int(class_id)] + " (" + str(percentage) + "%)"+ " {:.2f}".format(meters) + " meters away"
 
             box_color = (255, 128, 0)
             box_thickness = 1
@@ -108,8 +117,8 @@ try:
         cv2.putText(color_image, fps,       (width-170,15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (38,0,255), 1, cv2.LINE_AA)
         cv2.putText(color_image, detectfps, (width-170,30), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (38,0,255), 1, cv2.LINE_AA)
 
-        cv2.namedWindow('USB Camera', cv2.WINDOW_AUTOSIZE)
-        cv2.imshow('USB Camera', cv2.resize(color_image, (width, height)))
+        cv2.namedWindow('RealSense', cv2.WINDOW_AUTOSIZE)
+        cv2.imshow('RealSense', cv2.resize(color_image, (width, height)))
 
         if cv2.waitKey(1)&0xFF == ord('q'):
             break
@@ -134,5 +143,7 @@ except:
 
 finally:
 
+    # Stop streaming
+    pipeline.stop()
     print("\n\nFinished\n\n")
 
