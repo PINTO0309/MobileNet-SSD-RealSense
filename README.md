@@ -387,7 +387,7 @@ $ cd ~
 $ sudo apt update;sudo apt upgrade
 
 # Ubuntu16.04 Only
-$ sudo apt install mesa-utils* libglu1* libgles2-mesa-dev libopenal-dev gtk+-3.0
+$ sudo apt install mesa-utils* libglu1* libgles2-mesa-dev libopenal-dev gtk+-3.0 vulkan-utils libvulkan1 libvulkan-dev
 
 # The latest version is unstable
 $ git clone -b v2.13.0 https://github.com/IntelRealSense/librealsense.git
@@ -541,7 +541,7 @@ $ cd ~
 $ sudo apt update;sudo apt upgrade
 
 # Ubuntu16.04 Only
-$ sudo apt install mesa-utils* libglu1* libgles2-mesa-dev libopenal-dev  gtk+-3.0
+$ sudo apt install mesa-utils* libglu1* libgles2-mesa-dev libopenal-dev gtk+-3.0 vulkan-utils libvulkan1 libvulkan-dev
 
 # The latest version is unstable
 $ git clone -b v2.13.0 https://github.com/IntelRealSense/librealsense.git
