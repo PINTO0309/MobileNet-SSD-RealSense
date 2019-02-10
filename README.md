@@ -139,6 +139,7 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 [Jan 01, 2019]　Pull request merged. Fix Typo. Thanks, nguyen-alexa!!<br>
 [Feb 09, 2019]　Corresponds to PiCamera.<br>
 [Feb 10, 2019]　Added support for SingleStickSSDwithRealSense_OpenVINO_NCS2.py<br>
+[Feb 10, 2019]　Firmware v5.9.13 -> v5.10.6, RealSenseSDK v2.13.0 -> v2.16.5<br>
 </div></details><br><br>
 
 ## Motion image
@@ -194,7 +195,7 @@ $ python3 MultiStickSSDwithPiCamera_OpenVINO_NCS2.py
 ![20](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/20.png)<br>
 ## Environment
 1．RaspberryPi3 + Raspbian Stretch (USB2.0 Port) or RaspberryPi3 + Ubuntu Mate or PC + Ubuntu16.04<br>
-2．Intel RealSense D435 (Firmware Ver 5.9.13) or USB Camera or PiCamera [Official stable version firmware](https://realsense.intel.com/intel-realsense-downloads/#firmware)<br>
+2．Intel RealSense D435 (Firmware Ver 5.10.6) or USB Camera or PiCamera [Official stable version firmware](https://realsense.intel.com/intel-realsense-downloads/#firmware)<br>
 3．Intel Neural Compute Stick v1/v2 x１piece or more<br>
 4-1．OpenCV 3.4.2 (NCSDK)  
 4-2．OpenCV 4.0.1-openvino (OpenVINO)  
@@ -203,12 +204,12 @@ $ python3 MultiStickSSDwithPiCamera_OpenVINO_NCS2.py
 7．Python3.5<br>
 8．NCSDK v2.08.01 (It does not work with NCSDK v1.　[v1 version is here](https://github.com/PINTO0309/MobileNet-SSD-RealSense/tree/v1.0))<br>
 9. OpenVINO R5 2018.5.445  
-10．RealSenseSDK v2.13.0 (The latest version is unstable) [Official stable version SDK](https://realsense.intel.com/intel-realsense-downloads/#firmware)<br>
+10．RealSenseSDK v2.16.5 (The latest version is unstable) [Official stable version SDK](https://realsense.intel.com/intel-realsense-downloads/#firmware)<br>
 11．HDMI Display<br>
 
 ## Firmware update with Windows 10 PC
-1．ZIP 2 types [(1) Firmware update tool for Windows 10](https://downloadmirror.intel.com/27514/eng/Intel%20RealSense%20D400%20Series%20DFU%20Tool%20for%20Windows.zip)　[(2) The latest firmware bin file](https://downloadmirror.intel.com/27924/eng/Intel%C2%AE%20RealSense%E2%84%A2D400%20Series%20Signed%20Production%20Firmware%20v5_9_13.zip) Download and decompress<br>
-2．Copy Signed_Image_UVC_5_9_13_0.bin to the same folder as intel-realsense-dfu.exe<br>
+1．ZIP 2 types [(1) Firmware update tool for Windows 10](https://downloadmirror.intel.com/27514/eng/Intel%20RealSense%20D400%20Series%20DFU%20Tool%20for%20Windows.zip)　[(2) The latest firmware bin file](https://downloadmirror.intel.com/28237/eng/Intel%C2%AE%20RealSense%E2%84%A2D400%20Series%20Signed%20Production%20Firmware%20v5_10_6.zip) Download and decompress<br>
+2．Copy Signed_Image_UVC_5_10_6_0.bin to the same folder as intel-realsense-dfu.exe<br>
 3．Connect RealSense D435 to USB port<br>
 4．Wait for completion of installation of device driver<br>
 5．Execute intel-realsense-dfu.exe<br>
@@ -388,14 +389,27 @@ $ sudo apt update;sudo apt upgrade
 $ sudo apt install -y vulkan-utils libvulkan1 libvulkan-dev
 
 # Ubuntu16.04 Only
-$ sudo apt install mesa-utils* libglu1* libgles2-mesa-dev libopenal-dev gtk+-3.0
+$ sudo apt install -y mesa-utils* libglu1* libgles2-mesa-dev libopenal-dev gtk+-3.0
 
 # The latest version is unstable
-$ git clone -b v2.13.0 https://github.com/IntelRealSense/librealsense.git
-$ cd ~/librealsense;mkdir build;cd build
+$ cd ~/librealsense/build
+$ sudo make uninstall
+$ cd ~
+$ sudo rm -rf librealsense
+
+$ git clone -b v2.16.5 https://github.com/IntelRealSense/librealsense.git
+$ cd ~/librealsense
+$ git checkout -b v2.16.5
+$ mkdir build;cd build
 
 $ cmake .. -DBUILD_EXAMPLES=true -DCMAKE_BUILD_TYPE=Release
+
+# For RaspberryPi3
 $ make -j1
+or
+# For LaptopPC
+$ make -j8
+
 $ sudo make install
 ```
 11.Install Python binding
@@ -410,7 +424,12 @@ OR
 #When using with Python 2.x series
 $ cmake .. -DBUILD_PYTHON_BINDINGS=bool:true -DPYTHON_EXECUTABLE=$(which python)
 
+# For RaspberryPi3
 $ make -j1
+or
+# For LaptopPC
+$ make -j8
+
 $ sudo make install
 ```
 12.Update PYTHON_PATH
@@ -431,13 +450,13 @@ Type "help", "copyright", "credits" or "license" for more information.
 ```
 14.Installing the OpenGL package for Python
 ```bash
-$ sudo apt-get install python-opengl
+$ sudo apt-get install -y python-opengl
 $ sudo -H pip3 install pyopengl
 $ sudo -H pip3 install pyopengl_accelerate
 ```
 15.Installation of the imutils package. (For PiCamera)
 ```bash
-$ sudo apt-get install python3-picamera
+$ sudo apt-get install -y python3-picamera
 $ sudo -H pip3 install imutils --upgrade
 ```
 16.Reduce the SWAP area to the default size (RaspberryPi+Raspbian Stretch / RaspberryPi+Ubuntu Mate Only)
@@ -543,14 +562,27 @@ $ sudo apt update;sudo apt upgrade
 $ sudo apt install -y vulkan-utils libvulkan1 libvulkan-dev
 
 # Ubuntu16.04 Only
-$ sudo apt install mesa-utils* libglu1* libgles2-mesa-dev libopenal-dev gtk+-3.0
+$ sudo apt install -y mesa-utils* libglu1* libgles2-mesa-dev libopenal-dev gtk+-3.0
 
 # The latest version is unstable
-$ git clone -b v2.13.0 https://github.com/IntelRealSense/librealsense.git
-$ cd ~/librealsense;mkdir build;cd build
+$ cd ~/librealsense/build
+$ sudo make uninstall
+$ cd ~
+$ sudo rm -rf librealsense
+
+$ git clone -b v2.16.5 https://github.com/IntelRealSense/librealsense.git
+$ cd ~/librealsense
+$ git checkout -b v2.16.5
+$ mkdir build;cd build
 
 $ cmake .. -DBUILD_EXAMPLES=false -DCMAKE_BUILD_TYPE=Release
+
+# For RaspberryPi3
 $ make -j1
+or
+# For LaptopPC
+$ make -j8
+
 $ sudo make install
 ```
 8.Install Python binding
@@ -565,7 +597,12 @@ OR
 #When using with Python 2.x series
 $ cmake .. -DBUILD_PYTHON_BINDINGS=bool:true -DPYTHON_EXECUTABLE=$(which python)
 
+# For RaspberryPi3
 $ make -j1
+or
+# For LaptopPC
+$ make -j8
+
 $ sudo make install
 ```
 9.Update PYTHON_PATH
@@ -586,13 +623,13 @@ Type "help", "copyright", "credits" or "license" for more information.
 ```
 11.Installing the OpenGL package for Python
 ```bash
-$ sudo apt-get install python-opengl
+$ sudo apt-get install -y python-opengl
 $ sudo -H pip3 install pyopengl
 $ sudo -H pip3 install pyopengl_accelerate
 ```
 12.Installation of the imutils package. (For PiCamera)
 ```bash
-$ sudo apt-get install python3-picamera
+$ sudo apt-get install -y python3-picamera
 $ sudo -H pip3 install imutils --upgrade
 ```
 13.Reduce the SWAP area to the default size (RaspberryPi+Raspbian Stretch / RaspberryPi+Ubuntu Mate Only)
