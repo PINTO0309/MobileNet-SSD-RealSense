@@ -137,7 +137,8 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 [Dec 31, 2018]　"USB Camera + MultiStick + MultiProcess mode" correspondence with NCS2 is completed<br>
 [Jan 04, 2019]　Tune performance four times. MultiStickSSDwithRealSense_OpenVINO_NCS2.py<br>
 [Jan 01, 2019]　Pull request merged. Fix Typo. Thanks, nguyen-alexa!!<br>
-[Feb 09, 2019]　Corresponds to PiCamera.
+[Feb 09, 2019]　Corresponds to PiCamera.<br>
+[Feb 10, 2019]　Added support for SingleStickSSDwithRealSense_OpenVINO_NCS2.py<br>
 </div></details><br><br>
 
 ## Motion image
