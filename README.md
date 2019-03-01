@@ -1068,3 +1068,4 @@ https://www.dlology.com/blog/how-to-run-keras-model-on-movidius-neural-compute-s
 https://ncsforum.movidius.com/discussion/1106/ncs-temperature-issue<br>
 https://github.com/opencv/opencv/wiki/Intel%27s-Deep-Learning-Inference-Engine-backend<br>
 https://github.com/opencv/opencv/wiki/Intel%27s-Deep-Learning-Inference-Engine-backend#raspbian-stretch<br>
+https://github.com/skhameneh/OpenVINO-ARM64<br>
