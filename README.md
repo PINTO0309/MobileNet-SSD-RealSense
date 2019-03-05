@@ -227,7 +227,8 @@ https://qiita.com/kikuchi_kentaro/items/280ac68ad24759b4c091<br>
 <br>
 [Post of Official Forum]<br>
 https://ncsforum.movidius.com/discussion/950/problems-with-python-multiprocessing-using-sdk-2-0-0-4<br>
-https://ncsforum.movidius.com/discussion/comment/3921<br><br>
+https://ncsforum.movidius.com/discussion/comment/3921<br>
+https://ncsforum.movidius.com/discussion/comment/4316/#Comment_4316<br><br>
 
 1.Execute the following
 ```bash
