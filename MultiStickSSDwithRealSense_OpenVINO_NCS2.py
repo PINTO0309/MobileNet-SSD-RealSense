@@ -9,7 +9,10 @@ from os import system
 from os.path import isfile, join
 from time import sleep
 import multiprocessing as mp
-from openvino.inference_engine import IENetwork, IEPlugin
+try:
+    from armv7l.openvino.inference_engine import IENetwork, IEPlugin
+except:
+    from openvino.inference_engine import IENetwork, IEPlugin
 import heapq
 import threading
 
