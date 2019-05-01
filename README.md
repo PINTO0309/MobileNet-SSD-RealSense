@@ -782,12 +782,21 @@ $ rs-dnn
 ## 【Reference】 MobileNetv2 Model (Caffe) Great Thanks!!
 **https://github.com/xufeifeiWHU/Mobilenet-v2-on-Movidius-stick.git**
 
-## Conversion method from Caffe model to NCS model
-```
+## Conversion method from Caffe model to NCS model - NCSDK
+```bash
 $ cd ~/MobileNet-SSD-RealSense
 $ mvNCCompile ./caffemodel/MobileNetSSD/deploy.prototxt -w ./caffemodel/MobileNetSSD/MobileNetSSD_deploy.caffemodel -s 12
 $ mvNCCompile ./caffemodel/Facedetection/fullface_deploy.prototxt -w ./caffemodel/Facedetection/fullfacedetection.caffemodel -s 12
 $ mvNCCompile ./caffemodel/Facedetection/shortface_deploy.prototxt -w ./caffemodel/Facedetection/shortfacedetection.caffemodel -s 12
+```
+## Conversion method from Caffe model to NCS model - OpenVINO
+```bash
+$ cd ~/MobileNet-SSD-RealSense
+$ sudo python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo.py \
+--input_model caffemodel/MobileNetSSD/MobileNetSSD_deploy.caffemodel \
+--input_proto caffemodel/MobileNetSSD/MobileNetSSD_deploy.prototxt \
+--data_type FP16 \
+--batch 1
 ```
 
 ## Construction of learning environment and simple test for model (Ubuntu16.04 x86_64 PC + GPU[NVIDIA Geforce])
