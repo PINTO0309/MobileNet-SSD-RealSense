@@ -141,6 +141,7 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 [Feb 09, 2019]　Corresponds to PiCamera.<br>
 [Feb 10, 2019]　Added support for SingleStickSSDwithRealSense_OpenVINO_NCS2.py<br>
 [Feb 10, 2019]　Firmware v5.9.13 -> v5.10.6, RealSenseSDK v2.13.0 -> v2.16.5<br>
+[May 01, 2019]　Corresponds to OpenVINO 2019 R1.0.1<br>
 </div></details><br><br>
 
 ## Motion image
