@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<net batch="1" name="MobileNet-SSD" version="4">
+<net batch="1" name="MobileNet-SSD" version="5">
 	<layers>
 		<layer id="0" name="data" precision="FP16" type="Input">
 			<output>
@@ -2259,23 +2259,36 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="109" name="mbox_conf_reshape" precision="FP16" type="Reshape">
-			<data axis="0" dim="0,-1,21" num_axes="-1"/>
+		<layer id="109" name="mbox_conf_reshape/DimData_const" precision="FP16" type="Const">
+			<output>
+				<port id="1">
+					<dim>3</dim>
+				</port>
+			</output>
+			<blobs>
+				<custom offset="11566834" size="6"/>
+			</blobs>
+		</layer>
+		<layer id="110" name="mbox_conf_reshape" precision="FP16" type="Reshape">
+			<data axis="0" num_axes="-1"/>
 			<input>
 				<port id="0">
 					<dim>1</dim>
 					<dim>40257</dim>
 				</port>
+				<port id="1">
+					<dim>3</dim>
+				</port>
 			</input>
 			<output>
-				<port id="1">
+				<port id="2">
 					<dim>1</dim>
 					<dim>1917</dim>
 					<dim>21</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="110" name="mbox_conf_softmax" precision="FP16" type="SoftMax">
+		<layer id="111" name="mbox_conf_softmax" precision="FP16" type="SoftMax">
 			<data axis="2"/>
 			<input>
 				<port id="0">
@@ -2292,7 +2305,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="111" name="mbox_conf_flatten" precision="FP16" type="Flatten">
+		<layer id="112" name="mbox_conf_flatten" precision="FP16" type="Flatten">
 			<data axis="1" end_axis="-1"/>
 			<input>
 				<port id="0">
@@ -2308,7 +2321,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="112" name="conv11_mbox_priorbox" precision="FP16" type="PriorBox">
+		<layer id="113" name="conv11_mbox_priorbox" precision="FP16" type="PriorBox">
 			<data aspect_ratio="2.0" clip="0" flip="1" max_size="" min_size="60.0" offset="0.5" variance="0.10000000149011612,0.10000000149011612,0.20000000298023224,0.20000000298023224"/>
 			<input>
 				<port id="0">
@@ -2332,7 +2345,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="113" name="conv13_mbox_priorbox" precision="FP16" type="PriorBox">
+		<layer id="114" name="conv13_mbox_priorbox" precision="FP16" type="PriorBox">
 			<data aspect_ratio="2.0,3.0" clip="0" flip="1" max_size="150.0" min_size="105.0" offset="0.5" variance="0.10000000149011612,0.10000000149011612,0.20000000298023224,0.20000000298023224"/>
 			<input>
 				<port id="0">
@@ -2356,7 +2369,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="114" name="conv14_2_mbox_priorbox" precision="FP16" type="PriorBox">
+		<layer id="115" name="conv14_2_mbox_priorbox" precision="FP16" type="PriorBox">
 			<data aspect_ratio="2.0,3.0" clip="0" flip="1" max_size="195.0" min_size="150.0" offset="0.5" variance="0.10000000149011612,0.10000000149011612,0.20000000298023224,0.20000000298023224"/>
 			<input>
 				<port id="0">
@@ -2380,7 +2393,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="115" name="conv15_2_mbox_priorbox" precision="FP16" type="PriorBox">
+		<layer id="116" name="conv15_2_mbox_priorbox" precision="FP16" type="PriorBox">
 			<data aspect_ratio="2.0,3.0" clip="0" flip="1" max_size="240.0" min_size="195.0" offset="0.5" variance="0.10000000149011612,0.10000000149011612,0.20000000298023224,0.20000000298023224"/>
 			<input>
 				<port id="0">
@@ -2404,7 +2417,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="116" name="conv16_2_mbox_priorbox" precision="FP16" type="PriorBox">
+		<layer id="117" name="conv16_2_mbox_priorbox" precision="FP16" type="PriorBox">
 			<data aspect_ratio="2.0,3.0" clip="0" flip="1" max_size="285.0" min_size="240.0" offset="0.5" variance="0.10000000149011612,0.10000000149011612,0.20000000298023224,0.20000000298023224"/>
 			<input>
 				<port id="0">
@@ -2428,7 +2441,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="117" name="conv17_2_mbox_priorbox" precision="FP16" type="PriorBox">
+		<layer id="118" name="conv17_2_mbox_priorbox" precision="FP16" type="PriorBox">
 			<data aspect_ratio="2.0,3.0" clip="0" flip="1" max_size="300.0" min_size="285.0" offset="0.5" variance="0.10000000149011612,0.10000000149011612,0.20000000298023224,0.20000000298023224"/>
 			<input>
 				<port id="0">
@@ -2452,7 +2465,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="118" name="mbox_priorbox" precision="FP16" type="Concat">
+		<layer id="119" name="mbox_priorbox" precision="FP16" type="Concat">
 			<data axis="2"/>
 			<input>
 				<port id="0">
@@ -2494,7 +2507,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="119" name="detection_out" precision="FP16" type="DetectionOutput">
+		<layer id="120" name="detection_out" precision="FP16" type="DetectionOutput">
 			<data background_label_id="0" code_type="caffe.PriorBoxParameter.CENTER_SIZE" confidence_threshold="0.25" eta="1.0" input_height="1" input_width="1" keep_top_k="100" nms_threshold="0.44999998807907104" normalized="1" num_classes="21" share_location="1" top_k="100" variance_encoded_in_target="0" visualize="False"/>
 			<input>
 				<port id="0">
@@ -2640,40 +2653,43 @@
 		<edge from-layer="101" from-port="1" to-layer="108" to-port="3"/>
 		<edge from-layer="104" from-port="1" to-layer="108" to-port="4"/>
 		<edge from-layer="107" from-port="1" to-layer="108" to-port="5"/>
-		<edge from-layer="108" from-port="6" to-layer="109" to-port="0"/>
-		<edge from-layer="109" from-port="1" to-layer="110" to-port="0"/>
-		<edge from-layer="110" from-port="1" to-layer="111" to-port="0"/>
-		<edge from-layer="46" from-port="1" to-layer="112" to-port="0"/>
-		<edge from-layer="0" from-port="0" to-layer="112" to-port="1"/>
-		<edge from-layer="57" from-port="1" to-layer="113" to-port="0"/>
+		<edge from-layer="108" from-port="6" to-layer="110" to-port="0"/>
+		<edge from-layer="109" from-port="1" to-layer="110" to-port="1"/>
+		<edge from-layer="110" from-port="2" to-layer="111" to-port="0"/>
+		<edge from-layer="111" from-port="1" to-layer="112" to-port="0"/>
+		<edge from-layer="46" from-port="1" to-layer="113" to-port="0"/>
 		<edge from-layer="0" from-port="0" to-layer="113" to-port="1"/>
-		<edge from-layer="64" from-port="1" to-layer="114" to-port="0"/>
+		<edge from-layer="57" from-port="1" to-layer="114" to-port="0"/>
 		<edge from-layer="0" from-port="0" to-layer="114" to-port="1"/>
-		<edge from-layer="71" from-port="1" to-layer="115" to-port="0"/>
+		<edge from-layer="64" from-port="1" to-layer="115" to-port="0"/>
 		<edge from-layer="0" from-port="0" to-layer="115" to-port="1"/>
-		<edge from-layer="78" from-port="1" to-layer="116" to-port="0"/>
+		<edge from-layer="71" from-port="1" to-layer="116" to-port="0"/>
 		<edge from-layer="0" from-port="0" to-layer="116" to-port="1"/>
-		<edge from-layer="85" from-port="1" to-layer="117" to-port="0"/>
+		<edge from-layer="78" from-port="1" to-layer="117" to-port="0"/>
 		<edge from-layer="0" from-port="0" to-layer="117" to-port="1"/>
-		<edge from-layer="112" from-port="2" to-layer="118" to-port="0"/>
-		<edge from-layer="113" from-port="2" to-layer="118" to-port="1"/>
-		<edge from-layer="114" from-port="2" to-layer="118" to-port="2"/>
-		<edge from-layer="115" from-port="2" to-layer="118" to-port="3"/>
-		<edge from-layer="116" from-port="2" to-layer="118" to-port="4"/>
-		<edge from-layer="117" from-port="2" to-layer="118" to-port="5"/>
-		<edge from-layer="89" from-port="6" to-layer="119" to-port="0"/>
-		<edge from-layer="111" from-port="1" to-layer="119" to-port="1"/>
-		<edge from-layer="118" from-port="6" to-layer="119" to-port="2"/>
+		<edge from-layer="85" from-port="1" to-layer="118" to-port="0"/>
+		<edge from-layer="0" from-port="0" to-layer="118" to-port="1"/>
+		<edge from-layer="113" from-port="2" to-layer="119" to-port="0"/>
+		<edge from-layer="114" from-port="2" to-layer="119" to-port="1"/>
+		<edge from-layer="115" from-port="2" to-layer="119" to-port="2"/>
+		<edge from-layer="116" from-port="2" to-layer="119" to-port="3"/>
+		<edge from-layer="117" from-port="2" to-layer="119" to-port="4"/>
+		<edge from-layer="118" from-port="2" to-layer="119" to-port="5"/>
+		<edge from-layer="89" from-port="6" to-layer="120" to-port="0"/>
+		<edge from-layer="112" from-port="1" to-layer="120" to-port="1"/>
+		<edge from-layer="119" from-port="6" to-layer="120" to-port="2"/>
 	</edges>
 	<meta_data>
-		<MO_version value="1.5.12.49d067a0"/>
+		<MO_version value="2019.1.0-341-gc9b66a2"/>
 		<cli_parameters>
+			<batch value="1"/>
 			<data_type value="FP16"/>
 			<disable_fusing value="False"/>
 			<disable_gfusing value="False"/>
 			<disable_nhwc_to_nchw value="False"/>
 			<disable_omitting_optional value="False"/>
 			<disable_resnet_optimization value="False"/>
+			<enable_concat_optimization value="False"/>
 			<enable_flattening_nested_params value="False"/>
 			<extensions value="DIR"/>
 			<framework value="caffe"/>
@@ -2682,11 +2698,12 @@
 			<input_model_is_text value="False"/>
 			<input_proto value="DIR/MobileNetSSD_deploy.prototxt"/>
 			<k value="DIR/CustomLayersMapping.xml"/>
+			<keep_shape_ops value="False"/>
 			<legacy_mxnet_model value="False"/>
 			<log_level value="ERROR"/>
+			<mean_scale_values value="{}"/>
 			<mean_values value="()"/>
 			<move_to_preprocess value="False"/>
-			<offload_unsupported_operations_to_tf value="False"/>
 			<output_dir value="DIR"/>
 			<remove_output_softmax value="False"/>
 			<reverse_input_channels value="False"/>
@@ -2694,7 +2711,7 @@
 			<scale_values value="()"/>
 			<silent value="False"/>
 			<version value="False"/>
-			<unset unset_cli_parameters="batch, counts, finegrain_fusing, freeze_placeholder_with_value, input, input_checkpoint, input_meta_graph, input_shape, input_symbol, mean_file, mean_file_offsets, model_name, nd_prefix_name, output, pretrained_model_name, saved_model_dir, saved_model_tags, scale, tensorboard_logdir, tensorflow_custom_layer_libraries, tensorflow_custom_operations_config_update, tensorflow_object_detection_api_pipeline_config, tensorflow_operation_patterns, tensorflow_subgraph_patterns, tensorflow_use_custom_operations_config"/>
+			<unset unset_cli_parameters="counts, finegrain_fusing, freeze_placeholder_with_value, input, input_checkpoint, input_meta_graph, input_shape, input_symbol, mean_file, mean_file_offsets, model_name, nd_prefix_name, output, placeholder_shapes, pretrained_model_name, saved_model_dir, saved_model_tags, scale, tensorboard_logdir, tensorflow_custom_layer_libraries, tensorflow_custom_operations_config_update, tensorflow_object_detection_api_pipeline_config, tensorflow_operation_patterns, tensorflow_subgraph_patterns, tensorflow_use_custom_operations_config"/>
 		</cli_parameters>
 	</meta_data>
 </net>
