@@ -800,7 +800,17 @@ $ sudo python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo.py \
 --data_type FP16 \
 --batch 1
 ```
-
+or
+```bash
+```bash
+$ cd ~/MobileNet-SSD-RealSense
+$ sudo python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo.py \
+--input_model caffemodel/MobileNetSSD/MobileNetSSD_deploy.caffemodel \
+--input_proto caffemodel/MobileNetSSD/MobileNetSSD_deploy.prototxt \
+--data_type FP32 \
+--batch 1
+```
+```
 ## Construction of learning environment and simple test for model (Ubuntu16.04 x86_64 PC + GPU[NVIDIA Geforce])
 1.**【Example】** Introduction of NVIDIA-Driver, CUDA and cuDNN to the environment with GPU
 ```
