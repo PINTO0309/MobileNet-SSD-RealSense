@@ -201,12 +201,12 @@ $ python3 MultiStickSSDwithPiCamera_OpenVINO_NCS2.py
 2．Intel RealSense D435 (Firmware Ver 5.10.6) or USB Camera or PiCamera [Official stable version firmware](https://realsense.intel.com/intel-realsense-downloads/#firmware)<br>
 3．Intel Neural Compute Stick v1/v2 x１piece or more<br>
 4-1．OpenCV 3.4.2 (NCSDK)  
-4-2．OpenCV 4.1.0-openvino (OpenVINO)  
+4-2．OpenCV 4.1.1-openvino (OpenVINO)  
 5．VFPV3 or TBB (Intel Threading Building Blocks)<br>
 6．Numpy<br>
 7．Python3.5<br>
 8．NCSDK v2.08.01 (It does not work with NCSDK v1.　[v1 version is here](https://github.com/PINTO0309/MobileNet-SSD-RealSense/tree/v1.0))<br>
-9. OpenVINO 2019 R1.0.1  
+9. OpenVINO 2019 R2.0.1  
 10．RealSenseSDK v2.16.5 (The latest version is unstable) [Official stable version SDK](https://realsense.intel.com/intel-realsense-downloads/#firmware)<br>
 11．HDMI Display<br>
 
