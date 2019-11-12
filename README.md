@@ -53,7 +53,7 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 　　**4-2-4. [USB Camera Mode NCS2 x 1 Stick + RaspberryPi3（Asynchronous screen drawing）](#usb-camera-mode-ncs2-x-1-stick--raspberrypi3asynchronous-screen-drawing--multistickssdwithrealsense_openvino_ncs2py)**  
 　　**4-2-5. [USB Camera Mode NCS2 x 1 Stick + LattePanda Alpha（Asynchronous screen drawing）48 FPS](#usb-camera-mode-ncs2-x-1-stick--lattepanda-alphaasynchronous-screen-drawing--multistickssdwithrealsense_openvino_ncs2py48-fps)**  
 　　**4-2-6. [PiCamera Mode NCS2 x 1 Stick + RaspberryPi3（Asynchronous screen drawing）](#picamera-mode-ncs2-x-1-stick--raspberrypi3asynchronous-screen-drawing--multistickssdwithpicamera_openvino_ncs2py)**  
-　　**4-2-7. [USB Camera Mode NCS2 x 1 Stick + RaspberryPi4（Asynchronous screen drawing）](#picamera-mode-ncs2-x-1-stick--raspberrypi3asynchronous-screen-drawing--multistickssdwithpicamera_openvino_ncs2py)**  
+　　**4-2-7. [USB Camera Mode NCS2 x 1 Stick + RaspberryPi4（Asynchronous screen drawing）40 FPS](#usb-camera-mode-ncs2-x-1-stick--raspberrypi4asynchronous-screen-drawing--multistickssdwithusbcamera_openvino_ncs2py)**  
 **5. [Motion diagram of MultiStick](#motion-diagram-of-multistick)**  
 **6. [Environment](#environment)**  
 **7. [Firmware update with Windows 10 PC](#firmware-update-with-windows-10-pc)**  
