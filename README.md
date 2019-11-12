@@ -53,6 +53,7 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 　　**4-2-4. [USB Camera Mode NCS2 x 1 Stick + RaspberryPi3（Asynchronous screen drawing）](#usb-camera-mode-ncs2-x-1-stick--raspberrypi3asynchronous-screen-drawing--multistickssdwithrealsense_openvino_ncs2py)**  
 　　**4-2-5. [USB Camera Mode NCS2 x 1 Stick + LattePanda Alpha（Asynchronous screen drawing）48 FPS](#usb-camera-mode-ncs2-x-1-stick--lattepanda-alphaasynchronous-screen-drawing--multistickssdwithrealsense_openvino_ncs2py48-fps)**  
 　　**4-2-6. [PiCamera Mode NCS2 x 1 Stick + RaspberryPi3（Asynchronous screen drawing）](#picamera-mode-ncs2-x-1-stick--raspberrypi3asynchronous-screen-drawing--multistickssdwithpicamera_openvino_ncs2py)**  
+　　**4-2-7. [USB Camera Mode NCS2 x 1 Stick + RaspberryPi4（Asynchronous screen drawing）](#picamera-mode-ncs2-x-1-stick--raspberrypi3asynchronous-screen-drawing--multistickssdwithpicamera_openvino_ncs2py)**  
 **5. [Motion diagram of MultiStick](#motion-diagram-of-multistick)**  
 **6. [Environment](#environment)**  
 **7. [Firmware update with Windows 10 PC](#firmware-update-with-windows-10-pc)**  
@@ -143,6 +144,7 @@ And, This is support for simple clustering function. (To prevent thermal runaway
 [Feb 10, 2019]　Added support for SingleStickSSDwithRealSense_OpenVINO_NCS2.py<br>
 [Feb 10, 2019]　Firmware v5.9.13 -> v5.10.6, RealSenseSDK v2.13.0 -> v2.16.5<br>
 [May 01, 2019]　Corresponds to OpenVINO 2019 R1.0.1<br>
+[Nov 12, 2019]　Corresponds to OpenVINO 2019 R3.0<br>
 </div></details><br><br>
 
 ## Motion image
@@ -192,6 +194,11 @@ $ python3 MultiStickSSDwithRealSense_OpenVINO_NCS2.py -mod 1 -numncs 1
 $ python3 MultiStickSSDwithPiCamera_OpenVINO_NCS2.py
 ```
 ![25](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/25.gif)<br>
+### **USB Camera Mode NCS2 x 1 Stick + RaspberryPi4（Asynchronous screen drawing / MultiStickSSDwithUSBCamera_OpenVINO_NCS2.py）**<br>
+```
+$ python3 MultiStickSSDwithUSBCamera_OpenVINO_NCS2.py
+```
+![26](https://github.com/PINTO0309/MobileNet-SSD-RealSense/blob/master/media/26.gif)<br>
 <br>
 <br>
 ## Motion diagram of MultiStick
