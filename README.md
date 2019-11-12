@@ -6,7 +6,7 @@ https://software.intel.com/en-us/articles/OpenVINO-RelNotes#inpage-nav-2-2**
   
 **【Dec 31, 2018】 `USB Camera + MultiStick + MultiProcess mode` correspondence with NCS2 is completed.**<br>
 **【Jan 04, 2019】 Tune performance four times. MultiStickSSDwithRealSense_OpenVINO_NCS2.py. Core i7 -> NCS2 x1, 48 FPS**<br>
-**【Nov 12, 2019】 Compatible with OpenVINO 2019 R3 + RaspberryPi4 + Raspbian Buster.**<br>
+**【Nov 12, 2019】 Compatible with OpenVINO 2019 R3 + RaspberryPi3/4 + Raspbian Buster.**<br>
 <br><br>
 Measure the distance to the object with RealSense D435 while performing object detection by MobileNet-SSD(MobileNetSSD) with RaspberryPi 3 boosted with Intel Movidius Neural Compute Stick.<br>
 "USB Camera mode / PiCamera mode" can not measure the distance, but it operates at high speed.<br>
